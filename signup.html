@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles/signup.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="">Sign Up</a>
+        </nav>
+    </header>
+
+    <div id="account">
+        <form action="nothink" id="form" method="post">
+            <h2>Create your account </h2>
+            <div>
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" name="Firstname" placeholder=" Your name...">
+                <span id="valMessageFname"></span>
+            </div>
+
+            <div>
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" name="Lastname" placeholder="Your last name...">
+                <span id="valMessageLname"></span>
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="text" name="Email" placeholder="Your email...">
+                <span id="valMessageEmail"></span>
+            </div>
+
+            <div id="radioButtons">
+                <p>Gender</p>
+                <label for="male">Male</label>
+                <label class="custom-radio-btn">
+                    <input id="male" type="radio" name="Gender" value="Male">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="female">Female</label>
+                <label class="custom-radio-btn">
+                    <input id="female" type="radio" name="Gender" value="Female">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div class="select-container">
+                <label for="sercive">Choose the service you are interested in: </label>
+                <select name="Service" id="selectInput" class="custom-select">
+                    <option value="" selected disabled>--Please select on of these--</option>
+                    <option value="Fitness">Fitness</option>
+                    <option value="Beautification">Beautification</option>
+                    <option value="Home repairs">Home repairs</option>
+                    <option value="Teaching">Teaching</option>
+                </select>
+
+            </div>
+            <div id="invisibleElement">
+                <label for="selectData" id="invisibleElementText"></label>
+                <input id="selectData" type="text" name="Fitness Category">
+                <span id="valChoice"></span>
+            </div>
+
+            <div>
+                <label for="request">Would you like us to add somethink new?</label>
+                <br>
+                <textarea name="Requests" id="request" rows="10" cols="40" placeholder="Type here..."></textarea>
+            </div>
+
+            <div class="checkbox-container">
+                <input id="info" type="checkbox" name="Sent-Info" value="Yes">
+                <label for="info">Email me about products updates and resources,If this check box is checked, One on One
+                    will occasionally send helpful and relevant emails.You can <strong>unsubscribe</strong> at any
+                    time.</label>
+            </div>
+            <div class="button-container">
+                <button type="button" name="wrong" id="submitButton">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!--The Modal-->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal();">&times;</span>
+            <p id="modalParagraph">Some text in the Modal</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&nbsp; &#169; George Apostolakis</p>
+    </footer>
+    <script src="scripts/javaScript.js"></script>
+</body>
+
+</html>
