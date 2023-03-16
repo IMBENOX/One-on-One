@@ -17,25 +17,25 @@
         </nav>
     </header>
 
-    <div id="account">
+    <div id="formContainer">
         <form action="nothink" id="form" method="post">
             <h2>Create your account </h2>
             <div>
                 <label for="firstName">First Name</label>
-                <input id="firstName" type="text" name="Firstname" placeholder=" Your name...">
-                <span id="valMessageFname"></span>
+                <input id="firstName" type="text" name="First Name" placeholder=" Your name...">
+                <span id="validationMsgFirstName"></span>
             </div>
 
             <div>
                 <label for="lastName">Last Name</label>
-                <input id="lastName" type="text" name="Lastname" placeholder="Your last name...">
-                <span id="valMessageLname"></span>
+                <input id="lastName" type="text" name="Last Name" placeholder="Your last name...">
+                <span id="validationMsgLastName"></span>
             </div>
 
             <div>
                 <label for="email">Email</label>
                 <input id="email" type="text" name="Email" placeholder="Your email...">
-                <span id="valMessageEmail"></span>
+                <span id="validationMsgEmail"></span>
             </div>
 
             <div id="radioButtons">
@@ -52,9 +52,9 @@
                 </label>
             </div>
 
-            <div class="select-container">
-                <label for="sercive">Choose the service you are interested in: </label>
-                <select name="Service" id="selectInput" class="custom-select">
+            <div class="selectContainer">
+                <label for="serviceSelection">Choose the service you are interested in: </label>
+                <select name="Service" id="serviceSelection" class="custom-select">
                     <option value="" selected disabled>--Please select on of these--</option>
                     <option value="Fitness">Fitness</option>
                     <option value="Beautification">Beautification</option>
@@ -63,8 +63,8 @@
                 </select>
 
             </div>
-            <div id="invisibleElement">
-                <label for="selectData" id="invisibleElementText"></label>
+            <div id="hiddenInputContainer">
+                <label for="selectData" id="hiddenInputLabel"></label>
                 <input id="selectData" type="text" name="Fitness Category">
                 <span id="valChoice"></span>
             </div>
@@ -98,7 +98,7 @@
     <footer>
         <p>&nbsp; &#169; George Apostolakis</p>
     </footer>
-    <script src="scripts/javaScript.js"></script>
+    <script src="scripts/signup.js"></script>
 </body>
 
 </html>
