@@ -31,7 +31,7 @@ nav a {
     padding: 10px 20px;
     letter-spacing: 6px;
 }
-#account {
+#formContainer {
     width: 100%;
     height: auto;
     display: flex;
@@ -52,7 +52,7 @@ form {
     box-sizing:border-box;
     padding: 3.0em;
 }
-#account div{
+#formContainer div{
     width: 100%;
     margin: 10px 0;
 }
@@ -110,7 +110,7 @@ input[type=text]:focus{
      opacity: 1;
 }
 
-.select-container {
+.selectContainer {
     display: flex;
     justify-content: center;
     height: 40px;
@@ -206,7 +206,7 @@ textarea:focus {
     font-size: 20px;
 }
 
-#invisibleElement
+#hiddenInputContainer
 {
     display: none;
 }
