@@ -1,7 +1,7 @@
-const firstName   = document.querySelector('#firstName')
-const lastName    = document.querySelector('#lastName')
-const email       = document.querySelector('#email')
-const selectData  = document.querySelector('#selectData')
+const firstName         = document.querySelector('#firstName')
+const lastName          = document.querySelector('#lastName')
+const email             = document.querySelector('#email')
+const selectedCategory  = document.querySelector('#selectedCategory')
 
 let valFname  = 0;
 let valLname  = 0;
@@ -17,8 +17,8 @@ lastName.addEventListener('blur',function() {
 email.addEventListener('blur',function() {
     valEmail = validation('#validationMsgEmail',this)
 })
-selectData.addEventListener('blur',function() {
-    valSelect = validation('#valChoice',this)
+selectedCategory.addEventListener('blur',function() {
+    valSelect = validation('#hiddenInputValidationMsg',this)
 })
 
 const validation = (valMessage,type) =>
@@ -27,7 +27,7 @@ const validation = (valMessage,type) =>
     if (type.id === "firstName")      {regex = /^[a-zA-Z]{3,}$/};
     if (type.id === "lastName")       {regex = /^[a-zA-Z]{3,}$/};
     if (type.id === "email")          {regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/};
-    if (type.id === "selectData") {regex = /^(1|2|3)$/};
+    if (type.id === "selectedCategory") {regex = /^(1|2|3)$/};
     if(regex.test(type.value))
     {
         messageVar.style.color = "green";
@@ -41,7 +41,7 @@ const validation = (valMessage,type) =>
         {
             messageVar.innerHTML = "Please include an '@'and an '.' in the email address.";
         }
-        else if(type.id === "selectData")
+        else if(type.id === "selectedCategory")
         {
             messageVar.innerHTML = "Invalid";
         }
@@ -75,7 +75,7 @@ serviceSelection.addEventListener('change',function(){
     else
     {
         console.log(serviceSelection.value);
-        document.querySelector("#selectData").value = "";
+        document.querySelector("#selectedCategory").value = "";
         return 0;
     }
  }
