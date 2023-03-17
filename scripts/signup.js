@@ -1,62 +1,77 @@
-const firstName         = document.querySelector('#firstName')
-const lastName          = document.querySelector('#lastName')
-const email             = document.querySelector('#email')
-const selectedCategory  = document.querySelector('#selectedCategory')
+const firstNameInput         = document.querySelector('#firstNameInput')
+const lastNameInput          = document.querySelector('#lastNameInput')
+const emailInput             = document.querySelector('#emailInput')
+const hiddenInput       = document.querySelector('#hiddenInput')
+const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
 
 let valFname  = 0;
 let valLname  = 0;
 let valEmail  = 0;
 let valSelect = 0;
 
-firstName.addEventListener('blur',function () {
-     valFname = validation('#validationMsgFirstName',this)
+firstNameInput.addEventListener('blur',function () {
+    let validationMsgFirstName = document.querySelector('#validationMsgFirstName');
+     valFname = nameValidation(validationMsgFirstName,this)
 })
-lastName.addEventListener('blur',function() {
-    valLname = validation('#validationMsgLastName',this)
+lastNameInput.addEventListener('blur',function() {
+    let validationMsgLastName = document.querySelector('#validationMsgLastName');
+    valLname = nameValidation(validationMsgLastName,this)
 })
-email.addEventListener('blur',function() {
-    valEmail = validation('#validationMsgEmail',this)
+emailInput.addEventListener('blur',function() {
+    let validationMsgEmail = document.querySelector('#validationMsgEmail');
+    valEmail = emailValidation(validationMsgEmail,this)
 })
-selectedCategory.addEventListener('blur',function() {
-    valSelect = validation('#hiddenInputValidationMsg',this)
+hiddenInput.addEventListener('blur',function() {
+    let hiddenInputValidationMsg = document.querySelector('#hiddenInputValidationMsg');
+    valSelect = hiddenInputValidation(hiddenInputValidationMsg,this)
 })
 
-const validation = (valMessage,type) =>
-{
-    let messageVar   = document.querySelector(valMessage);
-    if (type.id === "firstName")      {regex = /^[a-zA-Z]{3,}$/};
-    if (type.id === "lastName")       {regex = /^[a-zA-Z]{3,}$/};
-    if (type.id === "email")          {regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/};
-    if (type.id === "selectedCategory") {regex = /^(1|2|3)$/};
-    if(regex.test(type.value))
-    {
-        messageVar.style.color = "green";
-        messageVar.innerHTML   = "&#10003;";
+const nameValidation = (validationMsg,lastNameInput) => {
+    regex = /^[a-zA-Z]{3,}$/
+    validationResult = regex.test(lastNameInput.value);
+    if(validationResult){
+        validationMsg.style.color = 'green';
+        validationMsg.innerHTML = '&#10003;';
         return 1;
-    }
-    else
-    {
-        messageVar.style.color = "red";
-        if(type.id === "email")
-        {
-            messageVar.innerHTML = "Please include an '@'and an '.' in the email address.";
-        }
-        else if(type.id === "selectedCategory")
-        {
-            messageVar.innerHTML = "Invalid";
-        }
-        else
-        {
-            messageVar.innerHTML = "Please type a 3 or more letter name with no special characters.";
-        }
+    } else {
+        validationMsg.style.color = 'red';
+        validationMsg.innerHTML = 'Please type a 3 or more letter name with no special characters.';
         return 0;
     }
-} 
+}
 
-const serviceSelection = document.querySelector('#serviceSelection')
+const emailValidation = (validationMsg,emailInput) => {
+    regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/ 
+    validationResult = regex.test(emailInput.value);
+    if(validationResult){
+        validationMsg.style.color = 'green';
+        validationMsg.innerHTML = '&#10003;'
+        return 1;
+    } else {
+        validationMsg.style.color = 'red';
+        validationMsg.innerHTML   = "Please include an '@'and an '.' in the email address.";
+        return 0;
+    }
+}
+
+const hiddenInputValidation = (validationMsg,hiddenInput) => {
+    regex = /^(1|2|3)$/
+    validationResult = regex.test(hiddenInput.value);
+    if(validationResult){
+        validationMsg.style.color = 'green';
+        validationMsg.innerHTML = '&#10003;';
+        return 1;
+    } else {
+        validationMsg.style.color = 'red';
+        validationMsg.innerHTML   = 'Invalid: please type 1 , 2, or 3'
+        return 0;
+    }
+}
+
+
 
 let fitnessSelected = 0;
-serviceSelection.addEventListener('change',function(){
+serviceDropDownMenu.addEventListener('change',function(){
     fitnessSelected = selectFun(this)
 })
 
@@ -65,17 +80,18 @@ serviceSelection.addEventListener('change',function(){
     let str = 'In what specific category are you interested in:'+ '<br>' +'1.Bodybuilding, 2.Crossfit or 3.Running?'+'<br>'+ 'Type 1 2 or 3 respectively:';
     let hiddenInputContainer    = document.querySelector("#hiddenInputContainer");
     let hiddenInputLabel = document.querySelector("#hiddenInputLabel");
-    if(serviceSelection.value == "Fitness")
+    if(serviceDropDownMenu.value == "Fitness")
     {
         hiddenInputLabel.innerHTML = str;
         hiddenInputContainer.style.display = 'unset';
-        console.log(serviceSelection.value);
+        console.log(serviceDropDownMenu.value);
         return 1;
     }
     else
     {
-        console.log(serviceSelection.value);
-        document.querySelector("#selectedCategory").value = "";
+        console.log(serviceDropDownMenu.value);
+        hiddenInputContainer.style.display = 'none';
+        document.querySelector("#hiddenInput").value = "";
         return 0;
     }
  }
