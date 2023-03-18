@@ -42,12 +42,10 @@ const tableWrapper = document.querySelector('#tableWrapper');
 const table = document.createElement('table');
 const thead = document.createElement('thead');
 const tbody = document.createElement('tbody');
-
 imagesContainer.insertAdjacentElement('afterend',tableWrapper)
 tableWrapper.append(table);
 table.append(thead);
 table.append(tbody);
-
 const headRow = document.createElement('tr');
 thead.append(headRow);
 
@@ -61,26 +59,24 @@ for(let service in services){
     const currentService = services[service]
     const tr  = document.createElement('tr')
     const th  = document.createElement('th')
-    const td1 = document.createElement('td')
-    const td2 = document.createElement('td')
-    const td3 = document.createElement('td')
+    const numOfProviders = document.createElement('td')
+    const avrPrice = document.createElement('td')
+    const mostPopularListContainer = document.createElement('td')
     const ul  = document.createElement('ul')
 
     th.setAttribute('scope','row')
     th.append(currentService.name)
-    td1.append(currentService.numOfProviders)
-    td2.append(currentService.avrPrice)
+    numOfProviders.append(currentService.numOfProviders)
+    avrPrice.append(currentService.avrPrice)
      for(let popularService of currentService.mostPopular){
         const li = document.createElement('li')
         li.append(popularService)
         ul.append(li)
      }
-     td3.append(ul)
-    
-
+    mostPopularListContainer.append(ul)
     tr.append(th)
-    tr.append(td1)
-    tr.append(td2)
-    tr.append(td3)
+    tr.append(numOfProviders)
+    tr.append(avrPrice)
+    tr.append(mostPopularListContainer)
     tbody.append(tr)
 }
