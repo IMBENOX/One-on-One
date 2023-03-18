@@ -16,7 +16,7 @@ header {
     flex-direction:column;
     align-items:center;
 }
-nav {
+ header nav {
     display:flex;
     justify-content:space-around;
     width: 50%;
@@ -24,7 +24,7 @@ nav {
     border-radius: 10px;
     margin-top:40px;
 }
-nav a {
+header nav a {
     font-weight: bold;
     color:white;
     text-decoration: none;
@@ -32,18 +32,21 @@ nav a {
     letter-spacing: 6px;
 }
 
-#images {
+#imagesContainer {
     display: flex;
-    /* border: 1px solid red; */
     justify-content: space-evenly;
     flex-wrap: wrap;
-
 }
 .image {
     /* border: 1px solid green; */
     max-width: 450px;
     min-width: 300px;
     height: 300px;
+}
+
+#tableWrapper {
+    height: 650px;
+    overflow: auto;
 }
 table {
     table-layout:fixed;
@@ -57,8 +60,11 @@ table,th,td {
     border: 1px solid lightgrey;
     border-collapse:collapse;
 }
+thead {
+    position: sticky;
+    top: 0px;
+}
 thead th {
-    width:20%;
     background-color: black;
     color: white;
     text-transform: uppercase;
