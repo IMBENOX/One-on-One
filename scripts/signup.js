@@ -1,39 +1,43 @@
-const firstNameInput         = document.querySelector('#firstNameInput')
-const lastNameInput          = document.querySelector('#lastNameInput')
-const emailInput             = document.querySelector('#emailInput')
-const hiddenInput            = document.querySelector('#hiddenInput')
-const serviceDropDownMenu    = document.querySelector('#serviceDropDownMenu')
-const modal                  = document.querySelector("#myModal");
 
-
-let validationResultFirstName   = false;
-let validationResultLastName    = false;
-let validationResultEmail       = false;
-let validationResultHiddenInput = false;
-let DropDownChoiceDesplayed     = false;
-
+const firstNameInput = document.querySelector('#firstNameInput')
+let validationResultFirstName = false;
 firstNameInput.addEventListener('blur',function () {
     let validationMsgFirstName = document.querySelector('#validationMsgFirstName');
     validationResultFirstName  = nameValidation(validationMsgFirstName,this)
 })
+
+const lastNameInput = document.querySelector('#lastNameInput')
+let validationResultLastName = false;
 lastNameInput.addEventListener('blur',function() {
     let validationMsgLastName = document.querySelector('#validationMsgLastName');
     validationResultLastName = nameValidation(validationMsgLastName,this)
 })
+
+const emailInput = document.querySelector('#emailInput')
+let validationResultEmail = false;
 emailInput.addEventListener('blur',function() {
     validationResultEmail = emailValidation(this)
 })
+
+const hiddenInput = document.querySelector('#hiddenInput')
+let validationResultHiddenInput = false;
 hiddenInput.addEventListener('blur',function() {
     validationResultHiddenInput = hiddenInputValidation(this)
 })
+
+const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
+let DropDownChoiceDesplayed = false;
 serviceDropDownMenu.addEventListener('change',function(){
     DropDownChoiceDesplayed = renderDropDownMenuChoice(this)
 })
+
+const modal = document.querySelector("#myModal");
 const submitButton = document.querySelector('#submitButton')
 submitButton.addEventListener('click',function(){
    renderModal();
    closeModal();
 })
+
 
 const nameValidation = (validationMsg,NameInput) => {
     regex = /^[a-zA-Z]{3,}$/
@@ -93,19 +97,15 @@ const hiddenInputValidation = (hiddenInput) => {
  }
 const renderModal = () => {
     modal.style.display ="block";
-    let formInput = document.querySelector("#form").elements;
+    let formField = document.querySelector("#form").elements;
     let str = '';
     if( (validationResultFirstName && validationResultLastName && validationResultEmail) === false ){modalText.innerHTML = "All inputs must be valid please try again!!!";}
     else if( validationResultHiddenInput === false && DropDownChoiceDesplayed === true) {modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";}
-    else{
-        for (let i = 0; i < formInput.length-1; i++) {
-            let name = formInput[i].name;
-            let value = formInput[i].value;
-            let ischecked = formInput[i].checked;
-            condition = value === "";
-            if((name ==='Gender' || name === 'Sent-Info') && ischecked === false ){condition = true}
-            str+= (condition? "" : `${name}: ${value} <br>`);
-            }
+    else{for (let i = 0; i < formField.length-1; i++) {
+            let value = formField[i].value;
+            doNotShow = value === "";
+            if((formField[i].type ==='radio' || formField[i].type === 'checkbox') && formField[i].checked === false ){doNotShow = true}
+            str+= (doNotShow? "" : `${formField[i].name}: ${value} <br>`);}
             modalText.innerHTML = `Your choices are: <br> ${str} `;
         }
 }
