@@ -1,6 +1,6 @@
-categories = ['TYPE','NUMBER OF PROVIDERS','AVERAGE PRICE','MOST POPULAR']
+const categories = ['TYPE','NUMBER OF PROVIDERS','AVERAGE PRICE','MOST POPULAR']
 
-services = {
+const services = {
     fitness: {
         name: 'Fitness',
         numOfProviders: 2000,
@@ -28,14 +28,23 @@ services = {
         avrPrice: '15$',
         mostPopular: ['Physics','Math','Dancing']
 
+    },
+    health: {
+        name: 'Health',
+        numOfProviders: 1000,
+        avrPrice: '50$',
+        mostPopular: ['Pathologist','Chiropractor','Dentist']
+
     }
 }
-const imgs  = document.querySelector('#images');
+const imagesContainer  = document.querySelector('#imagesContainer');
+const tableWrapper = document.querySelector('#tableWrapper');
 const table = document.createElement('table');
 const thead = document.createElement('thead');
 const tbody = document.createElement('tbody');
 
-imgs.insertAdjacentElement('afterend',table)
+imagesContainer.insertAdjacentElement('afterend',tableWrapper)
+tableWrapper.append(table);
 table.append(thead);
 table.append(tbody);
 
