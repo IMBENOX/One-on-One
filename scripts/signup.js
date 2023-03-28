@@ -1,39 +1,39 @@
 
 const firstNameInput = document.querySelector('#firstNameInput')
 let validationResultFirstName = false;
-firstNameInput.addEventListener('blur',function () {
+firstNameInput.addEventListener('blur',(event) => {
     let validationMsgFirstName = document.querySelector('#validationMsgFirstName');
-    validationResultFirstName  = nameValidation(validationMsgFirstName,this)
+    validationResultFirstName  = nameValidation(validationMsgFirstName,event.target)
 })
 
 const lastNameInput = document.querySelector('#lastNameInput')
 let validationResultLastName = false;
-lastNameInput.addEventListener('blur',function() {
+lastNameInput.addEventListener('blur',(event) => {
     let validationMsgLastName = document.querySelector('#validationMsgLastName');
-    validationResultLastName = nameValidation(validationMsgLastName,this)
+    validationResultLastName = nameValidation(validationMsgLastName,event.target)
 })
 
 const emailInput = document.querySelector('#emailInput')
 let validationResultEmail = false;
-emailInput.addEventListener('blur',function() {
-    validationResultEmail = emailValidation(this)
+emailInput.addEventListener('blur',(event) => {
+    validationResultEmail = emailValidation(event.target)
 })
 
 const hiddenInput = document.querySelector('#hiddenInput')
 let validationResultHiddenInput = false;
-hiddenInput.addEventListener('blur',function() {
-    validationResultHiddenInput = hiddenInputValidation(this)
+hiddenInput.addEventListener('blur',(event) => {
+    validationResultHiddenInput = hiddenInputValidation(event.target)
 })
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
 let DropDownChoiceDesplayed = false;
-serviceDropDownMenu.addEventListener('change',function(){
-    DropDownChoiceDesplayed = renderDropDownMenuChoice(this)
+serviceDropDownMenu.addEventListener('change',(event) => {
+    DropDownChoiceDesplayed = renderDropDownMenuChoice(event.target)
 })
 
 const modal = document.querySelector("#myModal");
 const submitButton = document.querySelector('#submitButton')
-submitButton.addEventListener('click',function(){
+submitButton.addEventListener('click',() => {
    renderModal();
    closeModal();
 })
@@ -112,6 +112,6 @@ const renderModal = () => {
 
 const closeModal = () => {
     let modalCloseButton = document.querySelector('.close');
-    modalCloseButton.onclick =function() { modal.style.display = "none"};
-    window.onclick = event => {  if (event.target == modal) {modal.style.display = "none"};}
+    modalCloseButton.onclick = () => modal.style.display = "none";
+    window.onclick = event => { if (event.target == modal) {modal.style.display = "none"};}
 }
