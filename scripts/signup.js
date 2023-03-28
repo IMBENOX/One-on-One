@@ -26,9 +26,9 @@ hiddenInput.addEventListener('blur',(event) => {
 })
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
-let DropDownChoiceDesplayed = false;
+let dropDownChoiceDesplayed = false;
 serviceDropDownMenu.addEventListener('change',(event) => {
-    DropDownChoiceDesplayed = renderDropDownMenuChoice(event.target)
+    dropDownChoiceDesplayed = renderDropDownMenuChoice(event.target)
 })
 
 const modal = document.querySelector("#myModal");
@@ -39,9 +39,9 @@ submitButton.addEventListener('click',() => {
 })
 
 
-const nameValidation = (validationMsg,NameInput) => {
-    regex = /^[a-zA-Z]{3,}$/
-    let validationResult = regex.test(NameInput.value);
+const nameValidation = (validationMsg,nameInput) => {
+    const regex = /^[a-zA-Z]{3,}$/
+    let validationResult = regex.test(nameInput.value);
     if(validationResult){
         validationMsg.style.color = 'green';
         validationMsg.innerHTML   = '&#10003;';
@@ -54,7 +54,7 @@ const nameValidation = (validationMsg,NameInput) => {
 }
 const emailValidation = (emailInput) => {
     let validationMsg = document.querySelector('#validationMsgEmail');
-    regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/ 
+    const regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/ 
     let validationResult = regex.test(emailInput.value);
     if(validationResult){
         validationMsg.style.color = 'green';
@@ -68,7 +68,7 @@ const emailValidation = (emailInput) => {
 }
 const hiddenInputValidation = (hiddenInput) => {
     let validationMsg = document.querySelector('#hiddenInputValidationMsg');
-    regex = /^(1|2|3)$/
+    const regex = /^(1|2|3)$/
     let validationResult = regex.test(hiddenInput.value);
     if(validationResult){
         validationMsg.style.color = 'green';
@@ -83,8 +83,8 @@ const hiddenInputValidation = (hiddenInput) => {
 
 
  const renderDropDownMenuChoice = (serviceDropDownMenu) =>{
-    if(serviceDropDownMenu.value == "Fitness"){
-        let hiddenInputContainer    = document.querySelector("#hiddenInputContainer");
+    if(serviceDropDownMenu.value === "Fitness"){
+        let hiddenInputContainer = document.querySelector("#hiddenInputContainer");
         let hiddenInputLabel = document.querySelector("#hiddenInputLabel");
         hiddenInputLabel.innerHTML = 'In what specific category are you interested in:'+ '<br>' +'1.Bodybuilding, 2.Crossfit or 3.Running?'+'<br>'+ 'Type 1 2 or 3 respectively:';
         hiddenInputContainer.style.display = 'unset';
@@ -100,10 +100,10 @@ const renderModal = () => {
     let formField = document.querySelector("#form").elements;
     let str = '';
     if( (validationResultFirstName && validationResultLastName && validationResultEmail) === false ){modalText.innerHTML = "All inputs must be valid please try again!!!";}
-    else if( validationResultHiddenInput === false && DropDownChoiceDesplayed === true) {modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";}
+    else if( validationResultHiddenInput === false && dropDownChoiceDesplayed === true) {modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";}
     else{for (let i = 0; i < formField.length-1; i++) {
             let value = formField[i].value;
-            doNotShow = value === "";
+            let doNotShow = value === "";
             if((formField[i].type ==='radio' || formField[i].type === 'checkbox') && formField[i].checked === false ){doNotShow = true}
             str+= (doNotShow? "" : `${formField[i].name}: ${value} <br>`);}
             modalText.innerHTML = `Your choices are: <br> ${str} `;
@@ -113,5 +113,5 @@ const renderModal = () => {
 const closeModal = () => {
     let modalCloseButton = document.querySelector('.close');
     modalCloseButton.onclick = () => modal.style.display = "none";
-    window.onclick = event => { if (event.target == modal) {modal.style.display = "none"};}
+    window.onclick = event => { if (event.target === modal) {modal.style.display = "none"};}
 }
