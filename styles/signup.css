@@ -205,55 +205,17 @@ textarea:focus {
 #modalParagraph {
     font-size: 20px;
 }
-
 #hiddenInputContainer
 {
     display: none;
 }
-
-@media (max-width: 1440px) {
-    h1 {
-        font-size:1.8em;
-        width:35%;
-    }
-}
-@media(max-width:1115px){
-    h1{
-        font-size:1.5em;
-        width:40%;
-    }
-    p{
-        font-size: 0.9em;
-    }
-}
-@media (max-width: 1367px){
-    .image{
-        max-width: 350px;
-        min-width: 200px;
-        height: 200px;
-    }
-    table {
-        font-size: 0.8em;
-    }
-}
 @media(max-width:820px){
-    h1 {
-        font-size: 1.3em;
-        width:50%;
-    }
-    p {
-        font-size:0.8em;
-    }
     nav {
         width: 70%;
         font-size: 0.8em;
     }
 }
 @media(max-width:570px){
-    h1{
-        font-size: 1.3em;
-        width:28%;
-    }
     nav {
         font-size: 0.6em;
     }
