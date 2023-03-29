@@ -71,7 +71,7 @@ nav a {
         font-size:1.8em;
         width:35%;
     }
-    #dtitle {
+    #title {
         font-size: 4em;
     }
     #description img {
@@ -80,7 +80,7 @@ nav a {
     }
 }
 @media (max-width: 1367px){
-    #dtitle {
+    #title {
         font-size: 3.5em;
     }
     #description img {
@@ -96,7 +96,7 @@ nav a {
     #paragraph{
         font-size: 0.8em;
     }
-    #dtitle {
+    #title {
         font-size: 3.0em;
     }
     #description img {
