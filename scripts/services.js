@@ -44,16 +44,15 @@ const thead = document.createElement('thead');
 const tbody = document.createElement('tbody');
 imagesContainer.insertAdjacentElement('afterend',tableWrapper)
 tableWrapper.append(table);
-table.append(thead);
-table.append(tbody);
+table.append(...[thead,tbody]);
 const headRow = document.createElement('tr');
 thead.append(headRow);
 
-for(let category of categories){
+categories.forEach(category => {
     const th = document.createElement('th')
     th.append(category);
     headRow.append(th);
-}
+})
 
 for(let service in services){
     const currentService = services[service]
@@ -74,9 +73,6 @@ for(let service in services){
         ul.append(li)
      }
     mostPopularListContainer.append(ul)
-    tr.append(th)
-    tr.append(numOfProviders)
-    tr.append(avrPrice)
-    tr.append(mostPopularListContainer)
+    tr.append(...[th,numOfProviders,avrPrice,mostPopularListContainer])
     tbody.append(tr)
 }
