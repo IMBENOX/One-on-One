@@ -1,28 +1,37 @@
-
 const firstNameInput = document.querySelector('#firstNameInput')
 let validationResultFirstName = false;
 firstNameInput.addEventListener('blur',(event) => {
-    let validationMsgFirstName = document.querySelector('#validationMsgFirstName');
-    validationResultFirstName  = nameValidation(validationMsgFirstName,event.target)
+    let validationContainerFirstName = document.querySelector('#validationMsgFirstName');
+    const firstNameMessage     = 'Please type a 3 or more letter name with no special characters.';
+    const firstNameRegex       = /^[a-zA-Z]{3,}$/;
+    validationResultFirstName  = validation(validationContainerFirstName,firstNameMessage,event.target,firstNameRegex)
 })
 
 const lastNameInput = document.querySelector('#lastNameInput')
 let validationResultLastName = false;
 lastNameInput.addEventListener('blur',(event) => {
-    let validationMsgLastName = document.querySelector('#validationMsgLastName');
-    validationResultLastName = nameValidation(validationMsgLastName,event.target)
+    let validationContainerLastName = document.querySelector('#validationMsgLastName');
+    const lastNameMessage     = 'Please type a 3 or more letter name with no special characters.';
+    const lastNameRegex       = /^[a-zA-Z]{3,}$/;
+    validationResultLastName  = validation(validationContainerLastName,lastNameMessage,event.target,lastNameRegex)
 })
 
 const emailInput = document.querySelector('#emailInput')
 let validationResultEmail = false;
 emailInput.addEventListener('blur',(event) => {
-    validationResultEmail = emailValidation(event.target)
+    let   validationContainerEmail  = document.querySelector('#validationMsgEmail');
+    const emailMessage        = "Please include an '@'and an '.' in the email address.";
+    const emailRegex          = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/;
+    validationResultEmail     = validation(validationContainerEmail,emailMessage,event.target,emailRegex)
 })
 
 const hiddenInput = document.querySelector('#hiddenInput')
 let validationResultHiddenInput = false;
 hiddenInput.addEventListener('blur',(event) => {
-    validationResultHiddenInput = hiddenInputValidation(event.target)
+    let   validationContainerHiddenInput = document.querySelector('#hiddenInputValidationMsg');
+    const hiddenInputMessage       = "Invalid: please type 1 , 2, or 3";
+    const hiddenInputRegex         = /^(1|2|3)$/;
+    validationResultHiddenInput = validation(validationContainerHiddenInput,hiddenInputMessage,event.target,hiddenInputRegex)
 })
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
@@ -38,49 +47,19 @@ submitButton.addEventListener('click',() => {
    closeModal();
 })
 
-
-const nameValidation = (validationMsg,nameInput) => {
-    const regex = /^[a-zA-Z]{3,}$/
-    let validationResult = regex.test(nameInput.value);
+const validation = (validationContainer, message, inputType, regex) => {
+    let validationResult = regex.test(inputType.value);
     if(validationResult){
-        validationMsg.style.color = 'green';
-        validationMsg.innerHTML   = '&#10003;';
+        validationContainer.style.color = 'green';
+        validationContainer.innerHTML   = '&#10003;';
         return validationResult;
-    } else {
-        validationMsg.style.color = 'red';
-        validationMsg.innerHTML   = 'Please type a 3 or more letter name with no special characters.';
+    }
+    else {
+        validationContainer.style.color = 'red';
+        validationContainer.innerHTML   = message;
         return validationResult;
     }
 }
-const emailValidation = (emailInput) => {
-    let validationMsg = document.querySelector('#validationMsgEmail');
-    const regex = /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/ 
-    let validationResult = regex.test(emailInput.value);
-    if(validationResult){
-        validationMsg.style.color = 'green';
-        validationMsg.innerHTML   = '&#10003;'
-        return validationResult;
-    } else {
-        validationMsg.style.color = 'red';
-        validationMsg.innerHTML   = "Please include an '@'and an '.' in the email address.";
-        return validationResult;
-    }
-}
-const hiddenInputValidation = (hiddenInput) => {
-    let validationMsg = document.querySelector('#hiddenInputValidationMsg');
-    const regex = /^(1|2|3)$/
-    let validationResult = regex.test(hiddenInput.value);
-    if(validationResult){
-        validationMsg.style.color = 'green';
-        validationMsg.innerHTML   = '&#10003;';
-        return validationResult;
-    } else {
-        validationMsg.style.color = 'red';
-        validationMsg.innerHTML   = 'Invalid: please type 1 , 2, or 3'
-        return validationResult;
-    }
-}
-
 
  const renderDropDownMenuChoice = (serviceDropDownMenu) =>{
     if(serviceDropDownMenu.value === "Fitness"){
