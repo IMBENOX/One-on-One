@@ -41,6 +41,7 @@ serviceDropDownMenu.addEventListener('change',(event) => {
 })
 
 const modal = document.querySelector("#myModal");
+const modalText = document.querySelector('#modalText');
 const submitButton = document.querySelector('#submitButton')
 submitButton.addEventListener('click',() => {
    renderModal();
