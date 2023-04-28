@@ -4,7 +4,7 @@ categories = {
         name: 'Fitness',
         numOfProviders: 200,
         avrPrice: '25$',
-        mostPopular: ['Bodybuilding','Crossfit','Running']
+        mostPopular: ['Bodybuilding','Crossfit','Track']
 
     },
     cosmetology: {
@@ -54,7 +54,7 @@ services = [
         avrDistance: '5km',
     },
     {
-        name: 'Running',
+        name: 'Track',
         category: 'Fitness',
         numOfProviders: 2,
         avrPrice: 18,
@@ -215,24 +215,102 @@ services = [
     },
 ]
 
-const fitnessCategory = services.filter(({category} )=> category === 'Fitness');
-const fitnessCategoryLowCost = services.filter(({category, avrPrice} )=> category === 'Fitness' && avrPrice < 20 );
-const cosmetologyCategory = services.filter(({category} )=> category === 'Cosmetology');
-const homeRepairsCategory = services.filter(({category} )=> category === 'Home Repairs');
-const teachingCategory = services.filter(({category} )=> category === 'Teaching');
-const healthCategory = services.filter(({category} )=> category === 'Health');
+const serviceListModal   = document.querySelector('#serviceListModal');
+const serviceListBtn     = document.querySelector('#serviceListBtn');
+serviceListBtn.addEventListener('click', () => {
+    renderServiceList();
+    closeLists();
+})
+
+const renderServiceList = () => {
+    serviceListModal.style.display = "flex";
+}
+
+const fitnessSelection     = document.querySelector('#fitnessSelection');
+const cosmetologySelection = document.querySelector('#cosmetologySelection');
+const homeRepairsSelection = document.querySelector('#homeRepairsSelection');
+const teachingSelection    = document.querySelector('#teachingSelection');
+const healthSelection      = document.querySelector('#healthSelection');
+const fitnessCategory      = document.querySelector('#fitnessCategory');
+const cosmetologyCategory  = document.querySelector('#cosmetologyCategory');
+const homeRepairsCategory  = document.querySelector('#homeRepairsCategory');
+const teachingCategory     = document.querySelector('#teachingCategory');
+const healthCategory       = document.querySelector('#healthCategory');
+
+fitnessSelection.addEventListener('click', (event) => {
+    renderSelectedCategoryList(event.target.id)
+})
+cosmetologySelection.addEventListener('click', (event) => {
+    renderSelectedCategoryList(event.target.id)
+})
+homeRepairsSelection.addEventListener('click', (event) => {
+    renderSelectedCategoryList(event.target.id)
+})
+teachingSelection.addEventListener('click', (event) => {
+    renderSelectedCategoryList(event.target.id)
+})
+healthSelection.addEventListener('click', (event) => {
+    renderSelectedCategoryList(event.target.id)
+})
+
+const renderSelectedCategoryList = (categoryTitle) => {
+    const categories = [fitnessCategory,cosmetologyCategory,homeRepairsCategory,teachingCategory,healthCategory];
+    const selections = [fitnessSelection,cosmetologySelection,homeRepairsSelection,teachingSelection,healthSelection];
+    switch(categoryTitle) {
+        case 'fitnessSelection' :
+            fitnessCategory.classList.remove('notSelectedCategory');
+            fitnessSelection.classList.add('selectedCategory');
+            categories.filter(category => category !== fitnessCategory).forEach(category => category.classList.add('notSelectedCategory'));
+            selections.filter(selection => selection !== fitnessSelection).forEach(selection => selection.classList.remove('selectedCategory'));
+            break;
+        case 'cosmetologySelection' :
+            cosmetologyCategory.classList.remove('notSelectedCategory');
+            cosmetologySelection.classList.add('selectedCategory');
+            categories.filter(category => category !== cosmetologyCategory).forEach(category => category.classList.add('notSelectedCategory'));
+            selections.filter(selection => selection !== cosmetologySelection).forEach(selection => selection.classList.remove('selectedCategory'));
+            break;
+        case 'homeRepairsSelection' :
+            homeRepairsCategory.classList.remove('notSelectedCategory');
+            homeRepairsSelection.classList.add('selectedCategory');
+            categories.filter(category => category !== homeRepairsCategory).forEach(category => category.classList.add('notSelectedCategory'));
+            selections.filter(selection => selection !== homeRepairsSelection).forEach(selection => selection.classList.remove('selectedCategory'));
+            break;
+        case 'teachingSelection' :
+            teachingCategory.classList.remove('notSelectedCategory');
+            teachingSelection.classList.add('selectedCategory');
+            categories.filter(category => category !== teachingCategory).forEach(category => category.classList.add('notSelectedCategory'));
+            selections.filter(selection => selection !== teachingSelection).forEach(selection => selection.classList.remove('selectedCategory'));
+            break;
+        case 'healthSelection' :
+            healthCategory.classList.remove('notSelectedCategory');
+            healthSelection.classList.add('selectedCategory');
+            categories.filter(category => category !== healthCategory).forEach(category => category.classList.add('notSelectedCategory'));
+            selections.filter(selection => selection !== healthSelection).forEach(selection => selection.classList.remove('selectedCategory'));
+            break;
+            default:
+                console.log('Somethink whent wrong');
+    }
+}
+
+const fitnessFilterLowCost     = services.filter(({category, avrPrice} )=> category === 'Fitness' && avrPrice < 20 );
+const cosmetologyFilterLowCost = services.filter(({category, avrPrice} )=> category === 'Cosmetology' && avrPrice < 20 );
+const homeRepairsFilterLowCost = services.filter(({category, avrPrice} )=> category === 'Home Repairs' && avrPrice < 60 );
+const teachingFilterLowCost    = services.filter(({category, avrPrice} )=> category === 'Teaching' && avrPrice < 15);
+const healthFilterLowCost      = services.filter(({category, avrPrice} )=> category === 'Health' && avrPrice < 50);
 
 const filterListModal = document.querySelector('#filterListModal');
+const serviceCategories = document.querySelector('#serviceCategories');
+const serviceSpecifics = document.querySelector('#serviceSpecifics');
 const filterListBtn = document.querySelector('#filterListBtn');
 const filterListText = document.querySelector('#filterListText');
 filterListBtn.addEventListener('click', () => {
     renderFilterList();
-    closeFilterList();
+    closeLists();
 })
 
 const renderFilterList = () => {
     filterListModal.style.display = "block";
-    filtersList = ['Fitness','Fitness Low Cost','Cosmetology','Home Repairs','Teaching','Health']
+    filtersList = ['Fitness Low Cost','Cosmetology Low Cost','Home Repairs Low Cost','Teaching Low Cost','Health Low Cost']
     for(let filterName of filtersList) {
         const filter = document.createElement('div')
         filter.classList.add('filterStyle');
@@ -240,39 +318,35 @@ const renderFilterList = () => {
         filterListText.append(filter);
         filter.onclick = () => {
             switch(filterName){
-                case 'Fitness':
-                    console.log('Fitness')
-                    console.log(fitnessCategory);
-                    break;
                 case 'Fitness Low Cost':
                     console.log('Fitness Low Cost')
-                    console.log(fitnessCategoryLowCost);
+                    console.log(fitnessFilterLowCost);
                     break;
-                case 'Cosmetology':
-                    console.log('Cosmetology')
-                    console.log(cosmetologyCategory);
+                case 'Cosmetology Low Cost':
+                    console.log('Cosmetology Low Cost')
+                    console.log(cosmetologyFilterLowCost);
                     break;
-                case 'Home Repairs':
-                    console.log('Home Repairs');
-                    console.log(homeRepairsCategory);
+                case 'Home Repairs Low Cost':
+                    console.log('Home Repairs Low Cost');
+                    console.log(homeRepairsFilterLowCost);
                     break;
-                case 'Teaching':
-                    console.log('Teaching')
-                    console.log(teachingCategory);
+                case 'Teaching Low Cost':
+                    console.log('Teaching Low Cost')
+                    console.log(teachingFilterLowCost);
                     break;
-                case 'Health':
-                    console.log('Health')
-                    console.log(healthCategory);
+                case 'Health Low Cost':
+                    console.log('Health Low Cost')
+                    console.log(healthFilterLowCost);
                     break;
                 default:
-                    console.log("")
+                    console.log("Somethink whent wrong")
             }
         }
     }
 
 }
 
-const closeFilterList = () => {
+const closeLists = () => {
     const closeFilterList = document.querySelector('.closeFilterList');
     closeFilterList.onclick = () => {
         filterListModal.style.display = "none" ;
@@ -284,12 +358,11 @@ const closeFilterList = () => {
             filterListModal.style.display = "none"
             filterListText.innerHTML = '';
             console.clear();
+        } else if (event.target === serviceListModal) {
+            serviceListModal.style.display = "none";
         }
     }
 }
-
-
-
 
 const searchBarContainter  = document.querySelector('.searchBarContainer');
 const tableWrapper = document.querySelector('#tableWrapper');
