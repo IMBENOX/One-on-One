@@ -1,41 +1,62 @@
-const tableHead = ['TYPE','NUMBER OF PROVIDERS','AVERAGE PRICE','MOST POPULAR']
-categories = {
-    fitness: {
+
+categories = [
+    {
         name: 'Fitness',
         numOfProviders: 200,
         avrPrice: '25$',
-        mostPopular: ['Bodybuilding','Crossfit','Track']
+        mostPopular: ['Bodybuilding','Crossfit','Track'],
+        id                 : 'fitnessCategory',
+        selectionId        : 'fitnessSelection',
+        isSelectedClass    : 'selectedCategory',
+        notSelectedClass   : '',
+        icon               : 'url("images/fitnessIcon.jpg")',
 
     },
-    cosmetology: {
+    {
         name: 'Cosmetology',
         numOfProviders: 130,
         avrPrice: '30$',
-        mostPopular: ['Hairdressing','Nails','Massage']
-
+        mostPopular: ['Hairdressing','Nails','Massage'],
+        id                 : 'cosmetologyCategory',
+        selectionId        : 'cosmetologySelection',
+        isSelectedClass    : '',
+        notSelectedClass   : 'notSelectedCategory',
+        icon               : 'url("images/cosmetologyIcon.jpg")',
     },
-    homeRepairs: {
+    {
         name: 'Home Repairs',
         numOfProviders: 150,
         avrPrice: '80$',
-        mostPopular: ['Home Paintment','Appliance Service','Plumbing']
-
+        mostPopular: ['Home Paintment','Appliance Service','Plumbing'],
+        id                 : 'homeRepairsCategory',
+        selectionId        : 'homeRepairsSelection',
+        isSelectedClass    : '',
+        notSelectedClass   : 'notSelectedCategory',
+        icon               : 'url("images/homeRepairsIcon.jpg")',
     },
-    teaching: {
+    {
         name: 'Teaching',
         numOfProviders: 90,
         avrPrice: '15$',
-        mostPopular: ['Physics','Math','Quitar']
-
+        mostPopular: ['Physics','Math','Quitar'],
+        id                 : 'teachingCategory',
+        selectionId        : 'teachingSelection',
+        isSelectedClass    : '',
+        notSelectedClass   : 'notSelectedCategory',
+        icon               : 'url("images/teachingIcon.jpg")',
     },
-    health: {
+    {
         name: 'Health',
         numOfProviders: 100,
         avrPrice: '50$',
-        mostPopular: ['Pathologist','Chiropractor','Dentist']
-
+        mostPopular: ['Pathologist','Chiropractor','Dentist'],
+        id                 : 'healthCategory',
+        selectionId        : 'healthSelection',
+        isSelectedClass    : '',
+        notSelectedClass   : 'notSelectedCategory',
+        icon               : 'url("images/healthIcon.jpg")',
     }
-}
+]
 services = [
     {
         name: 'Bodybuilding',
@@ -44,6 +65,7 @@ services = [
         avrPrice: 15,
         rating: '9/10',
         avrDistance: '1km',
+        icon: 'url("images/bodybuildingIcon.jpg")',
     },
     {
         name: 'Crossfit',
@@ -52,6 +74,7 @@ services = [
         avrPrice: 20,
         rating: '7/10',
         avrDistance: '5km',
+        icon: 'url("images/crossfitIcon.jpg")',
     },
     {
         name: 'Track',
@@ -60,6 +83,7 @@ services = [
         avrPrice: 18,
         rating: '6/10',
         avrDistance: '2km',
+        icon: 'url("images/trackIcon.jpg")',
     },
     {
         name: 'Yoga',
@@ -68,6 +92,7 @@ services = [
         avrPrice: 16,
         rating: '6.9/10',
         avrDistance: '8km',
+        icon: 'url("images/yogaIcon.jpg")',
     },
     {
         name: 'Pilates',
@@ -76,6 +101,7 @@ services = [
         avrPrice: 19,
         rating: '7.3/10',
         avrDistance: '6km',
+        icon: 'url("images/pilatesIcon.jpg")'
     },
     {
         name: 'Boxing',
@@ -84,6 +110,7 @@ services = [
         avrPrice: 25,
         rating: '7.9/10',
         avrDistance: '3.4km',
+        icon: 'url("images/boxingIcon.jpg")'
     },
     {
         name: 'Hairdressing',
@@ -92,6 +119,7 @@ services = [
         avrPrice: 22,
         rating: '8.4/10',
         avrDistance: '1.4km',
+        icon: 'url("images/hairdressingIcon.jpg")',
     },
     {
         name: 'Nails',
@@ -100,6 +128,7 @@ services = [
         avrPrice: 27,
         rating: '4.5/10',
         avrDistance: '2.1km',
+        icon: 'url("images/nailsIcon.jpg")',
     },
     {
         name: 'Massage',
@@ -108,6 +137,7 @@ services = [
         avrPrice: 11,
         rating: '5.7/10',
         avrDistance: '4km',
+        icon: 'url("images/massageIcon.jpg")',
     },
     {
         name: 'Skin-care',
@@ -116,6 +146,7 @@ services = [
         avrPrice: 15,
         rating: '3.8/10',
         avrDistance: '3.6km',
+        icon: 'url("images/skinCareIcon.jpg")',
     },
     {
         name: 'Make Up Artist',
@@ -124,6 +155,7 @@ services = [
         avrPrice: 13,
         rating: '8/10',
         avrDistance: '1.3km',
+        icon: 'url("images/makeUpArtistIcon.jpg")',
     },
     {
         name: 'House-Painting',
@@ -132,6 +164,7 @@ services = [
         avrPrice: 200,
         rating: '7.7/10',
         avrDistance: '1.8km',
+        icon: '',
     },
     {
         name: 'Appliance Service Technician',
@@ -140,6 +173,7 @@ services = [
         avrPrice: 60,
         rating: '6.5/10',
         avrDistance: '2km',
+        icon: '',
     },
     {
         name: 'Plumber',
@@ -148,6 +182,7 @@ services = [
         avrPrice: 50,
         rating: '8.9/10',
         avrDistance: '2.6km',
+        icon: '',
     },
     {
         name: 'Electrician',
@@ -156,6 +191,7 @@ services = [
         avrPrice: 55,
         rating: '6.9/10',
         avrDistance: '1.9km',
+        icon: '',
     },
     {
         name: 'Physics Teacher',
@@ -164,6 +200,7 @@ services = [
         avrPrice: 12,
         rating: '8/10',
         avrDistance: '2.5km',
+        icon: '',
     },
     {
         name: 'Math Teacher',
@@ -172,6 +209,7 @@ services = [
         avrPrice: 10,
         rating: '8.3/10',
         avrDistance: '2.5km',
+        icon: '',
     },
     {
         name: 'Quitar Teacher',
@@ -180,6 +218,7 @@ services = [
         avrPrice: 15,
         rating: '7/10',
         avrDistance: '2.1km',
+        icon: '',
     },
     {
         name: 'Piano Teacher',
@@ -188,6 +227,7 @@ services = [
         avrPrice: 18,
         rating: '7.3/10',
         avrDistance: '1.7km',
+        icon: '',
     },
     {
         name: 'Pathologist',
@@ -196,6 +236,7 @@ services = [
         avrPrice: 50,
         rating: '8.1/10',
         avrDistance: '2.3km',
+        icon: '',
     },
     {
         name: 'Chiropractor',
@@ -204,6 +245,7 @@ services = [
         avrPrice: 40,
         rating: '8.6/10',
         avrDistance: '3km',
+        icon: '',
     },
     {
         name: 'Dentist',
@@ -212,196 +254,85 @@ services = [
         avrPrice: 30,
         rating: '8.9/10',
         avrDistance: '2.5km',
+        icon: '',
     },
 ]
 
 const serviceListModal   = document.querySelector('#serviceListModal');
 const serviceListBtn     = document.querySelector('#serviceListBtn');
-serviceListBtn.addEventListener('click', () => {
-    renderServiceList();
-    closeLists();
-})
-
-const renderServiceList = () => {
+serviceListBtn.addEventListener('click', () => 
+{
     serviceListModal.style.display = "flex";
-}
-
-const fitnessSelection     = document.querySelector('#fitnessSelection');
-const cosmetologySelection = document.querySelector('#cosmetologySelection');
-const homeRepairsSelection = document.querySelector('#homeRepairsSelection');
-const teachingSelection    = document.querySelector('#teachingSelection');
-const healthSelection      = document.querySelector('#healthSelection');
-const fitnessCategory      = document.querySelector('#fitnessCategory');
-const cosmetologyCategory  = document.querySelector('#cosmetologyCategory');
-const homeRepairsCategory  = document.querySelector('#homeRepairsCategory');
-const teachingCategory     = document.querySelector('#teachingCategory');
-const healthCategory       = document.querySelector('#healthCategory');
-
-fitnessSelection.addEventListener('click', (event) => {
-    renderSelectedCategoryList(event.target.id)
-})
-cosmetologySelection.addEventListener('click', (event) => {
-    renderSelectedCategoryList(event.target.id)
-})
-homeRepairsSelection.addEventListener('click', (event) => {
-    renderSelectedCategoryList(event.target.id)
-})
-teachingSelection.addEventListener('click', (event) => {
-    renderSelectedCategoryList(event.target.id)
-})
-healthSelection.addEventListener('click', (event) => {
-    renderSelectedCategoryList(event.target.id)
-})
-
-const renderSelectedCategoryList = (categoryTitle) => {
-    const categories = [fitnessCategory,cosmetologyCategory,homeRepairsCategory,teachingCategory,healthCategory];
-    const selections = [fitnessSelection,cosmetologySelection,homeRepairsSelection,teachingSelection,healthSelection];
-    switch(categoryTitle) {
-        case 'fitnessSelection' :
-            fitnessCategory.classList.remove('notSelectedCategory');
-            fitnessSelection.classList.add('selectedCategory');
-            categories.filter(category => category !== fitnessCategory).forEach(category => category.classList.add('notSelectedCategory'));
-            selections.filter(selection => selection !== fitnessSelection).forEach(selection => selection.classList.remove('selectedCategory'));
-            break;
-        case 'cosmetologySelection' :
-            cosmetologyCategory.classList.remove('notSelectedCategory');
-            cosmetologySelection.classList.add('selectedCategory');
-            categories.filter(category => category !== cosmetologyCategory).forEach(category => category.classList.add('notSelectedCategory'));
-            selections.filter(selection => selection !== cosmetologySelection).forEach(selection => selection.classList.remove('selectedCategory'));
-            break;
-        case 'homeRepairsSelection' :
-            homeRepairsCategory.classList.remove('notSelectedCategory');
-            homeRepairsSelection.classList.add('selectedCategory');
-            categories.filter(category => category !== homeRepairsCategory).forEach(category => category.classList.add('notSelectedCategory'));
-            selections.filter(selection => selection !== homeRepairsSelection).forEach(selection => selection.classList.remove('selectedCategory'));
-            break;
-        case 'teachingSelection' :
-            teachingCategory.classList.remove('notSelectedCategory');
-            teachingSelection.classList.add('selectedCategory');
-            categories.filter(category => category !== teachingCategory).forEach(category => category.classList.add('notSelectedCategory'));
-            selections.filter(selection => selection !== teachingSelection).forEach(selection => selection.classList.remove('selectedCategory'));
-            break;
-        case 'healthSelection' :
-            healthCategory.classList.remove('notSelectedCategory');
-            healthSelection.classList.add('selectedCategory');
-            categories.filter(category => category !== healthCategory).forEach(category => category.classList.add('notSelectedCategory'));
-            selections.filter(selection => selection !== healthSelection).forEach(selection => selection.classList.remove('selectedCategory'));
-            break;
-            default:
-                console.log('Somethink whent wrong');
-    }
-}
-
-const fitnessFilterLowCost     = services.filter(({category, avrPrice} )=> category === 'Fitness' && avrPrice < 20 );
-const cosmetologyFilterLowCost = services.filter(({category, avrPrice} )=> category === 'Cosmetology' && avrPrice < 20 );
-const homeRepairsFilterLowCost = services.filter(({category, avrPrice} )=> category === 'Home Repairs' && avrPrice < 60 );
-const teachingFilterLowCost    = services.filter(({category, avrPrice} )=> category === 'Teaching' && avrPrice < 15);
-const healthFilterLowCost      = services.filter(({category, avrPrice} )=> category === 'Health' && avrPrice < 50);
-
-const filterListModal = document.querySelector('#filterListModal');
-const serviceCategories = document.querySelector('#serviceCategories');
-const serviceSpecifics = document.querySelector('#serviceSpecifics');
-const filterListBtn = document.querySelector('#filterListBtn');
-const filterListText = document.querySelector('#filterListText');
-filterListBtn.addEventListener('click', () => {
-    renderFilterList();
     closeLists();
 })
 
-const renderFilterList = () => {
-    filterListModal.style.display = "block";
-    filtersList = ['Fitness Low Cost','Cosmetology Low Cost','Home Repairs Low Cost','Teaching Low Cost','Health Low Cost']
-    for(let filterName of filtersList) {
-        const filter = document.createElement('div')
-        filter.classList.add('filterStyle');
-        filter.innerHTML = filterName;
-        filterListText.append(filter);
-        filter.onclick = () => {
-            switch(filterName){
-                case 'Fitness Low Cost':
-                    console.log('Fitness Low Cost')
-                    console.log(fitnessFilterLowCost);
-                    break;
-                case 'Cosmetology Low Cost':
-                    console.log('Cosmetology Low Cost')
-                    console.log(cosmetologyFilterLowCost);
-                    break;
-                case 'Home Repairs Low Cost':
-                    console.log('Home Repairs Low Cost');
-                    console.log(homeRepairsFilterLowCost);
-                    break;
-                case 'Teaching Low Cost':
-                    console.log('Teaching Low Cost')
-                    console.log(teachingFilterLowCost);
-                    break;
-                case 'Health Low Cost':
-                    console.log('Health Low Cost')
-                    console.log(healthFilterLowCost);
-                    break;
-                default:
-                    console.log("Somethink whent wrong")
-            }
-        }
-    }
+const serviceCategories = document.querySelector('#serviceCategories');
+const serviceSpecifics  = document.querySelector('#serviceSpecifics');
+for(category of categories)
+{
+    const categoryContainer  = document.createElement('div');
+    const categoryIconContainer = document.createElement('span');
+    categoryContainer.setAttribute('id',category.selectionId);
+    categoryContainer.setAttribute('class',category.isSelectedClass);
+    categoryIconContainer.style.backgroundImage = category.icon;
+    categoryContainer.append(...[categoryIconContainer,category.name]);
+    serviceCategories.append(categoryContainer);
 
+    const specificCategoryDiv = document.createElement('div');
+    specificCategoryDiv.setAttribute('id',category.id);
+    specificCategoryDiv.setAttribute('class',category.notSelectedClass);
+    serviceSpecifics.append(specificCategoryDiv);
+    services.forEach( service => 
+    {
+        if(category.name === service.category)
+        {
+            const serviceContainer            = document.createElement('div');
+            const serviceIconContainer        = document.createElement('span');
+            const serviceDiscriptionContainer = document.createElement('p');
+            serviceContainer.setAttribute('id',service.name.toLowerCase());
+            serviceIconContainer.style.backgroundImage = service.icon;
+            serviceContainer.append(...[serviceIconContainer,service.name,serviceDiscriptionContainer]);
+            serviceDiscriptionContainer.append(`Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                      Maxime repellat molestias vero recusandae velit dolores id, 
+                      hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat 
+                      consectetur nam, qui deserunt aliquid.`); 
+            specificCategoryDiv.append(serviceContainer);
+        }
+    } )
+
+    const categorySelection = document.querySelector(`#${category.selectionId}`);
+    categorySelection.addEventListener('click', event => 
+    {
+        renderSelectedCategoryList(event.target.id);
+    })
+}
+
+const renderSelectedCategoryList = categorySelection => 
+{
+     const selectedCategory = categories.filter(category => category.selectionId === categorySelection);
+     document.querySelector(`#${selectedCategory[0].selectionId}`).classList.add('selectedCategory');
+     document.querySelector(`#${selectedCategory[0].id}`).classList.remove('notSelectedCategory');
+     const notSelectedCategories = categories.filter(category => category.selectionId !== categorySelection);
+     notSelectedCategories.forEach(category => 
+        {
+            document.querySelector(`#${category.selectionId}`).classList.remove('selectedCategory');
+            document.querySelector(`#${category.id}`).classList.add('notSelectedCategory');
+        })
+     
 }
 
 const closeLists = () => {
-    const closeFilterList = document.querySelector('.closeFilterList');
-    closeFilterList.onclick = () => {
-        filterListModal.style.display = "none" ;
-        filterListText.innerHTML = '';
-        console.clear();
-    }
-    window.onclick = event => { 
-        if (event.target === filterListModal) {
-            filterListModal.style.display = "none"
-            filterListText.innerHTML = '';
-            console.clear();
-        } else if (event.target === serviceListModal) {
+    window.onclick = event => 
+    {
+        if (event.target === serviceListModal)
+        {
             serviceListModal.style.display = "none";
         }
     }
 }
 
 const searchBarContainter  = document.querySelector('.searchBarContainer');
-const tableWrapper = document.querySelector('#tableWrapper');
-const table = document.createElement('table');
-const thead = document.createElement('thead');
-const tbody = document.createElement('tbody');
-searchBarContainter.insertAdjacentElement('afterend',tableWrapper)
-tableWrapper.append(table);
-table.append(...[thead,tbody]);
-const headRow = document.createElement('tr');
-thead.append(headRow);
+// searchBarContainter.insertAdjacentElement('afterend',tableWrapper)
 
-tableHead.forEach(category => {
-    const th = document.createElement('th')
-    th.append(category);
-    headRow.append(th);
-})
-
-for(let service in categories){
-    const currentService = categories[service]
-    const tr  = document.createElement('tr')
-    const th  = document.createElement('th')
-    const numOfProviders = document.createElement('td')
-    const avrPrice = document.createElement('td')
-    const mostPopularListContainer = document.createElement('td')
-    const ul  = document.createElement('ul')
-
-    th.setAttribute('scope','row')
-    th.append(currentService.name)
-    numOfProviders.append(currentService.numOfProviders)
-    avrPrice.append(currentService.avrPrice)
-     for(let popularService of currentService.mostPopular){
-        const li = document.createElement('li')
-        li.append(popularService)
-        ul.append(li)
-     }
-    mostPopularListContainer.append(ul)
-    tr.append(...[th,numOfProviders,avrPrice,mostPopularListContainer])
-    tbody.append(tr)
-}
 
 
