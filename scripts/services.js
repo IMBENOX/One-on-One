@@ -4,57 +4,56 @@ categories = [
         name: 'Fitness',
         numOfProviders: 200,
         avrPrice: '25$',
-        mostPopular: ['Bodybuilding','Crossfit','Track'],
-        id                 : 'fitnessCategory',
-        selectionId        : 'fitnessSelection',
-        isSelectedClass    : 'selectedCategory',
-        notSelectedClass   : '',
-        icon               : 'url("images/fitnessIcon.jpg")',
-
+        mostPopular : ['Bodybuilding','Crossfit','Track'],
+        id          : 'fitnessCategory',
+        objectsId   : 'fitnessCatalog',
+        isSelectedClass  : 'selectedCategory',
+        notSelectedClass : '',
+        icon             : 'url("images/fitnessIcon.jpg")',
     },
     {
         name: 'Cosmetology',
         numOfProviders: 130,
         avrPrice: '30$',
-        mostPopular: ['Hairdressing','Nails','Massage'],
-        id                 : 'cosmetologyCategory',
-        selectionId        : 'cosmetologySelection',
-        isSelectedClass    : '',
-        notSelectedClass   : 'notSelectedCategory',
-        icon               : 'url("images/cosmetologyIcon.jpg")',
+        mostPopular : ['Hairdressing','Nails','Massage'],
+        id          : 'cosmetologyCategory',
+        objectsId   : 'cosmetologyCatalog',
+        isSelectedClass  : '',
+        notSelectedClass : 'notSelectedCategory',
+        icon             : 'url("images/cosmetologyIcon.jpg")',
     },
     {
         name: 'Home Repairs',
         numOfProviders: 150,
         avrPrice: '80$',
-        mostPopular: ['Home Paintment','Appliance Service','Plumbing'],
-        id                 : 'homeRepairsCategory',
-        selectionId        : 'homeRepairsSelection',
-        isSelectedClass    : '',
-        notSelectedClass   : 'notSelectedCategory',
-        icon               : 'url("images/homeRepairsIcon.jpg")',
+        mostPopular : ['Home Paintment','Appliance Service','Plumbing'],
+        id          : 'homeRepairsCategory',
+        objectsId   : 'homeRepairsCatalog',
+        isSelectedClass   : '',
+        notSelectedClass  : 'notSelectedCategory',
+        icon              : 'url("images/homeRepairsIcon.jpg")',
     },
     {
         name: 'Teaching',
         numOfProviders: 90,
         avrPrice: '15$',
-        mostPopular: ['Physics','Math','Quitar'],
-        id                 : 'teachingCategory',
-        selectionId        : 'teachingSelection',
-        isSelectedClass    : '',
-        notSelectedClass   : 'notSelectedCategory',
-        icon               : 'url("images/teachingIcon.jpg")',
+        mostPopular : ['Physics','Math','Quitar'],
+        id          : 'teachingCategory',
+        objectsId   : 'teachingCatalog',
+        isSelectedClass  : '',
+        notSelectedClass : 'notSelectedCategory',
+        icon             : 'url("images/teachingIcon.jpg")',
     },
     {
         name: 'Health',
         numOfProviders: 100,
         avrPrice: '50$',
         mostPopular: ['Pathologist','Chiropractor','Dentist'],
-        id                 : 'healthCategory',
-        selectionId        : 'healthSelection',
-        isSelectedClass    : '',
-        notSelectedClass   : 'notSelectedCategory',
-        icon               : 'url("images/healthIcon.jpg")',
+        id          : 'healthCategory',
+        objectsId   : 'healthCatalog',
+        isSelectedClass     : '',
+        notSelectedClass    : 'notSelectedCategory',
+        icon                : 'url("images/healthIcon.jpg")',
     }
 ]
 services = [
@@ -66,6 +65,7 @@ services = [
         rating: '9/10',
         avrDistance: '1km',
         icon: 'url("images/bodybuildingIcon.jpg")',
+        description  : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
     },
     {
         name: 'Crossfit',
@@ -75,6 +75,8 @@ services = [
         rating: '7/10',
         avrDistance: '5km',
         icon: 'url("images/crossfitIcon.jpg")',
+        description  : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Track',
@@ -84,6 +86,8 @@ services = [
         rating: '6/10',
         avrDistance: '2km',
         icon: 'url("images/trackIcon.jpg")',
+        description  : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Yoga',
@@ -93,6 +97,8 @@ services = [
         rating: '6.9/10',
         avrDistance: '8km',
         icon: 'url("images/yogaIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Pilates',
@@ -101,7 +107,9 @@ services = [
         avrPrice: 19,
         rating: '7.3/10',
         avrDistance: '6km',
-        icon: 'url("images/pilatesIcon.jpg")'
+        icon: 'url("images/pilatesIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Boxing',
@@ -110,7 +118,9 @@ services = [
         avrPrice: 25,
         rating: '7.9/10',
         avrDistance: '3.4km',
-        icon: 'url("images/boxingIcon.jpg")'
+        icon: 'url("images/boxingIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Hairdressing',
@@ -120,6 +130,8 @@ services = [
         rating: '8.4/10',
         avrDistance: '1.4km',
         icon: 'url("images/hairdressingIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Nails',
@@ -129,6 +141,8 @@ services = [
         rating: '4.5/10',
         avrDistance: '2.1km',
         icon: 'url("images/nailsIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Massage',
@@ -138,6 +152,8 @@ services = [
         rating: '5.7/10',
         avrDistance: '4km',
         icon: 'url("images/massageIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Skin-care',
@@ -147,6 +163,8 @@ services = [
         rating: '3.8/10',
         avrDistance: '3.6km',
         icon: 'url("images/skinCareIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Make Up Artist',
@@ -156,6 +174,8 @@ services = [
         rating: '8/10',
         avrDistance: '1.3km',
         icon: 'url("images/makeUpArtistIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'House-Painting',
@@ -164,7 +184,9 @@ services = [
         avrPrice: 200,
         rating: '7.7/10',
         avrDistance: '1.8km',
-        icon: '',
+        icon: 'url("images/housePaintingIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Appliance Service Technician',
@@ -173,7 +195,9 @@ services = [
         avrPrice: 60,
         rating: '6.5/10',
         avrDistance: '2km',
-        icon: '',
+        icon: 'url("images/applianceServiceIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Plumber',
@@ -182,7 +206,9 @@ services = [
         avrPrice: 50,
         rating: '8.9/10',
         avrDistance: '2.6km',
-        icon: '',
+        icon: 'url("images/plumberIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Electrician',
@@ -191,7 +217,9 @@ services = [
         avrPrice: 55,
         rating: '6.9/10',
         avrDistance: '1.9km',
-        icon: '',
+        icon: 'url("images/electricianIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Physics Teacher',
@@ -200,7 +228,9 @@ services = [
         avrPrice: 12,
         rating: '8/10',
         avrDistance: '2.5km',
-        icon: '',
+        icon: 'url("images/physicsIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Math Teacher',
@@ -209,7 +239,9 @@ services = [
         avrPrice: 10,
         rating: '8.3/10',
         avrDistance: '2.5km',
-        icon: '',
+        icon: 'url("images/mathIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Quitar Teacher',
@@ -218,7 +250,9 @@ services = [
         avrPrice: 15,
         rating: '7/10',
         avrDistance: '2.1km',
-        icon: '',
+        icon: 'url("images/quitarIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Piano Teacher',
@@ -227,7 +261,9 @@ services = [
         avrPrice: 18,
         rating: '7.3/10',
         avrDistance: '1.7km',
-        icon: '',
+        icon: 'url("images/pianoIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Pathologist',
@@ -236,7 +272,9 @@ services = [
         avrPrice: 50,
         rating: '8.1/10',
         avrDistance: '2.3km',
-        icon: '',
+        icon: 'url("images/pathologistIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Chiropractor',
@@ -245,7 +283,9 @@ services = [
         avrPrice: 40,
         rating: '8.6/10',
         avrDistance: '3km',
-        icon: '',
+        icon: 'url("images/chiropractorIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
     {
         name: 'Dentist',
@@ -254,7 +294,9 @@ services = [
         avrPrice: 30,
         rating: '8.9/10',
         avrDistance: '2.5km',
-        icon: '',
+        icon: 'url("images/dentistIcon.jpg")',
+        description : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat molestias vero recusandae velit dolores id, hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat consectetur nam, qui deserunt aliquid.',
+
     },
 ]
 
@@ -267,40 +309,37 @@ serviceListBtn.addEventListener('click', () =>
 })
 
 const serviceCategories = document.querySelector('#serviceCategories');
-const serviceSpecifics  = document.querySelector('#serviceSpecifics');
+const categorySpecifics  = document.querySelector('#categorySpecifics');
 for(category of categories)
 {
     const categoryContainer  = document.createElement('div');
     const categoryIconContainer = document.createElement('span');
-    categoryContainer.setAttribute('id',category.selectionId);
+    categoryContainer.setAttribute('id',category.id);
     categoryContainer.setAttribute('class',category.isSelectedClass);
     categoryIconContainer.style.backgroundImage = category.icon;
     categoryContainer.append(...[categoryIconContainer,category.name]);
     serviceCategories.append(categoryContainer);
 
     const specificCategoryDiv = document.createElement('div');
-    specificCategoryDiv.setAttribute('id',category.id);
+    specificCategoryDiv.setAttribute('id',category.objectsId);
     specificCategoryDiv.setAttribute('class',category.notSelectedClass);
-    serviceSpecifics.append(specificCategoryDiv);
+    categorySpecifics.append(specificCategoryDiv);
     services.forEach( service => 
     {
         if(category.name === service.category)
         {
             const serviceContainer            = document.createElement('div');
             const serviceIconContainer        = document.createElement('span');
-            const serviceDiscriptionContainer = document.createElement('p');
+            const servicedescriptionContainer = document.createElement('p');
             serviceContainer.setAttribute('id',service.name.toLowerCase());
             serviceIconContainer.style.backgroundImage = service.icon;
-            serviceContainer.append(...[serviceIconContainer,service.name,serviceDiscriptionContainer]);
-            serviceDiscriptionContainer.append(`Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                      Maxime repellat molestias vero recusandae velit dolores id, 
-                      hic veritatis nesciunt. Eius sapiente consequatur eveniet officia repellat 
-                      consectetur nam, qui deserunt aliquid.`); 
+            serviceContainer.append(...[serviceIconContainer,service.name,servicedescriptionContainer]);
+            servicedescriptionContainer.append(service.description); 
             specificCategoryDiv.append(serviceContainer);
         }
     } )
 
-    const categorySelection = document.querySelector(`#${category.selectionId}`);
+    const categorySelection = document.querySelector(`#${category.id}`);
     categorySelection.addEventListener('click', event => 
     {
         renderSelectedCategoryList(event.target.id);
@@ -309,14 +348,14 @@ for(category of categories)
 
 const renderSelectedCategoryList = categorySelection => 
 {
-     const selectedCategory = categories.filter(category => category.selectionId === categorySelection);
-     document.querySelector(`#${selectedCategory[0].selectionId}`).classList.add('selectedCategory');
-     document.querySelector(`#${selectedCategory[0].id}`).classList.remove('notSelectedCategory');
-     const notSelectedCategories = categories.filter(category => category.selectionId !== categorySelection);
+     const selectedCategory = categories.filter(category => category.id === categorySelection);
+     document.querySelector(`#${selectedCategory[0].id}`).classList.add('selectedCategory');
+     document.querySelector(`#${selectedCategory[0].objectsId}`).classList.remove('notSelectedCategory');
+     const notSelectedCategories = categories.filter(category => category.id !== categorySelection);
      notSelectedCategories.forEach(category => 
         {
-            document.querySelector(`#${category.selectionId}`).classList.remove('selectedCategory');
-            document.querySelector(`#${category.id}`).classList.add('notSelectedCategory');
+            document.querySelector(`#${category.id}`).classList.remove('selectedCategory');
+            document.querySelector(`#${category.objectsId}`).classList.add('notSelectedCategory');
         })
      
 }
