@@ -118,18 +118,18 @@ header nav a {
     vertical-align: -15px;
 }
 
-#serviceSpecifics {
+#categorySpecifics {
  height: 90%;
  overflow: auto;
  border-left: 1.5px solid lightgrey;
  padding-left: 10px;
 }
 
-#serviceSpecifics::-webkit-scrollbar {
+#categorySpecifics::-webkit-scrollbar {
     display: none;
 }
 
-#serviceSpecifics span {
+#categorySpecifics span {
     display: inline-block;
     margin-right: 15px;
     width: 50px;

@@ -46,8 +46,6 @@ serviceDropDownMenu.addEventListener('change',(event) =>
     dropDownChoiceDesplayed = renderDropDownMenuChoice(event.target)
 })
 
-const modal = document.querySelector("#myModal");
-const modalText = document.querySelector('#modalText');
 const submitButton = document.querySelector('#submitButton')
 submitButton.addEventListener('click',() => 
 {
@@ -91,6 +89,8 @@ const validation = (validationContainer, message, inputType, regex) =>
  }
 const renderModal = () => 
 {
+    const modal = document.querySelector("#myModal");
+    const modalText = document.querySelector('#modalText');
     modal.style.display ="block";
     const formField = document.querySelector("#form").elements;
     let str = '';
@@ -120,6 +120,7 @@ const renderModal = () =>
 
 const closeModal = () => 
 {
+    const modal = document.querySelector("#myModal");
     let modalCloseButton = document.querySelector('.close');
     modalCloseButton.onclick = () => modal.style.display = "none";
     window.onclick = event => 
