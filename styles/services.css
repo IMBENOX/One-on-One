@@ -148,6 +148,28 @@ header nav a {
     display: none;
 }
 
+#categoriesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#categoriesWrapper div {
+    font-size: 30px;
+    border-radius: 5px;
+    color: white;
+    padding: 25px;
+    margin: 20px;
+    transition: all 0.5s;
+    
+}
+
+#categoriesWrapper div:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+
+}
+
 @media (max-width: 1367px){
     .image{
         max-width: 350px;

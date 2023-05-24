@@ -35,15 +35,17 @@ signUpInputFields.forEach(inputField =>
 {
     inputField.selector.addEventListener('blur', event => 
     {
-        inputField.isValid = validation(inputField.validationContainer,inputField.message,event.target,inputField.regex);
+        inputField.isValid = inputField.regex.test(inputField.selector.value);
+        showValidationMsg(inputField.validationContainer,inputField.message,inputField.isValid);
     })
 })
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
-let dropDownChoiceDesplayed = false;
+let dropDownChoiceDisplayed = false;
 serviceDropDownMenu.addEventListener('change',(event) => 
 {
-    dropDownChoiceDesplayed = renderDropDownMenuChoice(event.target)
+    dropDownChoiceDisplayed = serviceDropDownMenu.value === "Fitness" ? true : false;
+    renderDropDownMenuChoice(event.target,dropDownChoiceDisplayed)
 })
 
 const submitButton = document.querySelector('#submitButton')
@@ -53,38 +55,34 @@ submitButton.addEventListener('click',() =>
    closeModal();
 })
 
-const validation = (validationContainer, message, inputType, regex) => 
+const showValidationMsg = (validationContainer, message, isValid) => 
 {
-    const isValid = regex.test(inputType.value);
     if(isValid)
     {
         validationContainer.style.color = 'green';
         validationContainer.innerHTML   = '&#10003;';
-        return isValid;
     }
     else 
     {
         validationContainer.style.color = 'red';
         validationContainer.innerHTML   = message;
-        return isValid;
     }
+    return isValid;
 }
 
- const renderDropDownMenuChoice = (serviceDropDownMenu) =>
+ const renderDropDownMenuChoice = (serviceDropDownMenu,isDisplayed) =>
  {
     const hiddenInputContainer = document.querySelector("#hiddenInputContainer");
-    if(serviceDropDownMenu.value === "Fitness")
+    if(isDisplayed)
     {
         const hiddenInputLabel = document.querySelector("#hiddenInputLabel");
         hiddenInputLabel.innerHTML = 'In what specific category are you interested in:'+ '<br>' +'1.Bodybuilding, 2.Crossfit or 3.Running?'+'<br>'+ 'Type 1 2 or 3 respectively:';
         hiddenInputContainer.style.display = 'unset';
-        return true;
     }
     else 
     {
         hiddenInputContainer.style.display = 'none';
         document.querySelector("#hiddenInput").value = "";
-        return false;
     }
  }
 const renderModal = () => 

@@ -10,6 +10,7 @@ categories = [
         isSelected  : 'selectedCategory',
         isDisplayed : '',
         icon             : 'url("images/fitnessIcon.jpg")',
+        backgroundColor : '#e76f51',
     },
     {
         name: 'Cosmetology',
@@ -21,6 +22,7 @@ categories = [
         isSelected  : '',
         isDisplayed : 'doNotDisplay',
         icon             : 'url("images/cosmetologyIcon.jpg")',
+        backgroundColor : '#a2d2ff',
     },
     {
         name: 'Home Repairs',
@@ -32,6 +34,7 @@ categories = [
         isSelected   : '',
         isDisplayed  : 'doNotDisplay',
         icon              : 'url("images/homeRepairsIcon.jpg")',
+        backgroundColor : '#2a9d8f',
     },
     {
         name: 'Teaching',
@@ -43,6 +46,7 @@ categories = [
         isSelected  : '',
         isDisplayed : 'doNotDisplay',
         icon             : 'url("images/teachingIcon.jpg")',
+        backgroundColor : '#e9c46a',
     },
     {
         name: 'Health',
@@ -54,6 +58,7 @@ categories = [
         isSelected     : '',
         isDisplayed    : 'doNotDisplay',
         icon                : 'url("images/healthIcon.jpg")',
+        backgroundColor : '#ffc8dd',
     }
 ]
 services = [
@@ -371,6 +376,15 @@ const closeLists = () => {
 }
 
 const searchBarContainter  = document.querySelector('.searchBarContainer');
+const categoriesWrapper = document.querySelector('#categoriesWrapper');
+
+categories.forEach(category => {
+    categoryDiv = document.createElement('div');
+    categoryDiv.append(category.name);
+    categoryDiv.style.backgroundColor = category.backgroundColor;
+    categoryDiv.onclick = () => {location.href="about.html"}
+    categoriesWrapper.append(categoryDiv)
+})
 
 
 
