@@ -7,8 +7,8 @@ categories = [
         mostPopular : ['Bodybuilding','Crossfit','Track'],
         id          : 'fitnessCategory',
         objectsId   : 'fitnessCatalog',
-        isSelectedClass  : 'selectedCategory',
-        notSelectedClass : '',
+        isSelected  : 'selectedCategory',
+        isDisplayed : '',
         icon             : 'url("images/fitnessIcon.jpg")',
     },
     {
@@ -18,8 +18,8 @@ categories = [
         mostPopular : ['Hairdressing','Nails','Massage'],
         id          : 'cosmetologyCategory',
         objectsId   : 'cosmetologyCatalog',
-        isSelectedClass  : '',
-        notSelectedClass : 'notSelectedCategory',
+        isSelected  : '',
+        isDisplayed : 'doNotDisplay',
         icon             : 'url("images/cosmetologyIcon.jpg")',
     },
     {
@@ -29,8 +29,8 @@ categories = [
         mostPopular : ['Home Paintment','Appliance Service','Plumbing'],
         id          : 'homeRepairsCategory',
         objectsId   : 'homeRepairsCatalog',
-        isSelectedClass   : '',
-        notSelectedClass  : 'notSelectedCategory',
+        isSelected   : '',
+        isDisplayed  : 'doNotDisplay',
         icon              : 'url("images/homeRepairsIcon.jpg")',
     },
     {
@@ -40,8 +40,8 @@ categories = [
         mostPopular : ['Physics','Math','Quitar'],
         id          : 'teachingCategory',
         objectsId   : 'teachingCatalog',
-        isSelectedClass  : '',
-        notSelectedClass : 'notSelectedCategory',
+        isSelected  : '',
+        isDisplayed : 'doNotDisplay',
         icon             : 'url("images/teachingIcon.jpg")',
     },
     {
@@ -51,8 +51,8 @@ categories = [
         mostPopular: ['Pathologist','Chiropractor','Dentist'],
         id          : 'healthCategory',
         objectsId   : 'healthCatalog',
-        isSelectedClass     : '',
-        notSelectedClass    : 'notSelectedCategory',
+        isSelected     : '',
+        isDisplayed    : 'doNotDisplay',
         icon                : 'url("images/healthIcon.jpg")',
     }
 ]
@@ -308,34 +308,34 @@ serviceListBtn.addEventListener('click', () =>
     closeLists();
 })
 
-const serviceCategories = document.querySelector('#serviceCategories');
-const categorySpecifics  = document.querySelector('#categorySpecifics');
-for(category of categories)
+const categoriesContainer = document.querySelector('#categoriesContainer');
+const categoryServicesContainer  = document.querySelector('#categoryServicesContainer');
+categories.forEach(category => 
 {
-    const categoryContainer  = document.createElement('div');
+    const categoryDiv  = document.createElement('div');
     const categoryIconContainer = document.createElement('span');
-    categoryContainer.setAttribute('id',category.id);
-    categoryContainer.setAttribute('class',category.isSelectedClass);
+    categoryDiv.setAttribute('id',category.id);
+    categoryDiv.setAttribute('class',category.isSelected);
     categoryIconContainer.style.backgroundImage = category.icon;
-    categoryContainer.append(...[categoryIconContainer,category.name]);
-    serviceCategories.append(categoryContainer);
+    categoryDiv.append(...[categoryIconContainer,category.name]);
+    categoriesContainer.append(categoryDiv);
 
-    const specificCategoryDiv = document.createElement('div');
-    specificCategoryDiv.setAttribute('id',category.objectsId);
-    specificCategoryDiv.setAttribute('class',category.notSelectedClass);
-    categorySpecifics.append(specificCategoryDiv);
+    const categoryServicesDiv = document.createElement('div');
+    categoryServicesDiv.setAttribute('id',category.objectsId);
+    categoryServicesDiv.setAttribute('class',category.isDisplayed);
+    categoryServicesContainer.append(categoryServicesDiv);
     services.forEach( service => 
     {
         if(category.name === service.category)
         {
-            const serviceContainer            = document.createElement('div');
+            const serviceDiv           = document.createElement('div');
             const serviceIconContainer        = document.createElement('span');
-            const servicedescriptionContainer = document.createElement('p');
-            serviceContainer.setAttribute('id',service.name.toLowerCase());
+            const serviceDescriptionContainer = document.createElement('p');
+            serviceDiv.setAttribute('id',service.name.toLowerCase());
             serviceIconContainer.style.backgroundImage = service.icon;
-            serviceContainer.append(...[serviceIconContainer,service.name,servicedescriptionContainer]);
-            servicedescriptionContainer.append(service.description); 
-            specificCategoryDiv.append(serviceContainer);
+            serviceDiv.append(...[serviceIconContainer,service.name,serviceDescriptionContainer]);
+            serviceDescriptionContainer.append(service.description); 
+            categoryServicesDiv.append(serviceDiv);
         }
     } )
 
@@ -344,18 +344,18 @@ for(category of categories)
     {
         renderSelectedCategoryList(event.target.id);
     })
-}
+})
 
 const renderSelectedCategoryList = categorySelection => 
 {
      const selectedCategory = categories.filter(category => category.id === categorySelection);
      document.querySelector(`#${selectedCategory[0].id}`).classList.add('selectedCategory');
-     document.querySelector(`#${selectedCategory[0].objectsId}`).classList.remove('notSelectedCategory');
+     document.querySelector(`#${selectedCategory[0].objectsId}`).classList.remove('doNotDisplay');
      const notSelectedCategories = categories.filter(category => category.id !== categorySelection);
      notSelectedCategories.forEach(category => 
         {
             document.querySelector(`#${category.id}`).classList.remove('selectedCategory');
-            document.querySelector(`#${category.objectsId}`).classList.add('notSelectedCategory');
+            document.querySelector(`#${category.objectsId}`).classList.add('doNotDisplay');
         })
      
 }
@@ -371,7 +371,7 @@ const closeLists = () => {
 }
 
 const searchBarContainter  = document.querySelector('.searchBarContainer');
-// searchBarContainter.insertAdjacentElement('afterend',tableWrapper)
+
 
 
 

@@ -6,38 +6,38 @@ const signUpInputFields =
         message  : 'Please type a 3 or more letter name with no special characters.',
         regex    : /^[a-zA-Z]{3,}$/,
         validationContainer : document.querySelector('#validationMsgFirstName'),
-        validationResult    : false,
+        isValid    : false,
     },
     {
         selector : document.querySelector('#lastNameInput'),
         message  : 'Please type a 3 or more letter name with no special characters.',
         regex    : /^[a-zA-Z]{3,}$/,
         validationContainer : document.querySelector('#validationMsgLastName'),
-        validationResult    : false,
+        isValid    : false,
     },
     {
         selector : document.querySelector('#emailInput'),
         message  : "Please include an '@'and an '.' in the email address.",
         regex    : /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/,
         validationContainer : document.querySelector('#validationMsgEmail'),
-        validationResult    : false,
+        isValid    : false,
     },
     {
         selector : document.querySelector('#hiddenInput'),
         message  : "Invalid: please type 1 , 2, or 3",
         regex    : /^(1|2|3)$/,
         validationContainer : document.querySelector('#hiddenInputValidationMsg'),
-        validationResult    : false,
+        isValid    : false,
     },
 ]
 
-for(let InputField of signUpInputFields)
+signUpInputFields.forEach(inputField =>
 {
-    InputField.selector.addEventListener('blur', event => 
+    inputField.selector.addEventListener('blur', event => 
     {
-        InputField.validationResult = validation(InputField.validationContainer,InputField.message,event.target,InputField.regex);
+        inputField.isValid = validation(inputField.validationContainer,inputField.message,event.target,inputField.regex);
     })
-}
+})
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu')
 let dropDownChoiceDesplayed = false;
@@ -55,18 +55,18 @@ submitButton.addEventListener('click',() =>
 
 const validation = (validationContainer, message, inputType, regex) => 
 {
-    const validationResult = regex.test(inputType.value);
-    if(validationResult)
+    const isValid = regex.test(inputType.value);
+    if(isValid)
     {
         validationContainer.style.color = 'green';
         validationContainer.innerHTML   = '&#10003;';
-        return validationResult;
+        return isValid;
     }
     else 
     {
         validationContainer.style.color = 'red';
         validationContainer.innerHTML   = message;
-        return validationResult;
+        return isValid;
     }
 }
 
@@ -94,11 +94,11 @@ const renderModal = () =>
     modal.style.display ="block";
     const formField = document.querySelector("#form").elements;
     let str = '';
-    if( (signUpInputFields[0].validationResult && signUpInputFields[1].validationResult && signUpInputFields[2].validationResult) === false )
+    if( (signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid) === false )
     {
         modalText.innerHTML = "All inputs must be valid please try again!!!";
     }
-    else if( signUpInputFields[3].validationResult === false && dropDownChoiceDesplayed === true) 
+    else if( signUpInputFields[3].isValid === false && dropDownChoiceDesplayed === true) 
     {
         modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";
     }
@@ -121,7 +121,7 @@ const renderModal = () =>
 const closeModal = () => 
 {
     const modal = document.querySelector("#myModal");
-    let modalCloseButton = document.querySelector('.close');
+    const modalCloseButton = document.querySelector('.close');
     modalCloseButton.onclick = () => modal.style.display = "none";
     window.onclick = event => 
     { 
