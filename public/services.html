@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="styles/services.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/44a07f8216.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="">Services</a>
+            <a href="signup.html">Sign Up</a>
+        </nav>
+    </header>
+
+    <div id="imagesContainer">
+        <img class="image" src="images/haircut.jpg" alt="haircut">
+        <img class="image" src="images/fitness.jpg" alt="doctors">
+        <img class="image" src="images/food.jpg" alt="food">
+    </div>
+
+    <div class="searchBarContainer">
+        <span id="serviceSearchIcon"><i class="fa-solid fa-magnifying-glass fa-sm" style="color: #000000;"></i></span>
+        <input id="serviceSearchBar" type="text" placeholder="Search service"></input>
+        <span id="serviceListBtn"><i class="fa-solid fa-bars fa-sm" style="color: #000000;"></i></i></span>
+    </div>
+
+    <div id="serviceListModal">
+        <div id="serviceListContent">
+            <div id="categoriesContainer"></div>
+            <div id="categoryServicesContainer"></div>
+        </div>
+    </div>
+
+    <div id="categoriesWrapper">
+    </div>
+
+    <footer>
+        <p>&nbsp; &#169; George Apostolakis</p>
+    </footer>
+    <script src="scripts/services.js"></script>
+</body>
+
+</html>
