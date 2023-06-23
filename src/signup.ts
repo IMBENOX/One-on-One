@@ -1,5 +1,11 @@
-
-const signUpInputFields = 
+type signUpFields = {
+    selector: HTMLInputElement,
+    message: string,
+    regex: RegExp,
+    validationContainer: HTMLSpanElement,
+    isValid: boolean,
+}[]
+const signUpInputFields : signUpFields = 
 [
     {
         selector : document.querySelector('#firstNameInput') as HTMLInputElement,
@@ -33,29 +39,29 @@ const signUpInputFields =
 
 signUpInputFields.forEach(inputField =>
 {
-    inputField.selector?.addEventListener('blur', event => 
+    inputField.selector.addEventListener('blur', () => 
     {
-        inputField.isValid = inputField.regex.test((inputField.selector?.value));
+        inputField.isValid = inputField.regex.test((inputField.selector.value));
         showValidationMsg(inputField.validationContainer,inputField.message,inputField.isValid);
     })
 })
 
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu') as HTMLSelectElement
 let dropDownChoiceDisplayed = false;
-serviceDropDownMenu?.addEventListener('change',(event) => 
+serviceDropDownMenu.addEventListener('change',() => 
 {
     dropDownChoiceDisplayed = serviceDropDownMenu.value === "Fitness" ? true : false;
     renderDropDownMenuChoice(dropDownChoiceDisplayed)
 })
 
-const submitButton = document.querySelector('#submitButton')
-submitButton?.addEventListener('click',() => 
+const submitButton = document.querySelector('#submitButton') as HTMLButtonElement;
+submitButton.addEventListener('click',() => 
 {
    renderModal();
    closeModal();
 })
 
-const showValidationMsg = (validationContainer : HTMLSpanElement , message : string, isValid : boolean) => 
+const showValidationMsg = (validationContainer : HTMLSpanElement , message : string, isValid : boolean) : boolean => 
 {
     if(isValid)
     {
