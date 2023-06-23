@@ -1,5 +1,19 @@
 
-const categories = [
+type categoriesArray = {
+    name: string,
+    numOfProviders: number,
+    avrPrice: string,
+    mostPopular : string[],
+    id          : string,
+    objectsId   : string,
+    isSelected  : string,
+    isDisplayed : string,
+    icon        : string,
+    backgroundColor : string,
+    htmlLocation : string,
+}[]
+
+  const categories: categoriesArray = [
     {
         name: 'Fitness',
         numOfProviders: 200,
@@ -11,6 +25,7 @@ const categories = [
         isDisplayed : '',
         icon             : 'url("images/fitnessIcon.jpg")',
         backgroundColor : '#e76f51',
+        htmlLocation :'about.html',
     },
     {
         name: 'Cosmetology',
@@ -23,6 +38,7 @@ const categories = [
         isDisplayed : 'doNotDisplay',
         icon             : 'url("images/cosmetologyIcon.jpg")',
         backgroundColor : '#a2d2ff',
+        htmlLocation :'about.html',
     },
     {
         name: 'Home Repairs',
@@ -35,6 +51,7 @@ const categories = [
         isDisplayed  : 'doNotDisplay',
         icon              : 'url("images/homeRepairsIcon.jpg")',
         backgroundColor : '#2a9d8f',
+        htmlLocation :'about.html',
     },
     {
         name: 'Teaching',
@@ -47,6 +64,7 @@ const categories = [
         isDisplayed : 'doNotDisplay',
         icon             : 'url("images/teachingIcon.jpg")',
         backgroundColor : '#e9c46a',
+        htmlLocation :'about.html',
     },
     {
         name: 'Health',
@@ -59,9 +77,20 @@ const categories = [
         isDisplayed    : 'doNotDisplay',
         icon                : 'url("images/healthIcon.jpg")',
         backgroundColor : '#ffc8dd',
-    }
+        htmlLocation :'about.html',
+    },
 ]
-const services = [
+type servicesArray = {
+    name: string,
+    category: string,
+    numOfProviders: number,
+    avrPrice: number,
+    rating: string,
+    avrDistance: string,
+    icon: string,
+    description: string,
+}[]
+const services: servicesArray = [
     {
         name: 'Bodybuilding',
         category: 'Fitness',
@@ -344,16 +373,15 @@ categories.forEach(category =>
         }
     } )
 
-    const categorySelection = document.querySelector(`#${category.id}`) as HTMLDivElement;
-    categorySelection.addEventListener('click', event => 
+    const categorySelector = document.querySelector(`#${category.id}`) as HTMLDivElement;
+    categorySelector.addEventListener('click', event => 
     {
-        if(!event.target) return
             renderSelectedCategoryList((event.target as HTMLDivElement).id);
         
     })
 })
-
-const renderSelectedCategoryList = (categorySelection: string) => 
+let renderSelectedCategoryList: (a: string) => void;
+renderSelectedCategoryList = (categorySelection: string) => 
 {
      const selectedCategory = categories.filter(category => category.id === categorySelection);
      document.querySelector(`#${selectedCategory[0].id}`)?.classList.add('selectedCategory');
@@ -363,11 +391,11 @@ const renderSelectedCategoryList = (categorySelection: string) =>
         {
             document.querySelector(`#${category.id}`)?.classList.remove('selectedCategory');
             document.querySelector(`#${category.objectsId}`)?.classList.add('doNotDisplay');
-        })
-     
+        })     
 }
 
-const closeLists = () => {
+let closeLists: () => void;
+closeLists = () => {
     window.onclick = event => 
     {
         if (event.target === serviceListModal)
@@ -384,7 +412,7 @@ categories.forEach(category => {
     const categoryDiv = document.createElement('div');
     categoryDiv.append(category.name);
     categoryDiv.style.backgroundColor = category.backgroundColor;
-    categoryDiv.onclick = () => {location.href="about.html"}
+    categoryDiv.onclick = () => {location.href= category.htmlLocation}
     categoriesWrapper.append(categoryDiv)
 })
 
