@@ -1,11 +1,11 @@
-type signUpFields = {
+type SignUpFields = {
     selector: HTMLInputElement,
     message: string,
     regex: RegExp,
     validationContainer: HTMLSpanElement,
     isValid: boolean,
-}[]
-const signUpInputFields : signUpFields = 
+}
+const signUpInputFields : SignUpFields[] = 
 [
     {
         selector : document.querySelector('#firstNameInput') as HTMLInputElement,
@@ -46,22 +46,22 @@ signUpInputFields.forEach(inputField =>
     })
 })
 
-const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu') as HTMLSelectElement
+const serviceDropDownMenu : HTMLSelectElement | null = document.querySelector('#serviceDropDownMenu')
 let dropDownChoiceDisplayed = false;
-serviceDropDownMenu.addEventListener('change',() => 
+serviceDropDownMenu?.addEventListener('change',() => 
 {
     dropDownChoiceDisplayed = serviceDropDownMenu.value === "Fitness" ? true : false;
     renderDropDownMenuChoice(dropDownChoiceDisplayed)
 })
 
-const submitButton = document.querySelector('#submitButton') as HTMLButtonElement;
-submitButton.addEventListener('click',() => 
+const submitButton : HTMLButtonElement | null = document.querySelector('#submitButton');
+submitButton?.addEventListener('click',() => 
 {
    renderModal();
    closeModal();
 })
 
-const showValidationMsg = (validationContainer : HTMLSpanElement , message : string, isValid : boolean) : boolean => 
+const showValidationMsg = (validationContainer : HTMLSpanElement , message : string, isValid : boolean) => 
 {
     if(isValid)
     {
@@ -74,31 +74,36 @@ const showValidationMsg = (validationContainer : HTMLSpanElement , message : str
         validationContainer.style.color = 'red';
         validationContainer.innerHTML   = message;
     }
-    return isValid;
 }
 
  const renderDropDownMenuChoice = (isDisplayed : boolean) =>
  {
-    const hiddenInputContainer = document.querySelector("#hiddenInputContainer") as HTMLDivElement;
+    const hiddenInputContainer : HTMLDivElement | null = document.querySelector("#hiddenInputContainer");
     if(isDisplayed)
     {
         const hiddenInputLabel = document.querySelector("#hiddenInputLabel") as HTMLSpanElement;
         hiddenInputLabel.innerHTML = 'In what specific category are you interested in:'+ '<br>' +'1.Bodybuilding, 2.Crossfit or 3.Running?'+'<br>'+ 'Type 1 2 or 3 respectively:';
+        if(hiddenInputContainer){
         hiddenInputContainer.style.display = 'unset' ;
+        }
     }
     else 
-    {   const hiddenInput = document.querySelector("#hiddenInput") as HTMLInputElement
-        hiddenInputContainer.style.display = 'none';
-        hiddenInput.value = "";
+    {   const hiddenInput : HTMLInputElement | null = document.querySelector("#hiddenInput")
+        if(hiddenInputContainer && hiddenInput){
+            hiddenInputContainer.style.display = 'none';
+            hiddenInput.value = "";
+        }
     }
  }
 const renderModal = () => 
 {
-    const modal = document.querySelector("#myModal") as HTMLDivElement;
-    const modalText = document.querySelector('#modalText') as HTMLParagraphElement;
+    const modal : HTMLDivElement | null = document.querySelector("#myModal");
+    const modalText : HTMLParagraphElement | null = document.querySelector('#modalText');
+    if(!(modal && modalText)){return}
     modal.style.display ="block";
-    const form= document.querySelector("#form") as HTMLFormElement;
-    const formField = form.elements;
+    const form : HTMLFormElement | null = document.querySelector("#form");
+    const formField = form?.elements;
+    if(!formField){return}
     let str = '';
     if( (signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid) === false )
     {
@@ -110,15 +115,15 @@ const renderModal = () =>
     }
     else
     {
-        for (let i = 0; i < formField.length-1; i++) 
-        {   
-            let value = (formField[i] as HTMLInputElement).value ;
+        for (let i = 0; i < formField.length-1; i++)
+        {   const formFieldInput  =  formField[i] as HTMLInputElement ;
+            let value = formFieldInput.value ;
             let doNotShow = value === "";
-            if(((formField[i]as HTMLInputElement).type ==='radio' || (formField[i] as HTMLInputElement).type === 'checkbox') && (formField[i] as HTMLInputElement).checked === false )
+            if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && (formFieldInput).checked === false )
             {
                 doNotShow = true
             }
-            str+= (doNotShow? "" : `${(formField[i] as HTMLInputElement).name}: ${value} <br>`);
+            str+= (doNotShow? "" : `${(formFieldInput).name}: ${value} <br>`);
         }
             modalText.innerHTML = `Your choices are: <br> ${str} `;
     }
@@ -126,8 +131,9 @@ const renderModal = () =>
 
 const closeModal = () => 
 {
-    const modal = document.querySelector("#myModal") as HTMLDivElement;
-    const modalCloseButton = document.querySelector('.close') as HTMLSpanElement;
+    const modal : HTMLDivElement | null = document.querySelector("#myModal");
+    const modalCloseButton : HTMLSpanElement | null = document.querySelector('.close');
+    if(!(modal && modalCloseButton)) {return}
     modalCloseButton.onclick = () => modal.style.display = "none";
     window.onclick = event => 
     { 

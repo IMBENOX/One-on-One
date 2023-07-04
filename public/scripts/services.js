@@ -325,8 +325,7 @@ categories.forEach(category => {
         renderSelectedCategoryList(event.target.id);
     });
 });
-let renderSelectedCategoryList;
-renderSelectedCategoryList = (categorySelection) => {
+const renderSelectedCategoryList = (categorySelection) => {
     const selectedCategory = categories.filter(category => category.id === categorySelection);
     document.querySelector(`#${selectedCategory[0].id}`)?.classList.add('selectedCategory');
     document.querySelector(`#${selectedCategory[0].objectsId}`)?.classList.remove('doNotDisplay');
@@ -336,8 +335,7 @@ renderSelectedCategoryList = (categorySelection) => {
         document.querySelector(`#${category.objectsId}`)?.classList.add('doNotDisplay');
     });
 };
-let closeLists;
-closeLists = () => {
+const closeLists = () => {
     window.onclick = event => {
         if (event.target === serviceListModal) {
             serviceListModal.style.display = "none";

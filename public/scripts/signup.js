@@ -30,14 +30,14 @@ const signUpInputFields = [
     },
 ];
 signUpInputFields.forEach(inputField => {
-    inputField.selector?.addEventListener('blur', event => {
-        inputField.isValid = inputField.regex.test((inputField.selector?.value));
+    inputField.selector.addEventListener('blur', () => {
+        inputField.isValid = inputField.regex.test((inputField.selector.value));
         showValidationMsg(inputField.validationContainer, inputField.message, inputField.isValid);
     });
 });
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu');
 let dropDownChoiceDisplayed = false;
-serviceDropDownMenu?.addEventListener('change', (event) => {
+serviceDropDownMenu?.addEventListener('change', () => {
     dropDownChoiceDisplayed = serviceDropDownMenu.value === "Fitness" ? true : false;
     renderDropDownMenuChoice(dropDownChoiceDisplayed);
 });
@@ -55,27 +55,36 @@ const showValidationMsg = (validationContainer, message, isValid) => {
         validationContainer.style.color = 'red';
         validationContainer.innerHTML = message;
     }
-    return isValid;
 };
 const renderDropDownMenuChoice = (isDisplayed) => {
     const hiddenInputContainer = document.querySelector("#hiddenInputContainer");
     if (isDisplayed) {
         const hiddenInputLabel = document.querySelector("#hiddenInputLabel");
         hiddenInputLabel.innerHTML = 'In what specific category are you interested in:' + '<br>' + '1.Bodybuilding, 2.Crossfit or 3.Running?' + '<br>' + 'Type 1 2 or 3 respectively:';
-        hiddenInputContainer.style.display = 'unset';
+        if (hiddenInputContainer) {
+            hiddenInputContainer.style.display = 'unset';
+        }
     }
     else {
         const hiddenInput = document.querySelector("#hiddenInput");
-        hiddenInputContainer.style.display = 'none';
-        hiddenInput.value = "";
+        if (hiddenInputContainer && hiddenInput) {
+            hiddenInputContainer.style.display = 'none';
+            hiddenInput.value = "";
+        }
     }
 };
 const renderModal = () => {
     const modal = document.querySelector("#myModal");
     const modalText = document.querySelector('#modalText');
+    if (!(modal && modalText)) {
+        return;
+    }
     modal.style.display = "block";
     const form = document.querySelector("#form");
-    const formField = form.elements;
+    const formField = form?.elements;
+    if (!formField) {
+        return;
+    }
     let str = '';
     if ((signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid) === false) {
         modalText.innerHTML = "All inputs must be valid please try again!!!";
@@ -85,12 +94,13 @@ const renderModal = () => {
     }
     else {
         for (let i = 0; i < formField.length - 1; i++) {
-            let value = formField[i].value;
+            const formFieldInput = formField[i];
+            let value = formFieldInput.value;
             let doNotShow = value === "";
-            if ((formField[i].type === 'radio' || formField[i].type === 'checkbox') && formField[i].checked === false) {
+            if ((formFieldInput.type === 'radio' || formFieldInput.type === 'checkbox') && (formFieldInput).checked === false) {
                 doNotShow = true;
             }
-            str += (doNotShow ? "" : `${formField[i].name}: ${value} <br>`);
+            str += (doNotShow ? "" : `${(formFieldInput).name}: ${value} <br>`);
         }
         modalText.innerHTML = `Your choices are: <br> ${str} `;
     }
@@ -98,6 +108,9 @@ const renderModal = () => {
 const closeModal = () => {
     const modal = document.querySelector("#myModal");
     const modalCloseButton = document.querySelector('.close');
+    if (!(modal && modalCloseButton)) {
+        return;
+    }
     modalCloseButton.onclick = () => modal.style.display = "none";
     window.onclick = event => {
         if (event.target === modal) {

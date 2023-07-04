@@ -1,5 +1,5 @@
 
-type categoriesArray = {
+type CategoriesArray = {
     name: string,
     numOfProviders: number,
     avrPrice: string,
@@ -11,9 +11,9 @@ type categoriesArray = {
     icon        : string,
     backgroundColor : string,
     htmlLocation : string,
-}[]
+}
 
-  const categories: categoriesArray = [
+  const categories: CategoriesArray[] = [
     {
         name: 'Fitness',
         numOfProviders: 200,
@@ -80,7 +80,7 @@ type categoriesArray = {
         htmlLocation :'about.html',
     },
 ]
-type servicesArray = {
+type ServicesArray = {
     name: string,
     category: string,
     numOfProviders: number,
@@ -89,8 +89,8 @@ type servicesArray = {
     avrDistance: string,
     icon: string,
     description: string,
-}[]
-const services: servicesArray = [
+}
+const services: ServicesArray[] = [
     {
         name: 'Bodybuilding',
         category: 'Fitness',
@@ -380,8 +380,8 @@ categories.forEach(category =>
         
     })
 })
-let renderSelectedCategoryList: (a: string) => void;
-renderSelectedCategoryList = (categorySelection: string) => 
+
+const renderSelectedCategoryList = (categorySelection: string) => 
 {
      const selectedCategory = categories.filter(category => category.id === categorySelection);
      document.querySelector(`#${selectedCategory[0].id}`)?.classList.add('selectedCategory');
@@ -394,8 +394,7 @@ renderSelectedCategoryList = (categorySelection: string) =>
         })     
 }
 
-let closeLists: () => void;
-closeLists = () => {
+const closeLists = () => {
     window.onclick = event => 
     {
         if (event.target === serviceListModal)
