@@ -30,7 +30,10 @@ const signUpInputFields = [
     },
 ];
 signUpInputFields.forEach(inputField => {
-    inputField.selector.addEventListener('blur', () => {
+    inputField.selector?.addEventListener('blur', () => {
+        if (!(inputField.selector && inputField.validationContainer)) {
+            return;
+        }
         inputField.isValid = inputField.regex.test((inputField.selector.value));
         showValidationMsg(inputField.validationContainer, inputField.message, inputField.isValid);
     });
@@ -60,8 +63,8 @@ const renderDropDownMenuChoice = (isDisplayed) => {
     const hiddenInputContainer = document.querySelector("#hiddenInputContainer");
     if (isDisplayed) {
         const hiddenInputLabel = document.querySelector("#hiddenInputLabel");
-        hiddenInputLabel.innerHTML = 'In what specific category are you interested in:' + '<br>' + '1.Bodybuilding, 2.Crossfit or 3.Running?' + '<br>' + 'Type 1 2 or 3 respectively:';
-        if (hiddenInputContainer) {
+        if (hiddenInputLabel && hiddenInputContainer) {
+            hiddenInputLabel.innerHTML = 'In what specific category are you interested in:' + '<br>' + '1.Bodybuilding, 2.Crossfit or 3.Running?' + '<br>' + 'Type 1 2 or 3 respectively:';
             hiddenInputContainer.style.display = 'unset';
         }
     }
@@ -86,10 +89,10 @@ const renderModal = () => {
         return;
     }
     let str = '';
-    if ((signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid) === false) {
+    if (!(signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid)) {
         modalText.innerHTML = "All inputs must be valid please try again!!!";
     }
-    else if (signUpInputFields[3].isValid === false && dropDownChoiceDisplayed === true) {
+    else if (!signUpInputFields[3].isValid && dropDownChoiceDisplayed) {
         modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";
     }
     else {
@@ -97,7 +100,7 @@ const renderModal = () => {
             const formFieldInput = formField[i];
             let value = formFieldInput.value;
             let doNotShow = value === "";
-            if ((formFieldInput.type === 'radio' || formFieldInput.type === 'checkbox') && (formFieldInput).checked === false) {
+            if ((formFieldInput.type === 'radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked) {
                 doNotShow = true;
             }
             str += (doNotShow ? "" : `${(formFieldInput).name}: ${value} <br>`);

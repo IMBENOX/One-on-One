@@ -6,8 +6,7 @@ type CategoriesArray = {
     mostPopular : string[],
     id          : string,
     objectsId   : string,
-    isSelected  : string,
-    isDisplayed : string,
+    isSelected  : boolean,
     icon        : string,
     backgroundColor : string,
     htmlLocation : string,
@@ -21,8 +20,7 @@ type CategoriesArray = {
         mostPopular : ['Bodybuilding','Crossfit','Track'],
         id          : 'fitnessCategory',
         objectsId   : 'fitnessCatalog',
-        isSelected  : 'selectedCategory',
-        isDisplayed : '',
+        isSelected  : true,
         icon             : 'url("images/fitnessIcon.jpg")',
         backgroundColor : '#e76f51',
         htmlLocation :'about.html',
@@ -34,8 +32,7 @@ type CategoriesArray = {
         mostPopular : ['Hairdressing','Nails','Massage'],
         id          : 'cosmetologyCategory',
         objectsId   : 'cosmetologyCatalog',
-        isSelected  : '',
-        isDisplayed : 'doNotDisplay',
+        isSelected  : false,
         icon             : 'url("images/cosmetologyIcon.jpg")',
         backgroundColor : '#a2d2ff',
         htmlLocation :'about.html',
@@ -47,8 +44,7 @@ type CategoriesArray = {
         mostPopular : ['Home Paintment','Appliance Service','Plumbing'],
         id          : 'homeRepairsCategory',
         objectsId   : 'homeRepairsCatalog',
-        isSelected   : '',
-        isDisplayed  : 'doNotDisplay',
+        isSelected   : false,
         icon              : 'url("images/homeRepairsIcon.jpg")',
         backgroundColor : '#2a9d8f',
         htmlLocation :'about.html',
@@ -60,8 +56,7 @@ type CategoriesArray = {
         mostPopular : ['Physics','Math','Quitar'],
         id          : 'teachingCategory',
         objectsId   : 'teachingCatalog',
-        isSelected  : '',
-        isDisplayed : 'doNotDisplay',
+        isSelected  : false,
         icon             : 'url("images/teachingIcon.jpg")',
         backgroundColor : '#e9c46a',
         htmlLocation :'about.html',
@@ -73,8 +68,7 @@ type CategoriesArray = {
         mostPopular: ['Pathologist','Chiropractor','Dentist'],
         id          : 'healthCategory',
         objectsId   : 'healthCatalog',
-        isSelected     : '',
-        isDisplayed    : 'doNotDisplay',
+        isSelected     : false,
         icon                : 'url("images/healthIcon.jpg")',
         backgroundColor : '#ffc8dd',
         htmlLocation :'about.html',
@@ -334,29 +328,34 @@ const services: ServicesArray[] = [
     },
 ]
 
-const serviceListModal   = document.querySelector('#serviceListModal') as HTMLDivElement;
-const serviceListBtn     = document.querySelector('#serviceListBtn') as HTMLSpanElement;
-serviceListBtn.addEventListener('click', () => 
-{
+const serviceListModal : HTMLDivElement | null   = document.querySelector('#serviceListModal');
+const serviceListBtn : HTMLSpanElement | null    = document.querySelector('#serviceListBtn');
+serviceListBtn?.addEventListener('click', () => 
+{   if(!serviceListModal){return}
     serviceListModal.style.display = "flex";
     closeLists();
 })
 
-const categoriesContainer = document.querySelector('#categoriesContainer') as HTMLDivElement;
-const categoryServicesContainer  = document.querySelector('#categoryServicesContainer') as HTMLDivElement;
+const categoriesContainer : HTMLDivElement | null = document.querySelector('#categoriesContainer');
+const categoryServicesContainer : HTMLDivElement | null  = document.querySelector('#categoryServicesContainer');
 categories.forEach(category => 
 {
     const categoryDiv  = document.createElement('div');
     const categoryIconContainer = document.createElement('span');
     categoryDiv.setAttribute('id',category.id);
-    categoryDiv.setAttribute('class',category.isSelected);
+    if(category.isSelected){
+        categoryDiv.setAttribute('class','selectedCategory');
+    }
     categoryIconContainer.style.backgroundImage = category.icon;
     categoryDiv.append(...[categoryIconContainer,category.name]);
+    if(!(categoriesContainer)){return}
     categoriesContainer.append(categoryDiv);
-
     const categoryServicesDiv = document.createElement('div');
     categoryServicesDiv.setAttribute('id',category.objectsId);
-    categoryServicesDiv.setAttribute('class',category.isDisplayed);
+    if(!category.isSelected){
+        categoryServicesDiv.setAttribute('class','doNotDisplay');
+    }
+    if(!(categoryServicesContainer)){return}
     categoryServicesContainer.append(categoryServicesDiv);
     services.forEach( service => 
     {
@@ -373,19 +372,19 @@ categories.forEach(category =>
         }
     } )
 
-    const categorySelector = document.querySelector(`#${category.id}`) as HTMLDivElement;
-    categorySelector.addEventListener('click', event => 
+    const categorySelector : HTMLDivElement | null = document.querySelector(`#${category.id}`);
+    categorySelector?.addEventListener('click', event => 
     {
-            renderSelectedCategoryList((event.target as HTMLDivElement).id);
-        
+        renderSelectedCategoryList((event.target as HTMLDivElement).id);   
     })
 })
 
 const renderSelectedCategoryList = (categorySelection: string) => 
 {
-     const selectedCategory = categories.filter(category => category.id === categorySelection);
-     document.querySelector(`#${selectedCategory[0].id}`)?.classList.add('selectedCategory');
-     document.querySelector(`#${selectedCategory[0].objectsId}`)?.classList.remove('doNotDisplay');
+     const selectedCategory = categories.find(category => category.id === categorySelection);
+    if(!selectedCategory){return}
+     document.querySelector(`#${selectedCategory.id}`)?.classList.add('selectedCategory');
+     document.querySelector(`#${selectedCategory.objectsId}`)?.classList.remove('doNotDisplay');
      const notSelectedCategories = categories.filter(category => category.id !== categorySelection);
      notSelectedCategories.forEach(category => 
         {
@@ -398,20 +397,22 @@ const closeLists = () => {
     window.onclick = event => 
     {
         if (event.target === serviceListModal)
-        {
+        {   
+            if(!serviceListModal){return}
             serviceListModal.style.display = "none";
         }
     }
 }
 
 const searchBarContainter  = document.querySelector('.searchBarContainer');
-const categoriesWrapper = document.querySelector('#categoriesWrapper') as HTMLDivElement;
+const categoriesWrapper : HTMLDivElement | null = document.querySelector('#categoriesWrapper');
 
 categories.forEach(category => {
     const categoryDiv = document.createElement('div');
     categoryDiv.append(category.name);
     categoryDiv.style.backgroundColor = category.backgroundColor;
     categoryDiv.onclick = () => {location.href= category.htmlLocation}
+    if(!(categoriesWrapper)){return}
     categoriesWrapper.append(categoryDiv)
 })
 

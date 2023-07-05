@@ -1,46 +1,47 @@
 type SignUpFields = {
-    selector: HTMLInputElement,
+    selector: HTMLInputElement | null,
     message: string,
     regex: RegExp,
-    validationContainer: HTMLSpanElement,
+    validationContainer: HTMLSpanElement | null,
     isValid: boolean,
 }
 const signUpInputFields : SignUpFields[] = 
 [
     {
-        selector : document.querySelector('#firstNameInput') as HTMLInputElement,
+        selector : document.querySelector('#firstNameInput'),
         message  : 'Please type a 3 or more letter name with no special characters.',
         regex    : /^[a-zA-Z]{3,}$/,
-        validationContainer : document.querySelector('#validationMsgFirstName') as HTMLSpanElement,
+        validationContainer : document.querySelector('#validationMsgFirstName'),
         isValid    : false,
     },
     {
-        selector : document.querySelector('#lastNameInput') as HTMLInputElement,
+        selector : document.querySelector('#lastNameInput'),
         message  : 'Please type a 3 or more letter name with no special characters.',
         regex    : /^[a-zA-Z]{3,}$/,
-        validationContainer : document.querySelector('#validationMsgLastName') as HTMLSpanElement,
+        validationContainer : document.querySelector('#validationMsgLastName'),
         isValid    : false,
     },
     {
-        selector : document.querySelector('#emailInput') as HTMLInputElement,
+        selector : document.querySelector('#emailInput'),
         message  : "Please include an '@'and an '.' in the email address.",
         regex    : /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/,
-        validationContainer : document.querySelector('#validationMsgEmail') as HTMLSpanElement,
+        validationContainer : document.querySelector('#validationMsgEmail'),
         isValid    : false,
     },
     {
-        selector : document.querySelector('#hiddenInput') as HTMLInputElement,
+        selector : document.querySelector('#hiddenInput'),
         message  : "Invalid: please type 1 , 2, or 3",
         regex    : /^(1|2|3)$/,
-        validationContainer : document.querySelector('#hiddenInputValidationMsg') as HTMLSpanElement,
+        validationContainer : document.querySelector('#hiddenInputValidationMsg'),
         isValid    : false,
     },
 ]
 
 signUpInputFields.forEach(inputField =>
-{
-    inputField.selector.addEventListener('blur', () => 
-    {
+{  
+    inputField.selector?.addEventListener('blur', () => 
+    {   
+        if(!(inputField.selector && inputField.validationContainer)) {return}
         inputField.isValid = inputField.regex.test((inputField.selector.value));
         showValidationMsg(inputField.validationContainer,inputField.message,inputField.isValid);
     })
@@ -81,11 +82,12 @@ const showValidationMsg = (validationContainer : HTMLSpanElement , message : str
     const hiddenInputContainer : HTMLDivElement | null = document.querySelector("#hiddenInputContainer");
     if(isDisplayed)
     {
-        const hiddenInputLabel = document.querySelector("#hiddenInputLabel") as HTMLSpanElement;
+        const hiddenInputLabel : HTMLSpanElement | null = document.querySelector("#hiddenInputLabel");
+        if(hiddenInputLabel && hiddenInputContainer){
         hiddenInputLabel.innerHTML = 'In what specific category are you interested in:'+ '<br>' +'1.Bodybuilding, 2.Crossfit or 3.Running?'+'<br>'+ 'Type 1 2 or 3 respectively:';
-        if(hiddenInputContainer){
         hiddenInputContainer.style.display = 'unset' ;
         }
+        
     }
     else 
     {   const hiddenInput : HTMLInputElement | null = document.querySelector("#hiddenInput")
@@ -105,11 +107,11 @@ const renderModal = () =>
     const formField = form?.elements;
     if(!formField){return}
     let str = '';
-    if( (signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid) === false )
+    if(!(signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid))
     {
         modalText.innerHTML = "All inputs must be valid please try again!!!";
     }
-    else if( signUpInputFields[3].isValid === false && dropDownChoiceDisplayed === true) 
+    else if( !signUpInputFields[3].isValid && dropDownChoiceDisplayed) 
     {
         modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";
     }
@@ -119,7 +121,7 @@ const renderModal = () =>
         {   const formFieldInput  =  formField[i] as HTMLInputElement ;
             let value = formFieldInput.value ;
             let doNotShow = value === "";
-            if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && (formFieldInput).checked === false )
+            if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked )
             {
                 doNotShow = true
             }

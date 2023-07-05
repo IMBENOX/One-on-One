@@ -7,8 +7,7 @@ const categories = [
         mostPopular: ['Bodybuilding', 'Crossfit', 'Track'],
         id: 'fitnessCategory',
         objectsId: 'fitnessCatalog',
-        isSelected: 'selectedCategory',
-        isDisplayed: '',
+        isSelected: true,
         icon: 'url("images/fitnessIcon.jpg")',
         backgroundColor: '#e76f51',
         htmlLocation: 'about.html',
@@ -20,8 +19,7 @@ const categories = [
         mostPopular: ['Hairdressing', 'Nails', 'Massage'],
         id: 'cosmetologyCategory',
         objectsId: 'cosmetologyCatalog',
-        isSelected: '',
-        isDisplayed: 'doNotDisplay',
+        isSelected: false,
         icon: 'url("images/cosmetologyIcon.jpg")',
         backgroundColor: '#a2d2ff',
         htmlLocation: 'about.html',
@@ -33,8 +31,7 @@ const categories = [
         mostPopular: ['Home Paintment', 'Appliance Service', 'Plumbing'],
         id: 'homeRepairsCategory',
         objectsId: 'homeRepairsCatalog',
-        isSelected: '',
-        isDisplayed: 'doNotDisplay',
+        isSelected: false,
         icon: 'url("images/homeRepairsIcon.jpg")',
         backgroundColor: '#2a9d8f',
         htmlLocation: 'about.html',
@@ -46,8 +43,7 @@ const categories = [
         mostPopular: ['Physics', 'Math', 'Quitar'],
         id: 'teachingCategory',
         objectsId: 'teachingCatalog',
-        isSelected: '',
-        isDisplayed: 'doNotDisplay',
+        isSelected: false,
         icon: 'url("images/teachingIcon.jpg")',
         backgroundColor: '#e9c46a',
         htmlLocation: 'about.html',
@@ -59,8 +55,7 @@ const categories = [
         mostPopular: ['Pathologist', 'Chiropractor', 'Dentist'],
         id: 'healthCategory',
         objectsId: 'healthCatalog',
-        isSelected: '',
-        isDisplayed: 'doNotDisplay',
+        isSelected: false,
         icon: 'url("images/healthIcon.jpg")',
         backgroundColor: '#ffc8dd',
         htmlLocation: 'about.html',
@@ -290,7 +285,10 @@ const services = [
 ];
 const serviceListModal = document.querySelector('#serviceListModal');
 const serviceListBtn = document.querySelector('#serviceListBtn');
-serviceListBtn.addEventListener('click', () => {
+serviceListBtn?.addEventListener('click', () => {
+    if (!serviceListModal) {
+        return;
+    }
     serviceListModal.style.display = "flex";
     closeLists();
 });
@@ -300,13 +298,23 @@ categories.forEach(category => {
     const categoryDiv = document.createElement('div');
     const categoryIconContainer = document.createElement('span');
     categoryDiv.setAttribute('id', category.id);
-    categoryDiv.setAttribute('class', category.isSelected);
+    if (category.isSelected) {
+        categoryDiv.setAttribute('class', 'selectedCategory');
+    }
     categoryIconContainer.style.backgroundImage = category.icon;
     categoryDiv.append(...[categoryIconContainer, category.name]);
+    if (!(categoriesContainer)) {
+        return;
+    }
     categoriesContainer.append(categoryDiv);
     const categoryServicesDiv = document.createElement('div');
     categoryServicesDiv.setAttribute('id', category.objectsId);
-    categoryServicesDiv.setAttribute('class', category.isDisplayed);
+    if (!category.isSelected) {
+        categoryServicesDiv.setAttribute('class', 'doNotDisplay');
+    }
+    if (!(categoryServicesContainer)) {
+        return;
+    }
     categoryServicesContainer.append(categoryServicesDiv);
     services.forEach(service => {
         if (category.name === service.category) {
@@ -321,14 +329,17 @@ categories.forEach(category => {
         }
     });
     const categorySelector = document.querySelector(`#${category.id}`);
-    categorySelector.addEventListener('click', event => {
+    categorySelector?.addEventListener('click', event => {
         renderSelectedCategoryList(event.target.id);
     });
 });
 const renderSelectedCategoryList = (categorySelection) => {
-    const selectedCategory = categories.filter(category => category.id === categorySelection);
-    document.querySelector(`#${selectedCategory[0].id}`)?.classList.add('selectedCategory');
-    document.querySelector(`#${selectedCategory[0].objectsId}`)?.classList.remove('doNotDisplay');
+    const selectedCategory = categories.find(category => category.id === categorySelection);
+    if (!selectedCategory) {
+        return;
+    }
+    document.querySelector(`#${selectedCategory.id}`)?.classList.add('selectedCategory');
+    document.querySelector(`#${selectedCategory.objectsId}`)?.classList.remove('doNotDisplay');
     const notSelectedCategories = categories.filter(category => category.id !== categorySelection);
     notSelectedCategories.forEach(category => {
         document.querySelector(`#${category.id}`)?.classList.remove('selectedCategory');
@@ -338,6 +349,9 @@ const renderSelectedCategoryList = (categorySelection) => {
 const closeLists = () => {
     window.onclick = event => {
         if (event.target === serviceListModal) {
+            if (!serviceListModal) {
+                return;
+            }
             serviceListModal.style.display = "none";
         }
     };
@@ -349,5 +363,8 @@ categories.forEach(category => {
     categoryDiv.append(category.name);
     categoryDiv.style.backgroundColor = category.backgroundColor;
     categoryDiv.onclick = () => { location.href = category.htmlLocation; };
+    if (!(categoriesWrapper)) {
+        return;
+    }
     categoriesWrapper.append(categoryDiv);
 });
