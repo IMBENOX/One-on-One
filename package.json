@@ -8,8 +8,10 @@
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "build": "npx tsc",
+    "build": "rimraf public/scripts && npx tsc",
+    "prestart": "npm run start",
     "start": "node public/scripts/index.js",
+    "predev": "npm run build",
     "dev": "concurrently \"npx tsc -W\" \"nodemon public/scripts/index.js\" "
   },
   "author": "",
