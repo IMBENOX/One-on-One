@@ -1,8 +1,8 @@
 import express, {Express, Request, Response} from "express";
-const app = express();
-const port = 3000;
 import path from "path";
 import mongoose from "mongoose";
+const app = express();
+const port = 3000;
 const methodOverride = require('method-override');
 
 app.set('views', path.join(__dirname,'../', '/views'));
@@ -22,8 +22,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         console.log(err)
     })
 
-
-
+import {Customer} from "./models/customer";
 
 
 
@@ -34,8 +33,21 @@ app.get('/home', (req, res) => {
 app.get('/services', (req, res) => {
     res.render('services')
 })
+
 app.get('/signup', (req, res) => {
     res.render('signup')
+})
+
+app.post('/signup', async (req, res) => {
+    console.log(req.body);
+    const newCustomer = new Customer(req.body);
+    await newCustomer.save()
+    .then(() => {
+        res.redirect('/home');
+    })
+    .catch((e) => {
+        res.render(e);
+    })
 })
 
 app.listen(port, () => {

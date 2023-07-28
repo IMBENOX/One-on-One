@@ -51,15 +51,15 @@ const serviceDropDownMenu : HTMLSelectElement | null = document.querySelector('#
 let dropDownChoiceDisplayed = false;
 serviceDropDownMenu?.addEventListener('change',() => 
 {
-    dropDownChoiceDisplayed = serviceDropDownMenu.value === "Fitness" ? true : false;
+    dropDownChoiceDisplayed = serviceDropDownMenu.value === "fitness" ? true : false;
     renderDropDownMenuChoice(dropDownChoiceDisplayed)
 })
 
 const submitButton : HTMLButtonElement | null = document.querySelector('#submitButton');
 submitButton?.addEventListener('click',() => 
 {
-   renderModal();
-   closeModal();
+    submitForm();
+    closeModal();
 })
 
 const showValidationMsg = (validationContainer : HTMLSpanElement , message : string, isValid : boolean) => 
@@ -97,7 +97,7 @@ const showValidationMsg = (validationContainer : HTMLSpanElement , message : str
         }
     }
  }
-const renderModal = () => 
+const submitForm = () => 
 {
     const modal : HTMLDivElement | null = document.querySelector("#myModal");
     const modalText : HTMLParagraphElement | null = document.querySelector('#modalText');
@@ -117,18 +117,19 @@ const renderModal = () =>
     }
     else
     {
-        for (let i = 0; i < formField.length-1; i++)
-        {   const formFieldInput  =  formField[i] as HTMLInputElement ;
-            let value = formFieldInput.value ;
-            let doNotShow = value === "";
-            if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked )
-            {
-                doNotShow = true
-            }
-            str+= (doNotShow? "" : `${(formFieldInput).name}: ${value} <br>`);
-        }
-            modalText.innerHTML = `Your choices are: <br> ${str} `;
-    }
+        form.submit();
+    //     for (let i = 0; i < formField.length-1; i++)
+    //     {   const formFieldInput  =  formField[i] as HTMLInputElement ;
+    //         let value = formFieldInput.value ;
+    //         let doNotShow = value === "";
+    //         if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked )
+    //         {
+    //             doNotShow = true
+    //         }
+    //         str+= (doNotShow? "" : `${(formFieldInput).name}: ${value} <br>`);
+    //     }
+    //         modalText.innerHTML = `Your choices are: <br> ${str} `;
+     }
 }
 
 const closeModal = () => 
