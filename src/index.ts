@@ -2,7 +2,7 @@ import express, {Express, Request, Response} from "express";
 import path from "path";
 import mongoose from "mongoose";
 const app = express();
-const port = 3000;
+const port = 8080;
 const methodOverride = require('method-override');
 
 app.set('views', path.join(__dirname,'../', '/views'));
@@ -23,6 +23,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     })
 
 import {Customer} from "./models/customer";
+import { Category } from "./models/category";
 
 
 
@@ -30,8 +31,10 @@ app.get('/home', (req, res) => {
     res.render('home')
 })
 
-app.get('/services', (req, res) => {
-    res.render('services')
+app.get('/services', async (req, res) => {
+    const categories = await Category.find({});
+    // res.send(categories);
+    res.render('services',{categories});
 })
 
 app.get('/signup', (req, res) => {

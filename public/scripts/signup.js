@@ -30,7 +30,8 @@ const signUpInputFields = [
     },
 ];
 signUpInputFields.forEach(inputField => {
-    inputField.selector?.addEventListener('blur', () => {
+    var _a;
+    (_a = inputField.selector) === null || _a === void 0 ? void 0 : _a.addEventListener('blur', () => {
         if (!(inputField.selector && inputField.validationContainer)) {
             return;
         }
@@ -40,12 +41,12 @@ signUpInputFields.forEach(inputField => {
 });
 const serviceDropDownMenu = document.querySelector('#serviceDropDownMenu');
 let dropDownChoiceDisplayed = false;
-serviceDropDownMenu?.addEventListener('change', () => {
+serviceDropDownMenu === null || serviceDropDownMenu === void 0 ? void 0 : serviceDropDownMenu.addEventListener('change', () => {
     dropDownChoiceDisplayed = serviceDropDownMenu.value === "fitness" ? true : false;
     renderDropDownMenuChoice(dropDownChoiceDisplayed);
 });
 const submitButton = document.querySelector('#submitButton');
-submitButton?.addEventListener('click', () => {
+submitButton === null || submitButton === void 0 ? void 0 : submitButton.addEventListener('click', () => {
     submitForm();
     closeModal();
 });
@@ -84,7 +85,7 @@ const submitForm = () => {
     }
     modal.style.display = "block";
     const form = document.querySelector("#form");
-    const formField = form?.elements;
+    const formField = form === null || form === void 0 ? void 0 : form.elements;
     if (!formField) {
         return;
     }
@@ -97,17 +98,6 @@ const submitForm = () => {
     }
     else {
         form.submit();
-        //     for (let i = 0; i < formField.length-1; i++)
-        //     {   const formFieldInput  =  formField[i] as HTMLInputElement ;
-        //         let value = formFieldInput.value ;
-        //         let doNotShow = value === "";
-        //         if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked )
-        //         {
-        //             doNotShow = true
-        //         }
-        //         str+= (doNotShow? "" : `${(formFieldInput).name}: ${value} <br>`);
-        //     }
-        //         modalText.innerHTML = `Your choices are: <br> ${str} `;
     }
 };
 const closeModal = () => {

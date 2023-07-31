@@ -118,17 +118,6 @@ const submitForm = () =>
     else
     {
         form.submit();
-    //     for (let i = 0; i < formField.length-1; i++)
-    //     {   const formFieldInput  =  formField[i] as HTMLInputElement ;
-    //         let value = formFieldInput.value ;
-    //         let doNotShow = value === "";
-    //         if((formFieldInput.type ==='radio' || formFieldInput.type === 'checkbox') && !formFieldInput.checked )
-    //         {
-    //             doNotShow = true
-    //         }
-    //         str+= (doNotShow? "" : `${(formFieldInput).name}: ${value} <br>`);
-    //     }
-    //         modalText.innerHTML = `Your choices are: <br> ${str} `;
      }
 }
 

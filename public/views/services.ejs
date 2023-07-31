@@ -8,7 +8,6 @@
     <title>Services</title>
     <link rel="stylesheet" href="/styles/services.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/44a07f8216.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,24 +25,20 @@
         <img class="image" src="images/food.jpg" alt="food">
     </div>
 
-    <div class="searchBarContainer">
-        <span id="serviceSearchIcon"><i class="fa-solid fa-magnifying-glass fa-sm" style="color: #000000;"></i></span>
-        <input id="serviceSearchBar" type="text" placeholder="Search service"></input>
-        <span id="serviceListBtn"><i class="fa-solid fa-bars fa-sm" style="color: #000000;"></i></i></span>
-    </div>
-
-    <div id="serviceListModal">
-        <div id="serviceListContent">
-            <div id="categoriesContainer"></div>
-            <div id="categoryServicesContainer"></div>
-        </div>
-    </div>
-
     <div id="categoriesWrapper">
+
+        <%categories.forEach(category=> { %>
+            <a href="<%=category.htmlLocation %>">
+                <div style="background-color: <%=category.backgroundColor%>">
+                    <%=category.name%>
+                </div>
+            </a>
+            <% }) %>
     </div>
 
     <%- include('partials/footer') %>
         <script src="../scripts/services.js"></script>
+
 </body>
 
 </html>
