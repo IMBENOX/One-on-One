@@ -11,7 +11,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         console.log(err)
     })
 
-    const seedCategories = [
+    interface ISeedCategory {
+        name: string;
+        id          : string;
+        objectsId   : string;
+        isSelected  : boolean,
+        icon             : string;
+        backgroundColor : string;
+        htmlLocation :string;
+    }
+
+    const seedCategories: ISeedCategory[] = [
         {
             name: 'Fitness',
             id          : 'fitnessCategory',
