@@ -24,22 +24,36 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
 
 import {Customer} from "./models/customer";
 import { Category } from "./models/category";
+import { Service } from "./models/service";
+import { Provider } from "./models/provider";
 
 
 
 app.get('/home', (req, res) => {
     res.render('home')
-})
+});
 
 app.get('/services', async (req, res) => {
     const categories = await Category.find({});
-    // res.send(categories);
     res.render('services',{categories});
+});
+
+app.get('/services/:category', async (req, res) => {
+    const {category} = req.params;
+    const foundServices = await Service.find({category: category})
+    res.render('about',{foundServices,category})
+});
+
+app.get('/services/:category/:service', async (req, res) => {
+    const {service, category} = req.params;
+    const foundProviders = await Provider.find({service: service})
+    res.render('providers',{foundProviders, service, category});
 })
+
 
 app.get('/signup', (req, res) => {
     res.render('signup')
-})
+});
 
 app.post('/signup', async (req, res) => {
     console.log(req.body);
@@ -51,10 +65,10 @@ app.post('/signup', async (req, res) => {
     .catch((e) => {
         res.render(e);
     })
-})
+});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
-})
+});
 
 

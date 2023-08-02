@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%=service %>
+    </title>
+</head>
+
+<body>
+    <h1>
+        <%=service %>
+    </h1>
+    <h2>
+        Providers
+    </h2>
+    <ul>
+        <% foundProviders.forEach(provider=> { %>
+            <li>
+                <%=provider.firstName%>
+                    <%=provider.lastName %>
+            </li>
+            <%}) %>
+    </ul>
+    <div>
+        <a href="/services/<%=category %>">Back to <%=category %></a>
+    </div>
+    <div>
+        <a href="/services">Back to Services</a>
+    </div>
+</body>
+
+</html>

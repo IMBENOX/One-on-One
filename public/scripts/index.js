@@ -33,13 +33,24 @@ mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
 });
 const customer_1 = require("./models/customer");
 const category_1 = require("./models/category");
+const service_1 = require("./models/service");
+const provider_1 = require("./models/provider");
 app.get('/home', (req, res) => {
     res.render('home');
 });
 app.get('/services', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = yield category_1.Category.find({});
-    // res.send(categories);
     res.render('services', { categories });
+}));
+app.get('/services/:category', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { category } = req.params;
+    const foundServices = yield service_1.Service.find({ category: category });
+    res.render('about', { foundServices, category });
+}));
+app.get('/services/:category/:service', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { service, category } = req.params;
+    const foundProviders = yield provider_1.Provider.find({ service: service });
+    res.render('providers', { foundProviders, service, category });
 }));
 app.get('/signup', (req, res) => {
     res.render('signup');
