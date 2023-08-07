@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>One on One</title>
-    <link rel="stylesheet" href="/styles/index.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-</head>
-
-<body>
+<%layout('layouts/boilerplate')%>
+   <% block('head').append('<title>One on One</title>') %>
+   <% block('head').append('<link rel="stylesheet" href="/styles/index.css">') %>
     <header>
         <div id="logo">
             <h1>One on One</h1>
@@ -32,9 +23,3 @@
         </div>
         <img src="/images/home.jpg" alt="People working together to solve problems">
     </div>
-
-    <%- include('partials/footer') %>
-        <script src="../scripts/seeds/array-names.js"></script>
-</body>
-
-</html>

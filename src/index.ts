@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 const app = express();
 const port = 8080;
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 
+app.engine('ejs',ejsMate);
 app.set('views', path.join(__dirname,'../', '/views'));
 app.set('view engine', 'ejs');
 

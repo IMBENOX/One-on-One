@@ -18,6 +18,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const app = (0, express_1.default)();
 const port = 8080;
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
+app.engine('ejs', ejsMate);
 app.set('views', path_1.default.join(__dirname, '../', '/views'));
 app.set('view engine', 'ejs');
 app.use(express_1.default.static(path_1.default.join(__dirname, '../', '../', 'public')));

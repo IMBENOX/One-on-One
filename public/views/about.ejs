@@ -1,32 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<%layout('layouts/boilerplate')%>
+<% block('head').append('<title>Category</title>') %>
+<% block('head').append('<link rel="stylesheet" href="../styles/about.css" />') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%=category%>
-    </title>
-</head>
+<h1>
+    <%=category%> Category
+</h1>
+<h2>
+    Services
+</h2>
+<ul>
+    <% foundServices.forEach(service=> { %>
+        <li>
+            <a href="/services/<%=category%>/<%=service.name %>">
+                <%=service.name %>
+            </a>
+        </li>
+        <%}) %>
+</ul>
+<a href="/services">Back to Services</a>
 
-<body>
-    <h1>
-        <%=category%> Category
-    </h1>
-    <h2>
-        Services
-    </h2>
-    <ul>
-        <% foundServices.forEach(service=> { %>
-            <li>
-                <a href="/services/<%=category%>/<%=service.name %>">
-                    <%=service.name %>
-                </a>
-            </li>
-            <%}) %>
-    </ul>
-    <a href="/services">Back to Services</a>
-</body>
-
-</html>
