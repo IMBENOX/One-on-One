@@ -6,20 +6,32 @@
 <h1>
     <%=service %>
 </h1>
-<h2>
-    Providers
-</h2>
-<ul>
+<div class="d-flex justify-content-between">
+    <h2>Providers</h2>
+    <a href="/services/<%=category %>" class="link-dark">Back to <%=category %></a>
+</div>
+<div class="container">
     <% foundProviders.forEach(provider=> { %>
-        <li>
-            <%=provider.firstName%>
-                <%=provider.lastName %>
-        </li>
-        <%}) %>
-</ul>
-<div>
-    <a href="/services/<%=category %>">Back to <%=category %></a>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" alt="" src="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=provider.firstName%>
+                            <%=provider.lastName %>
+                        </h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis dolorem velit quo eaque voluptates molestias mollitia et ratione cupiditate. Repellat cumque dolor vitae natus nostrum, voluptatem odit error! Laboriosam, quas?
+                        </p>
+                        <a class="btn btn-primary" href="#">Show Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}) %>
 </div>
-<div>
-    <a href="/services">Back to Services</a>
-</div>
+
+

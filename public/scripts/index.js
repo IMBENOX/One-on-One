@@ -46,8 +46,9 @@ app.get('/services', (req, res) => __awaiter(void 0, void 0, void 0, function* (
 }));
 app.get('/services/:category', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.params;
+    const foundCategory = yield category_1.Category.find({ name: category });
     const foundServices = yield service_1.Service.find({ category: category });
-    res.render('about', { foundServices, category });
+    res.render('about', { foundServices, foundCategory });
 }));
 app.get('/services/:category/:service', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;

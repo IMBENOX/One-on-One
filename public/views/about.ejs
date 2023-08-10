@@ -1,21 +1,33 @@
 <%layout('layouts/boilerplate')%>
 <% block('head').append('<title>Category</title>') %>
 <% block('head').append('<link rel="stylesheet" href="../styles/about.css" />') %>
-
-<h1>
-    <%=category%> Category
+<h1 class="w-auto h-auto" style="background-color:<%=foundCategory[0].backgroundColor%>">
+    <%=foundCategory[0].name%> Category
 </h1>
-<h2>
-    Services
-</h2>
-<ul>
+<div class="container">
+    <h2>
+        Services
+    </h2>
     <% foundServices.forEach(service=> { %>
-        <li>
-            <a href="/services/<%=category%>/<%=service.name %>">
-                <%=service.name %>
-            </a>
-        </li>
-        <%}) %>
-</ul>
-<a href="/services">Back to Services</a>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" alt="" src="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=service.name %>
+                        </h5>
+                        <p class="card-text">
+                            <%=service.description %>
+                        </p>
+                        <a class="btn btn-primary" href="/services/<%=foundCategory[0].name %>/<%=service.name%>">View Providers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}) %>
+</div>
+
 

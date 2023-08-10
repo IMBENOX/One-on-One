@@ -27,7 +27,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
             id          : 'fitnessCategory',
             objectsId   : 'fitnessCatalog',
             isSelected  : true,
-            icon             : 'url("images/fitnessIcon.jpg")',
+            icon             : 'url(images/fitnessIcon.jpg)',
             backgroundColor : '#e76f51',
             htmlLocation :'about.html',
         },

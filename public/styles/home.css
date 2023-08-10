@@ -17,6 +17,7 @@ header {
     align-items:center;
 }
 #logo {
+    margin-top: 20px;
     width:100%;
     display: flex;
     justify-content: center;
@@ -35,21 +36,6 @@ h1{
     padding:0.5em;
     width: 30%;     
 }
-nav {
-    display:flex;
-    justify-content:space-around;
-    width: 50%;
-    background-color:#bde0fe;
-    border-radius: 10px;
-    margin-top:40px;
-}
-nav a {
-    font-weight: bold;
-    color:white;
-    text-decoration: none;
-    padding: 10px 20px;
-    letter-spacing: 6px;
-}
 
 #description {
     display: flex;
@@ -57,9 +43,9 @@ nav a {
     justify-content:center;
 }
 #descriptionTitle {
-    font-size: 5em;
+    font-size: 3em;
     font-weight: bold;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 #description img {
     max-width: 800px;
@@ -108,15 +94,10 @@ nav a {
     h1 {
         font-size: 1.3em;
         width:50%;
+    } 
+    #description {
+      flex-wrap:wrap-reverse;
     }
-    nav {
-        width: 70%;
-        font-size: 0.8em;
-    }
- 
-#description {
-    flex-wrap:wrap-reverse;
-}
 
 }
 @media(max-width:570px){

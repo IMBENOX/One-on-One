@@ -42,8 +42,9 @@ app.get('/services', async (req, res) => {
 
 app.get('/services/:category', async (req, res) => {
     const {category} = req.params;
+    const foundCategory = await Category.find({name: category})
     const foundServices = await Service.find({category: category})
-    res.render('about',{foundServices,category})
+    res.render('about',{foundServices,foundCategory})
 });
 
 app.get('/services/:category/:service', async (req, res) => {

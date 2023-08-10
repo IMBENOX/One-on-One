@@ -28,7 +28,7 @@ const seedCategories = [
         id: 'fitnessCategory',
         objectsId: 'fitnessCatalog',
         isSelected: true,
-        icon: 'url("images/fitnessIcon.jpg")',
+        icon: 'url(images/fitnessIcon.jpg)',
         backgroundColor: '#e76f51',
         htmlLocation: 'about.html',
     },
