@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const ExpressError_1 = require("./utils/ExpressError");
+const catchAsync_1 = require("./utils/catchAsync");
 const app = (0, express_1.default)();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -40,26 +42,31 @@ const provider_1 = require("./models/provider");
 app.get('/home', (req, res) => {
     res.render('home');
 });
-app.get('/services', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/services', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = yield category_1.Category.find({});
     res.render('services', { categories });
-}));
-app.get('/services/:category', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+})));
+app.get('/services/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.params;
     const foundCategory = yield category_1.Category.find({ name: category });
+    if (foundCategory.length === 0)
+        throw new ExpressError_1.ExpressError(`There is not a Category with name ${category}`, 404);
     const foundServices = yield service_1.Service.find({ category: category });
     res.render('about', { foundServices, foundCategory });
-}));
-app.get('/services/:category/:service', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+})));
+app.get('/services/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;
     const foundProviders = yield provider_1.Provider.find({ service: service });
+    if (foundProviders.length === 0)
+        throw new ExpressError_1.ExpressError(`There is not a ${service} Service in ${category} Category`, 404);
     res.render('providers', { foundProviders, service, category });
-}));
+})));
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
-app.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
+app.post('/signup', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (Object.keys(req.body).length === 0)
+        throw new ExpressError_1.ExpressError('Invalid Data', 400);
     const newCustomer = new customer_1.Customer(req.body);
     yield newCustomer.save()
         .then(() => {
@@ -68,7 +75,17 @@ app.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         .catch((e) => {
         res.render(e);
     });
-}));
+})));
+app.all('*', (req, res, next) => {
+    next(new ExpressError_1.ExpressError('Page not found', 404));
+});
+const errorHandler = (err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message)
+        err.message = 'Somethink Went Wrong!';
+    res.status(statusCode).render('error', { err });
+};
+app.use(errorHandler);
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });

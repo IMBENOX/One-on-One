@@ -1,6 +1,8 @@
-import express, {Express, Request, Response} from "express";
+import express, {Express, Request, Response, ErrorRequestHandler} from "express";
 import path from "path";
 import mongoose from "mongoose";
+import { ExpressError } from "./utils/ExpressError";
+import {wrapAsync} from './utils/catchAsync';
 const app = express();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -35,31 +37,33 @@ app.get('/home', (req, res) => {
     res.render('home')
 });
 
-app.get('/services', async (req, res) => {
+app.get('/services', wrapAsync( async (req, res) => {
     const categories = await Category.find({});
     res.render('services',{categories});
-});
+}));
 
-app.get('/services/:category', async (req, res) => {
+app.get('/services/:category', wrapAsync( async (req, res) => {
     const {category} = req.params;
     const foundCategory = await Category.find({name: category})
+    if(foundCategory.length === 0) throw new ExpressError(`There is not a Category with name ${category}`, 404)
     const foundServices = await Service.find({category: category})
     res.render('about',{foundServices,foundCategory})
-});
+}));
 
-app.get('/services/:category/:service', async (req, res) => {
+app.get('/services/:category/:service', wrapAsync( async (req, res) => {
     const {service, category} = req.params;
     const foundProviders = await Provider.find({service: service})
+    if(foundProviders.length === 0) throw new ExpressError(`There is not a ${service} Service in ${category} Category`, 404)
     res.render('providers',{foundProviders, service, category});
-})
+}));
 
 
 app.get('/signup', (req, res) => {
     res.render('signup')
 });
 
-app.post('/signup', async (req, res) => {
-    console.log(req.body);
+app.post('/signup', wrapAsync( async (req, res) => {
+    if(Object.keys(req.body).length === 0) throw new ExpressError('Invalid Data',400)
     const newCustomer = new Customer(req.body);
     await newCustomer.save()
     .then(() => {
@@ -68,7 +72,20 @@ app.post('/signup', async (req, res) => {
     .catch((e) => {
         res.render(e);
     })
-});
+}));
+
+app.all('*', (req, res, next) => {
+next(new ExpressError('Page not found', 404))
+})
+
+const errorHandler: ErrorRequestHandler = (err, req, res , next) => {
+    const {statusCode= 500} = err;
+    if(!err.message) err.message = 'Somethink Went Wrong!'
+    res.status(statusCode).render('error',{err});
+
+}
+
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
