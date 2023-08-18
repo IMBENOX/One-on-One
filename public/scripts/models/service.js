@@ -18,5 +18,8 @@ const serviceSchema = new mongoose_1.default.Schema({
     providers: {
         type: [String]
     },
+    imageLocation: {
+        type: String
+    },
 });
 exports.Service = mongoose_1.default.model('Service', serviceSchema);

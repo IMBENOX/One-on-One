@@ -5,6 +5,7 @@ interface IService {
     category: string;
     description: string;
     providers: string[];
+    imageLocation: string;
 }
 
 const serviceSchema = new mongoose.Schema<IService> ({
@@ -19,6 +20,9 @@ const serviceSchema = new mongoose.Schema<IService> ({
     },
     providers : {
         type: [String]
+    },
+    imageLocation : {
+        type: String
     },
 })
 
