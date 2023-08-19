@@ -17,6 +17,7 @@ const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const ExpressError_1 = require("./utils/ExpressError");
 const catchAsync_1 = require("./utils/catchAsync");
+const schemas_1 = require("./schemas");
 const app = (0, express_1.default)();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -27,6 +28,17 @@ app.set('view engine', 'ejs');
 app.use(express_1.default.static(path_1.default.join(__dirname, '../', '../', 'public')));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+const validateUserDetails = (req, res, next) => {
+    const { error } = schemas_1.signupSchema.validate(req.body);
+    console.log(error);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError_1.ExpressError(msg, 400);
+    }
+    else {
+        next();
+    }
+};
 mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
     console.log("Mongo Connection Open!");
@@ -64,10 +76,8 @@ app.get('/services/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) =
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
-app.post('/signup', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (Object.keys(req.body).length === 0)
-        throw new ExpressError_1.ExpressError('Invalid Data', 400);
-    const newCustomer = new customer_1.Customer(req.body);
+app.post('/signup', validateUserDetails, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newCustomer = new customer_1.Customer(req.body.user);
     yield newCustomer.save()
         .then(() => {
         res.redirect('/home');

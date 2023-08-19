@@ -1,8 +1,9 @@
-import express, {Express, Request, Response, ErrorRequestHandler} from "express";
+import express, {Express, Request, Response, NextFunction, ErrorRequestHandler} from "express";
 import path from "path";
 import mongoose from "mongoose";
 import { ExpressError } from "./utils/ExpressError";
 import {wrapAsync} from './utils/catchAsync';
+import { signupSchema } from "./schemas";
 const app = express();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -16,6 +17,17 @@ app.use(express.static(path.join(__dirname,'../','../','public')))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'));
 
+const validateUserDetails = (req: Request, res: Response, next: NextFunction) => {
+    const {error} = signupSchema.validate(req.body);
+    console.log(error);
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+
+}
 
 mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
@@ -62,9 +74,8 @@ app.get('/signup', (req, res) => {
     res.render('signup')
 });
 
-app.post('/signup', wrapAsync( async (req, res) => {
-    if(Object.keys(req.body).length === 0) throw new ExpressError('Invalid Data',400)
-    const newCustomer = new Customer(req.body);
+app.post('/signup',validateUserDetails, wrapAsync( async (req, res) => {
+    const newCustomer = new Customer(req.body.user);
     await newCustomer.save()
     .then(() => {
         res.redirect('/home');
