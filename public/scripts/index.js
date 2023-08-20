@@ -52,29 +52,34 @@ const category_1 = require("./models/category");
 const service_1 = require("./models/service");
 const provider_1 = require("./models/provider");
 app.get('/home', (req, res) => {
-    res.render('home');
+    const path = req.path;
+    res.render('home', { path });
 });
 app.get('/services', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const path = req.path;
     const categories = yield category_1.Category.find({});
-    res.render('services', { categories });
+    res.render('services', { categories, path });
 })));
 app.get('/services/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const path = req.path;
     const { category } = req.params;
     const foundCategory = yield category_1.Category.find({ name: category });
     if (foundCategory.length === 0)
         throw new ExpressError_1.ExpressError(`There is not a Category with name ${category}`, 404);
     const foundServices = yield service_1.Service.find({ category: category });
-    res.render('about', { foundServices, foundCategory });
+    res.render('about', { foundServices, foundCategory, path });
 })));
 app.get('/services/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const path = req.path;
     const { service, category } = req.params;
     const foundProviders = yield provider_1.Provider.find({ service: service });
     if (foundProviders.length === 0)
         throw new ExpressError_1.ExpressError(`There is not a ${service} Service in ${category} Category`, 404);
-    res.render('providers', { foundProviders, service, category });
+    res.render('providers', { foundProviders, service, category, path });
 })));
 app.get('/signup', (req, res) => {
-    res.render('signup');
+    const path = req.path;
+    res.render('signup', { path });
 });
 app.post('/signup', validateUserDetails, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newCustomer = new customer_1.Customer(req.body.user);
