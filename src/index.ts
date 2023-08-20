@@ -46,37 +46,37 @@ import { Provider } from "./models/provider";
 
 
 app.get('/home', (req, res) => {
-    const path = req.path;
-    res.render('home',{path})
+    res.render('home')
 });
 
 app.get('/services', wrapAsync( async (req, res) => {
-    const path = req.path;
     const categories = await Category.find({});
-    res.render('services',{categories, path});
+    res.render('services',{categories});
 }));
 
 app.get('/services/:category', wrapAsync( async (req, res) => {
-    const path = req.path;
     const {category} = req.params;
-    const foundCategory = await Category.find({name: category})
+    const arr = category.split('-');
+    arr.forEach((str,index) => {
+        arr[index] = str.charAt(0).toUpperCase() + str.slice(1)
+    })
+    const correctCategoryName = arr.join(' ');
+    const foundCategory = await Category.find({name: correctCategoryName})
     if(foundCategory.length === 0) throw new ExpressError(`There is not a Category with name ${category}`, 404)
-    const foundServices = await Service.find({category: category})
-    res.render('about',{foundServices,foundCategory, path})
+    const foundServices = await Service.find({category: correctCategoryName})
+    res.render('about',{foundServices,foundCategory})
 }));
 
 app.get('/services/:category/:service', wrapAsync( async (req, res) => {
-    const path = req.path;
     const {service, category} = req.params;
     const foundProviders = await Provider.find({service: service})
     if(foundProviders.length === 0) throw new ExpressError(`There is not a ${service} Service in ${category} Category`, 404)
-    res.render('providers',{foundProviders, service, category, path});
+    res.render('providers',{foundProviders, service, category});
 }));
 
 
 app.get('/signup', (req, res) => {
-    const path = req.path;
-    res.render('signup',{path})
+    res.render('signup')
 });
 
 app.post('/signup',validateUserDetails, wrapAsync( async (req, res) => {
