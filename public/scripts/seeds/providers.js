@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.insertProviders = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const provider_1 = require("../models/provider");
 const array_names_1 = require("./array-names");
@@ -37,11 +38,12 @@ const insertProviders = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         yield provider.save()
             .then(res => {
-            console.log(res);
+            // console.log(res);
         })
             .catch(err => {
             console.log(err);
         });
     }
 });
-insertProviders();
+exports.insertProviders = insertProviders;
+// insertProviders();

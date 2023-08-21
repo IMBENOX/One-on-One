@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seedServices = void 0;
+exports.insertServises = exports.seedServices = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const service_1 = require("../models/service");
 const provider_1 = require("../models/provider");
@@ -190,12 +190,13 @@ const insertServises = () => __awaiter(void 0, void 0, void 0, function* () {
         const service = new service_1.Service(serviceFromSeed);
         yield service.save()
             .then(res => {
-            console.log(res);
+            // console.log(res);
         })
             .catch(err => {
             console.log(err);
         });
-        console.log('END');
+        // console.log('END');
     }));
 });
-insertServises();
+exports.insertServises = insertServises;
+(0, exports.insertServises)();

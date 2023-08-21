@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.insertCategories = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const category_1 = require("../models/category");
 mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
@@ -77,4 +78,5 @@ const insertCategories = () => __awaiter(void 0, void 0, void 0, function* () {
         // console.log(res);
     });
 });
-insertCategories();
+exports.insertCategories = insertCategories;
+// insertCategories();
