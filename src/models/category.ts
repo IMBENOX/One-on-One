@@ -14,22 +14,7 @@ const categorySchema = new mongoose.Schema<ICategory>({
     name: {
         type: String
     },
-    id: {
-        type: String
-    },
-    objectsId: {
-        type: String
-    },
-    isSelected: {
-        type: Boolean
-    },
-    icon: {
-        type: String
-    },
     backgroundColor: {
-        type: String
-    },
-    htmlLocation: {
         type: String
     },
 })

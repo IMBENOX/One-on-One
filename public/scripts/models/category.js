@@ -9,22 +9,7 @@ const categorySchema = new mongoose_1.default.Schema({
     name: {
         type: String
     },
-    id: {
-        type: String
-    },
-    objectsId: {
-        type: String
-    },
-    isSelected: {
-        type: Boolean
-    },
-    icon: {
-        type: String
-    },
     backgroundColor: {
-        type: String
-    },
-    htmlLocation: {
         type: String
     },
 });

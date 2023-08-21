@@ -9,7 +9,6 @@ interface ICustomer {
     fitnessCategory: number;
     suggestions: string;
     sendInfo: string;
-
 }
 
 const customerSchema = new mongoose.Schema<ICustomer>({
