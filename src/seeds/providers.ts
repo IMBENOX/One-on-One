@@ -13,7 +13,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         console.log(err)
     })
 
-const insertProviders = async () => {
+export const insertProviders = async () => {
     await Provider.deleteMany({});
     for(let i = 0; i < 100; i++) {
         const randomName1 = Math.floor(Math.random() * 1000);
@@ -26,7 +26,7 @@ const insertProviders = async () => {
         });
         await provider.save()
         .then(res => {
-            console.log(res);
+            // console.log(res);
         })
         .catch(err => {
             console.log(err);
@@ -34,4 +34,4 @@ const insertProviders = async () => {
     }
 }
 
-insertProviders();
+// insertProviders();

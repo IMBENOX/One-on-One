@@ -179,7 +179,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         },
     ]
 
-    const insertServises = async () => {
+    export const insertServises = async () => {
         await Service.deleteMany({});
         seedServices.forEach(async (serviceFromSeed) => {
             const serviceProviders = await Provider.find({service: serviceFromSeed.name})
@@ -189,12 +189,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
             const service = new Service(serviceFromSeed);
             await service.save()
             .then(res => {
-                console.log(res);
+                // console.log(res);
             })
             .catch(err => {
                 console.log(err);
             })
-            console.log('END');
+            // console.log('END');
         });
     }
 

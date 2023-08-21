@@ -21,7 +21,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         htmlLocation :string;
     }
 
-    const seedCategories: ISeedCategory[] = [
+     const seedCategories: ISeedCategory[] = [
         {
             name: 'Fitness',
             id          : 'fitnessCategory',
@@ -69,7 +69,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         },
     ]
 
-    const insertCategories = async () => {
+    export const insertCategories = async () => {
         await Category.deleteMany({});
         await Category.insertMany(seedCategories)
         .then(res => {
@@ -78,5 +78,5 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         })
     };
 
-insertCategories();
+// insertCategories();
 
