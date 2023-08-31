@@ -41,7 +41,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
 import {Customer} from "./models/customer";
 import { Category } from "./models/category";
 import { Service } from "./models/service";
-import { Provider } from "./models/provider";
+
 
 
 
@@ -64,14 +64,15 @@ app.get('/services/:category', wrapAsync( async (req, res) => {
     const foundCategory = await Category.find({name: correctCategoryName})
     if(foundCategory.length === 0) throw new ExpressError(`There is not a Category with name ${category}`, 404)
     const foundServices = await Service.find({category: correctCategoryName})
+    if(foundServices.length === 0) throw new ExpressError(`There are not services in the Category ${category}`, 404)
     res.render('about',{foundServices,foundCategory})
 }));
 
 app.get('/services/:category/:service', wrapAsync( async (req, res) => {
     const {service, category} = req.params;
-    const foundProviders = await Provider.find({service: service})
-    if(foundProviders.length === 0) throw new ExpressError(`There is not a ${service} Service in ${category} Category`, 404)
-    res.render('providers',{foundProviders, service, category});
+    const foundService = await Service.find({name: service}).populate('providers');
+    if(foundService.length === 0) throw new ExpressError(`There are not provider for  ${service} in ${category} Category`, 404)
+    res.render('providers',{service, category, foundService});
 }));
 
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { Service } from '../models/service';
-import {Provider} from "../models/provider";
+import {IService} from '../models/service';
+
 
 
 
@@ -13,15 +13,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         console.log(err)
     })
 
-    interface ISeedService {
-        name: string;
-        category: string;
-        description: string;
-        providers: string[];
-        imageLocation: string;
-    }
 
-    export const seedServices: ISeedService[] = [
+    export const seedServices: IService[] = [
         {
             name: 'Bodybuilding',
             category: 'Fitness',
@@ -179,23 +172,3 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         },
     ]
 
-    export const insertServises = async () => {
-        await Service.deleteMany({});
-        seedServices.forEach(async (serviceFromSeed) => {
-            const serviceProviders = await Provider.find({service: serviceFromSeed.name})
-            serviceProviders.forEach( provider => {
-                serviceFromSeed.providers.push(`${provider.firstName} ${provider.lastName}`);
-            })
-            const service = new Service(serviceFromSeed);
-            await service.save()
-            .then(res => {
-                // console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            // console.log('END');
-        });
-    }
-
-    insertServises();

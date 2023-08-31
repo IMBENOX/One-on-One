@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IProvider {
+export interface IProvider {
     firstName: string;
     lastName:  string;
     info:     string;
@@ -8,7 +8,7 @@ interface IProvider {
     service:   string;
 }
 
-const providerSchema = new mongoose.Schema<IProvider>({
+export const providerSchema = new mongoose.Schema<IProvider>({
     firstName: {
         type: String,
         required: true,
@@ -28,5 +28,5 @@ const providerSchema = new mongoose.Schema<IProvider>({
     },
 })
 
-export const Provider = mongoose.model('Provider',providerSchema);
+
 

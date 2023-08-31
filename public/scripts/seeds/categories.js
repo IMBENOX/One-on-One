@@ -49,7 +49,7 @@ const insertCategories = () => __awaiter(void 0, void 0, void 0, function* () {
     yield category_1.Category.deleteMany({});
     yield category_1.Category.insertMany(seedCategories)
         .then(res => {
-        console.log("Data Inserted:");
+        // console.log("Categories Inserted:");
         // console.log(res);
     });
 });

@@ -1,10 +1,12 @@
 import mongoose from "mongoose"
+import { providerSchema, IProvider} from "./provider";
 
-interface IService {
+
+export interface IService {
     name: string;
     category: string;
     description: string;
-    providers: string[];
+    providers: IProvider[];
     imageLocation: string;
 }
 
@@ -18,12 +20,13 @@ const serviceSchema = new mongoose.Schema<IService> ({
     description: {
         type: String
     },
-    providers : {
-        type: [String]
-    },
+    providers : [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Provider'}
+    ],
     imageLocation : {
         type: String
     },
 })
 
+export const Provider = mongoose.model('Provider',providerSchema);
 export const Service = mongoose.model('Service',serviceSchema);

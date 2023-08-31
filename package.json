@@ -12,6 +12,7 @@
     "build": "rimraf public/scripts && npx tsc",
     "prestart": "npm run start",
     "start": "node public/scripts/index.js",
+    "preseed": "npm run build",
     "seed" : "node public/scripts/seeds/seed.js ",
     "predev": "npm run build",
     "dev": "concurrently \"npx tsc -W\" \"nodemon public/scripts/index.js\" "

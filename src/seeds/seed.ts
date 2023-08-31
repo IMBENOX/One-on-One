@@ -1,12 +1,13 @@
 import {insertCategories} from "./categories";
-import { insertProviders } from "./providers";
-import { insertServises } from "./services";
+import {insertProvidersServices } from "./providers";
+
+
 
 //Seeding Categories
 insertCategories();
 
 //Seeding Providers
-insertProviders();
+ insertProvidersServices();
 
-//Seeding Services
-insertServises();
+
+

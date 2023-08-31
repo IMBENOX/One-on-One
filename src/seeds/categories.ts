@@ -44,7 +44,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         await Category.deleteMany({});
         await Category.insertMany(seedCategories)
         .then(res => {
-            console.log("Data Inserted:");
+            // console.log("Categories Inserted:");
             // console.log(res);
         })
     };

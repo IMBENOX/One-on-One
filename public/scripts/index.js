@@ -50,7 +50,6 @@ mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
 const customer_1 = require("./models/customer");
 const category_1 = require("./models/category");
 const service_1 = require("./models/service");
-const provider_1 = require("./models/provider");
 app.get('/home', (req, res) => {
     res.render('home');
 });
@@ -69,14 +68,16 @@ app.get('/services/:category', (0, catchAsync_1.wrapAsync)((req, res) => __await
     if (foundCategory.length === 0)
         throw new ExpressError_1.ExpressError(`There is not a Category with name ${category}`, 404);
     const foundServices = yield service_1.Service.find({ category: correctCategoryName });
+    if (foundServices.length === 0)
+        throw new ExpressError_1.ExpressError(`There are not services in the Category ${category}`, 404);
     res.render('about', { foundServices, foundCategory });
 })));
 app.get('/services/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;
-    const foundProviders = yield provider_1.Provider.find({ service: service });
-    if (foundProviders.length === 0)
-        throw new ExpressError_1.ExpressError(`There is not a ${service} Service in ${category} Category`, 404);
-    res.render('providers', { foundProviders, service, category });
+    const foundService = yield service_1.Service.find({ name: service }).populate('providers');
+    if (foundService.length === 0)
+        throw new ExpressError_1.ExpressError(`There are not provider for  ${service} in ${category} Category`, 404);
+    res.render('providers', { service, category, foundService });
 })));
 app.get('/signup', (req, res) => {
     res.render('signup');
