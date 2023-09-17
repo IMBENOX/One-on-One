@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-interface ICustomer {
+export interface ICustomer {
     firstName: string;
     lastName:  string;
     email:     string;
+    password:  string;
     gender:    string;
     servise:   string;
     fitnessCategory: number;
@@ -21,6 +22,10 @@ const customerSchema = new mongoose.Schema<ICustomer>({
         required: true,
     },
     email: {
+        type: String,
+        required: true,
+    },
+    password: {
         type: String,
         required: true,
     },

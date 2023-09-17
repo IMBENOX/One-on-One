@@ -65,78 +65,6 @@ input[type=text]:focus, input[type=password]:focus {
     box-shadow: 1px 1px  10px 3px #bde0fe , -1px -1px 10px 3px #bde0fe;
 }
 
-#radioButtons {
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-}
-#radioButtons p {
-    font-size: 0.6em;
-    font-weight: bold;
-}
-.custom-radio-btn {
-    width: 15px;
-    height: 15px;
-    border: 1px solid lightgray;
-    border-radius:50%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-.custom-radio-btn input {
-    display: none;
-}
-.checkmark { 
- width: calc(100% - 4px);
- height:calc(100% - 4px);
- background-color: #fb5607;
- border-radius: 50%;
- opacity:0;
- transition: opacity 0.6s;
-}
-.custom-radio-btn input:checked + .checkmark {
-     opacity: 1;
-}
-
-.selectContainer {
-    display: flex;
-    justify-content: center;
-    height: 40px;
-}
-.custom-select {
-border: none;
-appearance: none;
-padding: 10px 20px;
-color: white;
-background-color:rgb(103, 159, 248);
-border-radius: 10px;
-font-size: 15px;
-outline: none;
-}
-
-textarea {
-    width: 90%;
-    height: 150px;
-    padding: 12px 20px;
-    border : 1px solid lightgray;
-    border-radius: 10px;
-    resize: none;
-    transition: box-shadow 0.5s;
-}
-textarea:focus {
-    outline:none;
-    box-shadow: 1px 1px  10px 3px #bde0fe , -1px -1px 10px 3px #bde0fe;    
-}
-.checkbox-container{
-    display: flex;
-    justify-content:flex-start;
-    align-items: flex-start;
-    color: rgba(0, 0, 0, 0.425);
-}
-.checkbox-container strong {
-    color:hsla(19, 97%, 51%, 0.445);
-}
-
 .button-container {
     display:flex;
     justify-content: center;
@@ -155,6 +83,19 @@ textarea:focus {
 .button-container button:hover {
     background-color:#3a86ff;
     cursor : pointer;
+}
+
+.notAUser {
+    color: red;
+}
+
+.a-container {
+    font-size: 0.8em;
+}
+
+.a-container a{
+    text-decoration: none;
+    color: hsla(19, 97%, 51%, 0.445);
 }
 
 
@@ -190,10 +131,7 @@ textarea:focus {
 #modalParagraph {
     font-size: 20px;
 }
-#hiddenInputContainer
-{
-    display: none;
-}
+
 @media(max-width:820px){
     nav {
         font-size: 0.8em;

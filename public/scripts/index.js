@@ -18,6 +18,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const ExpressError_1 = require("./utils/ExpressError");
 const catchAsync_1 = require("./utils/catchAsync");
 const schemas_1 = require("./schemas");
+const customer_1 = require("./models/customer");
+const category_1 = require("./models/category");
+const service_1 = require("./models/service");
 const app = (0, express_1.default)();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -28,17 +31,37 @@ app.set('view engine', 'ejs');
 app.use(express_1.default.static(path_1.default.join(__dirname, '../', '../', 'public')));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-const validateUserDetails = (req, res, next) => {
+const validateUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { error } = schemas_1.signupSchema.validate(req.body);
-    console.log(error);
+    const foundCustomer = yield customer_1.Customer.find({ email: req.body.user.email });
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError_1.ExpressError(msg, 400);
     }
+    else if (foundCustomer.length) {
+        const message = `${foundCustomer[0].email} is in use please use an other email`;
+        res.render('signup', { message });
+    }
     else {
         next();
     }
-};
+});
+const signInValidaton = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { error } = schemas_1.signinSchema.validate(req.body);
+    const foundCustomer = yield customer_1.Customer.find({ email: req.body.user.email, password: req.body.user.password });
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError_1.ExpressError(msg, 400);
+    }
+    else if (!foundCustomer.length) {
+        const message = `This is not a correct account please try again`;
+        res.render('signin', { message });
+    }
+    else {
+        res.locals.foundCustomer = foundCustomer[0];
+        next();
+    }
+});
 mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
     console.log("Mongo Connection Open!");
@@ -47,9 +70,6 @@ mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     console.log("Oh No Monge Conection ERROR!!!!");
     console.log(err);
 });
-const customer_1 = require("./models/customer");
-const category_1 = require("./models/category");
-const service_1 = require("./models/service");
 app.get('/home', (req, res) => {
     res.render('home');
 });
@@ -79,8 +99,16 @@ app.get('/services/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) =
         throw new ExpressError_1.ExpressError(`There are not provider for  ${service} in ${category} Category`, 404);
     res.render('providers', { service, category, foundService });
 })));
+app.get('/signin', (req, res) => {
+    const message = '';
+    res.render('signin', { message });
+});
+app.post('/signin', signInValidaton, (req, res) => {
+    res.render('home', { name: res.locals.foundCustomer.firstName });
+});
 app.get('/signup', (req, res) => {
-    res.render('signup');
+    const message = '';
+    res.render('signup', { message });
 });
 app.post('/signup', validateUserDetails, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newCustomer = new customer_1.Customer(req.body.user);

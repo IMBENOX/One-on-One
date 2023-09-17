@@ -1,0 +1,44 @@
+<%layout('layouts/boilerplate')%>
+   <% block('head').append('<title>Sign In</title>') %>
+   <% block('head').append('<link rel="stylesheet" href="../styles/signin.css">') %>
+
+<div id="formContainer">
+    <form action="/signin" id="form" method="POST">
+        <h2>Sign in to your account </h2>
+
+
+        <div>
+            <label for="emailInput">Email</label>
+            <input id="emailInput" type="text" name="user[email]" placeholder="Your email...">
+            <span id="validationMsgEmail"></span>
+        </div>
+        <div>
+            <label for="passwordInput">Password</label>
+            <input id="passwordInput" type="password" name="user[password]" placeholder="Your password...">
+            <span id="validationMsgPassword"></span>
+        </div>
+
+        <div class="button-container">
+            <button type="button" id="ContinueButton">Continue</button>
+        </div>
+
+        <div class="notAUser"><%=message %></div>
+
+        <div class="a-container">
+            <p>Don't have an acount? <a href="/signup">Sign Up</a></p>
+        </div>
+    </form>
+</div>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalText"></p>
+    </div>
+</div>
+
+<script src="../scripts/signin.js"></script>
+</body>
+
+</html>

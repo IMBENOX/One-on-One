@@ -22,6 +22,13 @@ const signUpInputFields = [
         isValid: false,
     },
     {
+        selector: document.querySelector('#passwordInput'),
+        message: "Password must be at least 4 characters long, with at least 1, uppercase letter 1, lowercase and 1, number",
+        regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/,
+        validationContainer: document.querySelector('#validationMsgPassword'),
+        isValid: false,
+    },
+    {
         selector: document.querySelector('#hiddenInput'),
         message: "Invalid: please type 1 , 2, or 3",
         regex: /^(1|2|3)$/,
@@ -90,13 +97,14 @@ const submitForm = () => {
         return;
     }
     let str = '';
-    if (!(signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid)) {
+    if (!(signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid && signUpInputFields[3].isValid)) {
         modalText.innerHTML = "All inputs must be valid please try again!!!";
     }
     else if (!signUpInputFields[3].isValid && dropDownChoiceDisplayed) {
         modalText.innerHTML = "Please choose one fitness category (1 ,2 or 3)";
     }
     else {
+        modal.style.display = "none";
         form.submit();
     }
 };

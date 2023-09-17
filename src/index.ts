@@ -3,7 +3,10 @@ import path from "path";
 import mongoose from "mongoose";
 import { ExpressError } from "./utils/ExpressError";
 import {wrapAsync} from './utils/catchAsync';
-import { signupSchema } from "./schemas";
+import { signupSchema, signinSchema} from "./schemas";
+import {Customer, ICustomer} from "./models/customer";
+import { Category } from "./models/category";
+import { Service } from "./models/service";
 const app = express();
 const port = 8080;
 const methodOverride = require('method-override');
@@ -17,13 +20,33 @@ app.use(express.static(path.join(__dirname,'../','../','public')))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'));
 
-const validateUserDetails = (req: Request, res: Response, next: NextFunction) => {
+const validateUserDetails = async (req: Request, res: Response, next: NextFunction) => {
     const {error} = signupSchema.validate(req.body);
-    console.log(error);
+    const foundCustomer = await Customer.find({email: req.body.user.email})
     if(error){
         const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
+    } else if (foundCustomer.length){
+        const message = `${foundCustomer[0].email} is in use please use an other email`
+        res.render('signup', {message});
     } else {
+        next();
+    }
+
+}
+
+
+const signInValidaton = async (req: Request, res: Response, next: NextFunction) => {
+    const {error} = signinSchema.validate(req.body);
+    const foundCustomer = await Customer.find({email: req.body.user.email, password: req.body.user.password})
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else if (!foundCustomer.length){
+        const message = `This is not a correct account please try again`
+        res.render('signin', {message});
+    } else {
+        res.locals.foundCustomer = foundCustomer[0];
         next();
     }
 
@@ -37,13 +60,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
         console.log("Oh No Monge Conection ERROR!!!!")
         console.log(err)
     })
-
-import {Customer} from "./models/customer";
-import { Category } from "./models/category";
-import { Service } from "./models/service";
-
-
-
 
 app.get('/home', (req, res) => {
     res.render('home')
@@ -76,8 +92,18 @@ app.get('/services/:category/:service', wrapAsync( async (req, res) => {
 }));
 
 
+app.get('/signin', (req, res) => {
+    const message = ''
+    res.render('signin', {message});
+})
+
+app.post('/signin',signInValidaton,(req, res) => {
+    res.render('home', {name: res.locals.foundCustomer.firstName })
+})
+
 app.get('/signup', (req, res) => {
-    res.render('signup')
+    const message = ''
+    res.render('signup', {message})
 });
 
 app.post('/signup',validateUserDetails, wrapAsync( async (req, res) => {
