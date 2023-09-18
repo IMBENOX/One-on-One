@@ -16,7 +16,6 @@ const express_1 = __importDefault(require("express"));
 const catchAsync_1 = require("../utils/catchAsync");
 const service_1 = require("../models/service");
 const category_1 = require("../models/category");
-const ExpressError_1 = require("../utils/ExpressError");
 const router = express_1.default.Router();
 router.get('/', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = yield category_1.Category.find({});
@@ -30,18 +29,25 @@ router.get('/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(voi
     });
     const correctCategoryName = arr.join(' ');
     const foundCategory = yield category_1.Category.find({ name: correctCategoryName });
-    if (foundCategory.length === 0)
-        throw new ExpressError_1.ExpressError(`There is not a Category with name ${category}`, 404);
+    if (foundCategory.length === 0) {
+        req.flash('error', `There is not a Category with name ${category}`);
+        return res.redirect(`/services`);
+    }
     const foundServices = yield service_1.Service.find({ category: correctCategoryName });
-    if (foundServices.length === 0)
-        throw new ExpressError_1.ExpressError(`There are not services in the Category ${category}`, 404);
+    if (foundServices.length === 0) {
+        req.flash('error', `There are not services in the Category ${category}`);
+        return res.redirect(`/services`);
+    }
     res.render('about', { foundServices, foundCategory });
 })));
 router.get('/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;
+    console.log(category);
     const foundService = yield service_1.Service.find({ name: service }).populate('providers');
-    if (foundService.length === 0)
-        throw new ExpressError_1.ExpressError(`There are not provider for  ${service} in ${category} Category`, 404);
+    if (foundService.length === 0) {
+        req.flash('error', `There are not providers for  ${service} in ${category} Category`);
+        return res.redirect(`/services/${category}`);
+    }
     res.render('providers', { service, category, foundService });
 })));
 exports.default = router;

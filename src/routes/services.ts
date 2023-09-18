@@ -18,16 +18,26 @@ router.get('/:category', wrapAsync( async (req, res) => {
     })
     const correctCategoryName = arr.join(' ');
     const foundCategory = await Category.find({name: correctCategoryName})
-    if(foundCategory.length === 0) throw new ExpressError(`There is not a Category with name ${category}`, 404)
+    if(foundCategory.length === 0) {
+        req.flash('error', `There is not a Category with name ${category}`)
+        return res.redirect(`/services`);
+    }
     const foundServices = await Service.find({category: correctCategoryName})
-    if(foundServices.length === 0) throw new ExpressError(`There are not services in the Category ${category}`, 404)
+    if(foundServices.length === 0) {
+        req.flash('error', `There are not services in the Category ${category}`)
+        return res.redirect(`/services`);
+    }
     res.render('about',{foundServices,foundCategory})
 }));
 
 router.get('/:category/:service', wrapAsync( async (req, res) => {
     const {service, category} = req.params;
+    console.log(category)
     const foundService = await Service.find({name: service}).populate('providers');
-    if(foundService.length === 0) throw new ExpressError(`There are not provider for  ${service} in ${category} Category`, 404)
+    if(foundService.length === 0) {
+        req.flash('error', `There are not providers for  ${service} in ${category} Category`)
+        return res.redirect(`/services/${category}`);
+    }
     res.render('providers',{service, category, foundService});
 }));
 

@@ -19,20 +19,16 @@ const validateUserDetails = async (req: Request, res: Response, next: NextFuncti
     }
 }
 
-router.get('/signup', (req, res) => {
+router.get('/', (req, res) => {
     const message = ''
     res.render('signup', {message})
 });
 
-router.post('/signup',validateUserDetails, wrapAsync( async (req, res) => {
+router.post('/',validateUserDetails, wrapAsync( async (req, res) => {
     const newCustomer = new Customer(req.body.user);
     await newCustomer.save()
-    .then(() => {
-        res.redirect('/home');
-    })
-    .catch((e) => {
-        res.render(e);
-    })
+    req.flash('success', 'Successfully Sign Up!')
+    res.redirect('/home');
 }));
 
 export default router;

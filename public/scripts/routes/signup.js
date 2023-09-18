@@ -33,18 +33,14 @@ const validateUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0
         next();
     }
 });
-router.get('/signup', (req, res) => {
+router.get('/', (req, res) => {
     const message = '';
     res.render('signup', { message });
 });
-router.post('/signup', validateUserDetails, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', validateUserDetails, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newCustomer = new customer_1.Customer(req.body.user);
-    yield newCustomer.save()
-        .then(() => {
-        res.redirect('/home');
-    })
-        .catch((e) => {
-        res.render(e);
-    });
+    yield newCustomer.save();
+    req.flash('success', 'Successfully Sign Up!');
+    res.redirect('/home');
 })));
 exports.default = router;

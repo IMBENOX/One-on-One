@@ -25,7 +25,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/',signInValidaton,(req, res) => {
-    res.render('home', {name: res.locals.foundCustomer.firstName })
+    req.flash('success', 'Successfully Sign In!')
+    res.redirect('home')
 })
 
 export default router;
