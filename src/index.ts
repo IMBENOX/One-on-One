@@ -9,11 +9,13 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+import {Customer} from './models/customer';
 
-import home from './routes/home';
-import services from './routes/services';
-import signin from './routes/signin';
-import signup from './routes/signup'
+import homeRoutes from './routes/home';
+import serviceRoutes from './routes/services';
+import customerRoutes from './routes/customer';
 
 mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
@@ -45,17 +47,23 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash());
 
+app.use(passport.initialize()); //Initializes Passport.js, setting up its internal state and creating an instance of the Passport object.
+app.use(passport.session()); //Passport.js allows you to store user authentication information in sessions to maintain a user's logged-in state across multiple HTTP requests. The passport.session() middleware is necessary to enable this feature.
+passport.use(new LocalStrategy(Customer.authenticate()))//You are creating a new instance of the "LocalStrategy" and passing the Customer.authenticate() function as its parameter. LocalStrategy is a strategy provided by Passport.js for authenticating users with a username and password.Customer.authenticate() is a function that is typically provided by Mongoose when using passport-local-mongoose or a similar plugin. This function is used to authenticate users based on their username and password. It takes in the provided username and password, checks them against the user data stored in your MongoDB database, and returns a user object if the authentication is successful or false if it fails.
+
+passport.serializeUser(Customer.serializeUser())//This is a Passport.js function used to specify how a user object should be serialized into the session. Serialization means converting a complex object (in this case, a user object) into a simple form that can be stored in the session.
+passport.deserializeUser(Customer.deserializeUser());//This does the opposite of serializeUser.
+
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user; //req.user is typically set by Passport.js when a user is authenticated. It contains information about the authenticated user.
     res.locals.success = req.flash('success'); 
     res.locals.error = req.flash('error');
     next();
 })
 
-app.use('/home', home);
-app.use('/services', services)
-app.use('/signin', signin);
-app.use('/signup', signup);
-
+app.use('/',customerRoutes)
+app.use('/home', homeRoutes);
+app.use('/services', serviceRoutes)
 
 app.all('*', (req, res, next) => {
 next(new ExpressError('Page not found', 404))

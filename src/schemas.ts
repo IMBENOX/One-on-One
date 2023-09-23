@@ -16,8 +16,6 @@ export const signupSchema = Joi.object({
 })
 
 export const signinSchema = Joi.object({
-    user: Joi.object({
-        email: Joi.string().pattern(new RegExp(/^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/)).required(),
+        username: Joi.string().pattern(new RegExp(/^[a-zA-Z]{3,}$/)).required(),
         password: Joi.string().pattern(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/)).required(),
-    }).required()
 })

@@ -6,23 +6,20 @@
     <form action="/signin" id="form" method="POST">
         <h2>Sign in to your account </h2>
 
-
         <div>
-            <label for="emailInput">Email</label>
-            <input id="emailInput" type="text" name="user[email]" placeholder="Your email...">
-            <span id="validationMsgEmail"></span>
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" placeholder="Your Username ...">
+            <span id="validationMsgUsername"></span>
         </div>
         <div>
-            <label for="passwordInput">Password</label>
-            <input id="passwordInput" type="password" name="user[password]" placeholder="Your password...">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Your password...">
             <span id="validationMsgPassword"></span>
         </div>
 
         <div class="button-container">
             <button type="button" id="ContinueButton">Continue</button>
         </div>
-
-        <div class="notAUser"><%=message %></div>
 
         <div class="a-container">
             <p>Don't have an acount? <a href="/signup">Sign Up</a></p>

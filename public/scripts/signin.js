@@ -1,14 +1,14 @@
 "use strict";
 const signInInputFields = [
     {
-        selector: document.querySelector('#emailInput'),
-        message: "Please include an '@'and an '.' in the email address.",
-        regex: /^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/,
-        validationContainer: document.querySelector('#validationMsgEmail'),
+        selector: document.querySelector('#username'),
+        message: 'Please type a 3 or more letter name with no special characters.',
+        regex: /^[a-zA-Z]{3,}$/,
+        validationContainer: document.querySelector('#validationMsgUsername'),
         isValid: false,
     },
     {
-        selector: document.querySelector('#passwordInput'),
+        selector: document.querySelector('#password'),
         message: "Password must be at least 4 characters long, with at least 1, uppercase letter 1, lowercase and 1, number",
         regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/,
         validationContainer: document.querySelector('#validationMsgPassword'),

@@ -19,8 +19,6 @@ exports.signupSchema = joi_1.default.object({
     }).required()
 });
 exports.signinSchema = joi_1.default.object({
-    user: joi_1.default.object({
-        email: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/)).required(),
-        password: joi_1.default.string().pattern(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/)).required(),
-    }).required()
+    username: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z]{3,}$/)).required(),
+    password: joi_1.default.string().pattern(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/)).required(),
 });

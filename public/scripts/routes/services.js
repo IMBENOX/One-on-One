@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const catchAsync_1 = require("../utils/catchAsync");
 const service_1 = require("../models/service");
 const category_1 = require("../models/category");
+const middleware_1 = require("../middleware");
 const router = express_1.default.Router();
 router.get('/', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = yield category_1.Category.find({});
@@ -40,9 +41,8 @@ router.get('/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(voi
     }
     res.render('about', { foundServices, foundCategory });
 })));
-router.get('/:category/:service', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/:category/:service', middleware_1.isLoggedIn, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;
-    console.log(category);
     const foundService = yield service_1.Service.find({ name: service }).populate('providers');
     if (foundService.length === 0) {
         req.flash('error', `There are not providers for  ${service} in ${category} Category`);

@@ -2,7 +2,7 @@ import express from "express";
 import {wrapAsync} from '../utils/catchAsync';
 import { Service } from "../models/service";
 import { Category } from "../models/category";
-import { ExpressError } from "../utils/ExpressError";
+import { isLoggedIn } from "../middleware";
 const router = express.Router();
 
 router.get('/', wrapAsync( async (req, res) => {
@@ -30,9 +30,8 @@ router.get('/:category', wrapAsync( async (req, res) => {
     res.render('about',{foundServices,foundCategory})
 }));
 
-router.get('/:category/:service', wrapAsync( async (req, res) => {
+router.get('/:category/:service', isLoggedIn, wrapAsync( async (req, res) => {
     const {service, category} = req.params;
-    console.log(category)
     const foundService = await Service.find({name: service}).populate('providers');
     if(foundService.length === 0) {
         req.flash('error', `There are not providers for  ${service} in ${category} Category`)
