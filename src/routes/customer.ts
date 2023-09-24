@@ -1,5 +1,5 @@
 import express, {Request, Response, NextFunction} from "express";
-import { signInValidaton, storeReturnTo, validateUserDetails } from "../middleware";
+import {storeReturnTo, validateUserDetails } from "../middleware";
 import {Customer} from "../models/customer";
 import { ExpressError } from "../utils/ExpressError";
 import {wrapAsync} from '../utils/catchAsync';
@@ -41,7 +41,7 @@ router.get('/signin', (req, res) => {
     res.render('signin');
 })
 
-router.post('/signin',signInValidaton, storeReturnTo, passport.authenticate('local', {failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+router.post('/signin', storeReturnTo, passport.authenticate('local', {failureFlash: true, failureRedirect: '/signin' }), (req, res) => {
     req.flash('success', 'Successfully Sign In!')
     const redirectUrl = res.locals.returnTo || '/home';
     delete req.session.returnTo; //This line of code deletes the returnTo property from the session object. After this line is executed, req.session.returnTo will be undefined or no longer exist in the session.

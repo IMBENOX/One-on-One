@@ -51,7 +51,7 @@ router.post('/signup', middleware_1.validateUserDetails, (0, catchAsync_1.wrapAs
 router.get('/signin', (req, res) => {
     res.render('signin');
 });
-router.post('/signin', middleware_1.signInValidaton, middleware_1.storeReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+router.post('/signin', middleware_1.storeReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/signin' }), (req, res) => {
     req.flash('success', 'Successfully Sign In!');
     const redirectUrl = res.locals.returnTo || '/home';
     delete req.session.returnTo; //This line of code deletes the returnTo property from the session object. After this line is executed, req.session.returnTo will be undefined or no longer exist in the session.

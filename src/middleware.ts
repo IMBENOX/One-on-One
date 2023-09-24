@@ -7,15 +7,17 @@ declare module 'express-session' { // Define a custom type declaration for the s
       returnTo: string;
     }
   }
- export const signInValidaton = async (req: Request, res: Response, next: NextFunction) => {
-    const {error} = signinSchema.validate(req.body);
-    if(error){
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
+
+//  export const signInValidaton = async (req: Request, res: Response, next: NextFunction) => {
+//     const {error} = signinSchema.validate(req.body);
+//     if(error){
+//         const msg = error.details.map(el => el.message).join(',');
+//         throw new ExpressError(msg, 400);
+//     } else {
+//         next();
+//     }
+// }
+
 export const validateUserDetails = async (req: Request, res: Response, next: NextFunction) => {
     const {error} = signupSchema.validate(req.body);
     if(error){

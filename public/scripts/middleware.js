@@ -9,20 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storeReturnTo = exports.isLoggedIn = exports.validateUserDetails = exports.signInValidaton = void 0;
+exports.storeReturnTo = exports.isLoggedIn = exports.validateUserDetails = void 0;
 const schemas_1 = require("./schemas");
 const ExpressError_1 = require("./utils/ExpressError");
-const signInValidaton = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { error } = schemas_1.signinSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError_1.ExpressError(msg, 400);
-    }
-    else {
-        next();
-    }
-});
-exports.signInValidaton = signInValidaton;
+//  export const signInValidaton = async (req: Request, res: Response, next: NextFunction) => {
+//     const {error} = signinSchema.validate(req.body);
+//     if(error){
+//         const msg = error.details.map(el => el.message).join(',');
+//         throw new ExpressError(msg, 400);
+//     } else {
+//         next();
+//     }
+// }
 const validateUserDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { error } = schemas_1.signupSchema.validate(req.body);
     if (error) {
