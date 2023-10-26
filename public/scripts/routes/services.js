@@ -39,7 +39,7 @@ router.get('/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(voi
         req.flash('error', `There are not services in the Category ${category}`);
         return res.redirect(`/services`);
     }
-    res.render('about', { foundServices, foundCategory });
+    res.render('aboutService', { foundServices, foundCategory });
 })));
 router.get('/:category/:service', middleware_1.isLoggedIn, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;

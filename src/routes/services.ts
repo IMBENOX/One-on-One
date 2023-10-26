@@ -27,7 +27,7 @@ router.get('/:category', wrapAsync( async (req, res) => {
         req.flash('error', `There are not services in the Category ${category}`)
         return res.redirect(`/services`);
     }
-    res.render('about',{foundServices,foundCategory})
+    res.render('aboutService',{foundServices,foundCategory})
 }));
 
 router.get('/:category/:service', isLoggedIn, wrapAsync( async (req, res) => {
