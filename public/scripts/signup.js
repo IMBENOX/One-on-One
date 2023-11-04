@@ -23,7 +23,7 @@ const signUpInputFields = [
     },
     {
         selector: document.querySelector('#passwordInput'),
-        message: "Password must be at least 4 characters long, with at least 1, uppercase letter 1, lowercase and 1, number",
+        message: "Password must be at least 4 characters long, with at least 1 uppercase letter, 1 lowercase and 1, number",
         regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/,
         validationContainer: document.querySelector('#validationMsgPassword'),
         isValid: false,
@@ -106,6 +106,7 @@ const submitForm = () => {
     else {
         modal.style.display = "none";
         form.submit();
+        form.reset();
     }
 };
 const closeModal = () => {

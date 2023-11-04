@@ -20,7 +20,7 @@
     "predev": "npm run build",
     "dev": "concurrently \"npx tsc -W\" \"nodemon public/scripts/index.js\" "
   },
-  "author": "",
+  "author": "George Apostolakis",
   "license": "ISC",
   "description": "",
   "dependencies": {

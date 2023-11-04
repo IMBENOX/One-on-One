@@ -41,6 +41,5 @@ const customerSchema = new mongoose_1.default.Schema({
         default: 'false',
     }
 });
-customerSchema.plugin(passport_local_mongoose_1.default); //passportLocalMongoose: passport-local-mongoose is a Mongoose plugin that simplifies building username and password-based authentication using Passport.js. 
-//.plugin(passportLocalMongoose): By using .plugin() with passportLocalMongoose, you're adding the passportLocalMongoose plugin to your UserSchema. This means that all the methods and fields required for username and password authentication will be added to your UserSchema by this plugin. This includes hashing and salting passwords, comparing passwords during login, and additional methods for managing users.
+customerSchema.plugin(passport_local_mongoose_1.default);
 exports.Customer = mongoose_1.default.model('Customer', customerSchema);

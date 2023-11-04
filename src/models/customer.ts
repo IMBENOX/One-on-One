@@ -5,7 +5,7 @@ export interface ICustomer {
     firstName: string;
     lastName:  string;
     email:     string;
-    password:  string;
+    password?:  string;
     gender:    string;
     servise:   string;
     fitnessCategory: number;
@@ -29,7 +29,7 @@ const customerSchema = new mongoose.Schema<ICustomer>({
     },
     password: {
         type: String,
-        required: [true, 'Password cannot be blank']
+         required: [true, 'Password cannot be blank']
     },
     gender: {
         type: String,
@@ -49,8 +49,7 @@ const customerSchema = new mongoose.Schema<ICustomer>({
     }
 })
 
-customerSchema.plugin(passportLocalMongoose);//passportLocalMongoose: passport-local-mongoose is a Mongoose plugin that simplifies building username and password-based authentication using Passport.js. 
-//.plugin(passportLocalMongoose): By using .plugin() with passportLocalMongoose, you're adding the passportLocalMongoose plugin to your UserSchema. This means that all the methods and fields required for username and password authentication will be added to your UserSchema by this plugin. This includes hashing and salting passwords, comparing passwords during login, and additional methods for managing users.
+customerSchema.plugin(passportLocalMongoose);
 
 export const Customer = mongoose.model('Customer',customerSchema);
 

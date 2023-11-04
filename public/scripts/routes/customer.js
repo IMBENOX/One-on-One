@@ -17,7 +17,6 @@ const middleware_1 = require("../middleware");
 const customer_1 = require("../models/customer");
 const catchAsync_1 = require("../utils/catchAsync");
 const router = express_1.default.Router();
-const catchAsync = require('../utils/catchAsync');
 const passport = require('passport');
 router.get('/signup', (req, res) => {
     res.render('signup');
@@ -27,7 +26,8 @@ router.post('/signup', middleware_1.validateUserDetails, (0, catchAsync_1.wrapAs
         const { user } = req.body;
         user.username = user.firstName;
         const customer = new customer_1.Customer(user);
-        const signupCustomer = yield customer_1.Customer.register(customer, user.password); //This code is calling a registration function or method on the Customer model. The purpose of this function is to create a new user account in your application's database.
+        customer.password = '1234';
+        const signupCustomer = yield customer_1.Customer.register(customer, user.password);
         req.login(signupCustomer, err => {
             if (err)
                 return next(err);
@@ -37,7 +37,6 @@ router.post('/signup', middleware_1.validateUserDetails, (0, catchAsync_1.wrapAs
     }
     catch (e) {
         if (e instanceof Error) {
-            console.log();
             if (e.message.includes('11000')) {
                 req.flash('error', 'Email address is already in use');
             }
@@ -54,7 +53,7 @@ router.get('/signin', (req, res) => {
 router.post('/signin', middleware_1.storeReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/signin' }), (req, res) => {
     req.flash('success', 'Successfully Sign In!');
     const redirectUrl = res.locals.returnTo || '/home';
-    delete req.session.returnTo; //This line of code deletes the returnTo property from the session object. After this line is executed, req.session.returnTo will be undefined or no longer exist in the session.
+    delete req.session.returnTo;
     res.redirect(redirectUrl);
 });
 router.get('/logout', (req, res, next) => {

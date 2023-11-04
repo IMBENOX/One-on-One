@@ -3,14 +3,10 @@
    <% block('head').append('<link rel="stylesheet" href="/styles/providers.css" />') %>
 
 
-<h1>
-    <%=service %>
-</h1>
-<div class="d-flex justify-content-between">
+<h1><%=service %></h1>
+<div class="container">
     <h2>Providers</h2>
     <a href="/services/<%=category %>" class="link-dark">Back to <%=category %></a>
-</div>
-<div class="container">
     <% foundService[0].providers.forEach(provider=> { %>
         <div class="card mb-3">
             <div class="row">

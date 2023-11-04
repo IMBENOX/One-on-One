@@ -38,6 +38,7 @@ h1{
 }
 
 #description {
+    margin: 50px;
     display: flex;
     text-align:left;
     justify-content:center;
