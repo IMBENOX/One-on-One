@@ -13,6 +13,9 @@ const serviceSchema = new mongoose_1.default.Schema({
     category: {
         type: String
     },
+    id: {
+        type: String
+    },
     description: {
         type: String
     },

@@ -13,29 +13,35 @@ mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
 
     interface ISeedCategory {
         name: string;
+        id  : string;
         backgroundColor : string;
     }
 
      const seedCategories: ISeedCategory[] = [
         {
             name: 'Fitness',
+            id  : 'fitness',
             backgroundColor : '#e76f51',
         },
         {
             name: 'Cosmetology',
+            id  : 'cosmetology',
             backgroundColor : '#a2d2ff',
 
         },
         {
             name: 'Home Repairs',
+            id  : 'home-repairs',
             backgroundColor : '#2a9d8f',
         },
         {
             name: 'Teaching',
+            id  : 'teaching',
             backgroundColor : '#e9c46a',
         },
         {
             name: 'Health',
+            id  : 'health',
             backgroundColor : '#ffc8dd',
         },
     ]

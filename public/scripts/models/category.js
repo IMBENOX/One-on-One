@@ -9,6 +9,9 @@ const categorySchema = new mongoose_1.default.Schema({
     name: {
         type: String
     },
+    id: {
+        type: String
+    },
     backgroundColor: {
         type: String
     },

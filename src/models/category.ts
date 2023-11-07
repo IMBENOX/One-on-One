@@ -3,15 +3,14 @@ import mongoose from "mongoose";
 interface ICategory {
     name: string;
     id  : string;
-    objectsId : string;
-    isSelected: boolean;
-    icon: string;
     backgroundColor : string;
-    htmlLocation : string;
 }
 
 const categorySchema = new mongoose.Schema<ICategory>({
     name: {
+        type: String
+    },
+    id: {
         type: String
     },
     backgroundColor: {

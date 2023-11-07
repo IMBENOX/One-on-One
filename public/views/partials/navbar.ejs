@@ -15,11 +15,12 @@
                     <a class="nav-link">Sign In</a>
                     <% } %>
             </div>
+            
             <ul class="navbar-nav">
                 <% if(currentUser) {%>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="welcome">Welcome: George</span><span class="checkmark-nav"></span>
+                        <span class="welcome">Welcome: <%=currentUser.firstName%></span><span class="checkmark-nav"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/logout">

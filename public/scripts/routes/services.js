@@ -24,17 +24,12 @@ router.get('/', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void
 })));
 router.get('/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.params;
-    const arr = category.split('-');
-    arr.forEach((str, index) => {
-        arr[index] = str.charAt(0).toUpperCase() + str.slice(1);
-    });
-    const correctCategoryName = arr.join(' ');
-    const foundCategory = yield category_1.Category.find({ name: correctCategoryName });
+    const foundCategory = yield category_1.Category.find({ id: category });
     if (foundCategory.length === 0) {
         req.flash('error', `There is not a Category with name ${category}`);
         return res.redirect(`/services`);
     }
-    const foundServices = yield service_1.Service.find({ category: correctCategoryName });
+    const foundServices = yield service_1.Service.find({ category: category });
     if (foundServices.length === 0) {
         req.flash('error', `There are not services in the Category ${category}`);
         return res.redirect(`/services`);
@@ -43,7 +38,7 @@ router.get('/:category', (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(voi
 })));
 router.get('/:category/:service', middleware_1.isLoggedIn, (0, catchAsync_1.wrapAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service, category } = req.params;
-    const foundService = yield service_1.Service.find({ name: service }).populate('providers');
+    const foundService = yield service_1.Service.find({ id: service }).populate('providers');
     if (foundService.length === 0) {
         req.flash('error', `There are not providers for  ${service} in ${category} Category`);
         return res.redirect(`/services/${category}`);

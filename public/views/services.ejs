@@ -11,10 +11,7 @@
     <div id="categoriesWrapper">
 
         <%categories.forEach(category=> { %>
-            <%let categoryName = category.name.toLowerCase()%>
-            <% const arr = categoryName.split(' ') %>
-            <% categoryName = arr.join('-') %>
-            <a href="/services/<%=categoryName %>">
+            <a href="/services/<%=category.id %>">
                 <div style="background-color: <%=category.backgroundColor%>">
                     <%=category.name%>
                 </div>

@@ -5,6 +5,7 @@ import { providerSchema, IProvider} from "./provider";
 export interface IService {
     name: string;
     category: string;
+    id: string;
     description: string;
     providers: IProvider[];
     imageLocation: string;
@@ -15,6 +16,9 @@ const serviceSchema = new mongoose.Schema<IService> ({
         type: String
     },
     category: {
+        type: String
+    },
+    id: {
         type: String
     },
     description: {
