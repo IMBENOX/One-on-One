@@ -15,8 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertProvidersServices = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const array_names_1 = require("./array-names");
+const array_images_1 = require("./array-images");
 const services_1 = require("./services");
 const service_1 = require("../models/service");
+const faker_1 = require("@faker-js/faker");
 mongoose_1.default.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
     console.log("Database Connected");
@@ -32,11 +34,19 @@ const insertProvidersServices = () => __awaiter(void 0, void 0, void 0, function
         const randomName1 = Math.floor(Math.random() * 1000);
         const randomName2 = Math.floor(Math.random() * 1000);
         const randomService = Math.floor(Math.random() * services_1.seedServices.length);
+        const randomImage = Math.floor(Math.random() * array_images_1.arrayImages.length);
         const provider = new service_1.Provider({
             firstName: `${array_names_1.arrayNames[randomName1]}`,
             lastName: `${array_names_1.arrayNames[randomName2]}`,
             service: `${services_1.seedServices[randomService].name}`,
-            info: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat quis architecto ut iure aspernatur voluptatum odit. Fugit repudiandae laboriosam possimus veniam fuga eaque laborum sed, facere ullam. Nostrum, iusto eveniet?'
+            info: `Address: <br>
+                        Street: ${faker_1.faker.location.streetAddress()}<br>
+                        City: ${faker_1.faker.location.city()}<br>
+                        State: ${faker_1.faker.location.state()}<br>
+                        ZipCode: ${faker_1.faker.location.zipCode()}<br>
+                        Email: ${faker_1.faker.internet.email()}<br><br>
+                        About:  ${faker_1.faker.lorem.sentences(3)}`,
+            imageLocation: `${array_images_1.arrayImages[randomImage]}`,
         });
         services_1.seedServices[randomService].providers.push(provider);
         yield provider.save()

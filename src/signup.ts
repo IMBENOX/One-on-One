@@ -116,7 +116,7 @@ const submitForm = () =>
     let str = '';
     if(!(signUpInputFields[0].isValid && signUpInputFields[1].isValid && signUpInputFields[2].isValid && signUpInputFields[3].isValid))
     {
-        modalText.innerHTML = "All inputs must be valid please try again!!!";
+        modalText.innerHTML = "All inputs must be valid please try again.";
     }
     else if( !signUpInputFields[3].isValid && dropDownChoiceDisplayed) 
     {

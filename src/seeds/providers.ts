@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import { arrayNames } from "./array-names";
+import { arrayImages } from "./array-images";
 import { seedServices } from "./services";
 import { Service, Provider} from "../models/service";
-
+import { faker } from '@faker-js/faker';
 
 mongoose.connect('mongodb://127.0.0.1:27017/OneOnOneDb')
     .then(() => {
@@ -20,11 +21,20 @@ export const insertProvidersServices = async () => {
         const randomName1 = Math.floor(Math.random() * 1000);
         const randomName2 = Math.floor(Math.random() * 1000);
         const randomService = Math.floor(Math.random() * seedServices.length)
+        const randomImage   = Math.floor(Math.random() * arrayImages.length)
         const provider = new Provider({
             firstName: `${arrayNames[randomName1]}`,
             lastName: `${arrayNames[randomName2]}`,
             service : `${seedServices[randomService].name}`,
-            info    :  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat quis architecto ut iure aspernatur voluptatum odit. Fugit repudiandae laboriosam possimus veniam fuga eaque laborum sed, facere ullam. Nostrum, iusto eveniet?'
+            info    :  `Address: <br>
+                        Street: ${faker.location.streetAddress()}<br>
+                        City: ${faker.location.city()}<br>
+                        State: ${faker.location.state()}<br>
+                        ZipCode: ${faker.location.zipCode()}<br>
+                        Email: ${faker.internet.email()}<br><br>
+                        About:  ${faker.lorem.sentences(3)}`
+                        ,
+            imageLocation: `${arrayImages[randomImage]}`,
         });
         seedServices[randomService].providers.push(provider)
         await provider.save()

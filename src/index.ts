@@ -66,9 +66,8 @@ app.use('/',customerRoutes)
 app.use('/home', homeRoutes);
 app.use('/services', serviceRoutes)
 
-app.all('*', (req, res, next) => {
+app.all('*', (req, res) => {
 res.redirect('/home');
-next(new ExpressError('Page not found', 404))
 })
 
 app.use(errorHandler);

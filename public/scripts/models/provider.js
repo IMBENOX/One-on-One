@@ -23,4 +23,7 @@ exports.providerSchema = new mongoose_1.default.Schema({
     service: {
         type: String,
     },
+    imageLocation: {
+        type: String,
+    },
 });

@@ -2,7 +2,6 @@
    <% block('head').append('<title>Service</title>') %>
    <% block('head').append('<link rel="stylesheet" href="/styles/providers.css" />') %>
 
-
 <h1><%=service %></h1>
 <div class="container">
     <h2>Providers</h2>
@@ -11,7 +10,7 @@
         <div class="card mb-3">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="img-fluid" alt="" src="">
+                    <img class="img-fluid" alt="" src="<%= provider.imageLocation %>">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -20,9 +19,9 @@
                             <%=provider.lastName %>
                         </h5>
                         <p class="card-text">
-                            <%=provider.info%>
+                            <%-provider.info%>
                         </p>
-                        <a class="btn btn-primary" href="#">Show Details</a>
+                        <a class="btn btn-primary" href="#">Arrange appointment</a>
                     </div>
                 </div>
             </div>

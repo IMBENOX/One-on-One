@@ -1,0 +1,32 @@
+
+.container-fluid {
+    padding-right: 100px;
+  }
+
+
+  span {
+    font-size: 15px;
+}
+
+.navbar-nav.text-center a{
+    color: white;
+}
+   .nav-link.dropdown-toggle {
+    background-color: white;
+    color: black !important;
+    border-radius: 10px;
+  } 
+
+.checkmark-nav { 
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #07fb95;
+    border-radius: 50%;
+   }
+
+   .welcome {
+    margin-right: 5px;
+   }
+
+

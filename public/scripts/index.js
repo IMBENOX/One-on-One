@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const ExpressError_1 = require("./utils/ExpressError");
 const middleware_1 = require("./middleware");
 const app = (0, express_1.default)();
 const port = 8080;
@@ -60,9 +59,8 @@ app.use((req, res, next) => {
 app.use('/', customer_2.default);
 app.use('/home', home_1.default);
 app.use('/services', services_1.default);
-app.all('*', (req, res, next) => {
+app.all('*', (req, res) => {
     res.redirect('/home');
-    next(new ExpressError_1.ExpressError('Page not found', 404));
 });
 app.use(middleware_1.errorHandler);
 app.listen(port, () => {

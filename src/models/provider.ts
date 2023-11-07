@@ -6,6 +6,7 @@ export interface IProvider {
     info:     string;
     gender:    string;
     service:   string;
+    imageLocation: string;
 }
 
 export const providerSchema = new mongoose.Schema<IProvider>({
@@ -24,6 +25,9 @@ export const providerSchema = new mongoose.Schema<IProvider>({
         type: String,
     },
     service: {
+        type: String,
+    },
+    imageLocation: {
         type: String,
     },
 })
