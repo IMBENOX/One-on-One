@@ -46,7 +46,7 @@ const signUpInputFields : SignUpFields[] =
 
 signUpInputFields.forEach(inputField =>
 {  
-    inputField.selector?.addEventListener('blur', () => 
+    inputField.selector?.addEventListener('change', () => 
     {   
         if(!(inputField.selector && inputField.validationContainer)) {return}
         inputField.isValid = inputField.regex.test((inputField.selector.value));

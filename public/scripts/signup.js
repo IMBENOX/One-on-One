@@ -38,7 +38,7 @@ const signUpInputFields = [
 ];
 signUpInputFields.forEach(inputField => {
     var _a;
-    (_a = inputField.selector) === null || _a === void 0 ? void 0 : _a.addEventListener('blur', () => {
+    (_a = inputField.selector) === null || _a === void 0 ? void 0 : _a.addEventListener('change', () => {
         if (!(inputField.selector && inputField.validationContainer)) {
             return;
         }
