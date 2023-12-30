@@ -7,9 +7,9 @@ exports.signinSchema = exports.signupSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.signupSchema = joi_1.default.object({
     user: joi_1.default.object({
-        firstName: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z]{3,}$/)).required(),
-        lastName: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z]{3,}$/)).required(),
-        email: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z0-9]{1,}@[a-z]{1,}\.[a-z]{1,}$/)).required(),
+        firstName: joi_1.default.string().pattern(new RegExp(/^[a-zA-ZΑ-Ωα-ωίϊΐόάέύϋΰήώΊΌΆΈΎΏ]{3,}$/)).required(),
+        lastName: joi_1.default.string().pattern(new RegExp(/^[a-zA-ZΑ-Ωα-ωίϊΐόάέύϋΰήώΊΌΆΈΎΏ]{3,}$/)).required(),
+        email: joi_1.default.string().pattern(new RegExp(/^[a-zA-Z0-9.]{1,}@[a-z]{1,}\.[a-z]{1,}$/)).required(),
         password: joi_1.default.string().pattern(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{4,}$/)).required(),
         gender: joi_1.default.string().allow(''),
         service: joi_1.default.string().allow(''),
