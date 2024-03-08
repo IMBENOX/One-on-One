@@ -1,4 +1,4 @@
-import express, {Request, Response, NextFunction,ErrorRequestHandler} from "express";
+import {Request, Response, NextFunction,ErrorRequestHandler} from "express";
 import {signupSchema} from "./schemas";
 import { ExpressError } from "./utils/ExpressError";
 
@@ -36,7 +36,7 @@ export const storeReturnTo = (req: Request, res: Response, next: NextFunction) =
 
 export const errorHandler: ErrorRequestHandler = (err, req, res , next) => {
     const {statusCode= 500} = err;
-    if(!err.message) err.message = 'Somethink Went Wrong!'
+    if(!err.message) err.message = 'Something Went Wrong!'
     res.status(statusCode).render('error',{err});
 
 }
